@@ -111,24 +111,16 @@
     {% if "usuario_logado" in session %}
     <div class="titulomensagem-prof">
         <h2>Mensagem do Professor</h2>
-     </div>
+    </div>
 
     <div class="container-mensagem_professor">
-
         <div class="mensagem_prof">
-            <div class="mensagem">
-                {% for mensagem in lista_mensagens %}
-                <p>{{ mensagem['mensagem'] }}</p>
-                {% if "professor_logado" in session %}
-                <form action="{{ url_for('excluir_mensagem') }}" method="POST">
-                    <input type="hidden" name="mensagem_id" value="{{ mensagem['cod_mensagem'] }}">
-                    <button type="submit" class="btn-excluir">EXCLUIR MENSAGEM</button>
-                </form>
-                {% endif %}
-                {% endfor %}
-            </div>
+            {% for mensagem in lista_mensagens %}
+                <div class="mensagem">
+                    <p>{{ mensagem['mensagem'] }}</p>
+                </div>
+            {% endfor %}
         </div>
-        
     </div>
     {% endif %}
     <!-- Fim da seção de mensagem do professor -->

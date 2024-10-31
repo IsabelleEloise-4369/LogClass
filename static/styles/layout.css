@@ -203,3 +203,11 @@ footer p{
 .theme-container.dark .header-container {
   background-color: var(--sidebar-bg-dark);
 }
+
+.theme-container.dark td{
+  color: var(--text-color-dark);
+}
+
+.theme-container.dark td{
+  border: var(--text-color-dark);
+}

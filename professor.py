@@ -83,7 +83,8 @@ class Professor:
                 modelo VARCHAR(100),
                 fabricante VARCHAR(100),
                 num_lote VARCHAR(100),
-                enderecamento VARCHAR(100)
+                enderecamento VARCHAR(100),
+                quantidade INT DEFAULT 0
                 );
             """,
             """
@@ -91,6 +92,7 @@ class Professor:
             """,
             """
                 CREATE TABLE tb_estoque (
+                id INT AUTO_INCREMENT PRIMARY KEY,
                 cod_prod_est INT,
                 num_lote_est INT ,
                 loc_est CHAR(100) ,
@@ -103,9 +105,6 @@ class Professor:
                 func_responsavel VARCHAR(100) ,
                 cod_aluno INT
                 );
-            """,
-            """
-                ALTER TABLE tb_estoque ADD CONSTRAINT PK_tb_estoque PRIMARY KEY (cod_prod_est);
             """,
             """
                 CREATE TABLE tb_expedicao (

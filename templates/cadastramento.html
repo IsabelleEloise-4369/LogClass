@@ -14,6 +14,10 @@
     <script src="/static/js/cadastramento.js" defer></script>
     
 
+    <div id="successMessage" style="display: none;" class="alert">
+        <span class="alert-icon">✔️</span>
+        <span class="alert-text">Processo concluído com sucesso!</span>
+    </div>
 
     <section class="geral-cadastramento">
 
@@ -29,6 +33,29 @@
 
 
         <section class="formulario">
+            <div class="tracking-container">
+                <p class="status">Status do Produto</p>
+                <div class="tracking-steps">
+                    <div class="step active">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <p>Produto em mãos</p>
+                    </div>
+                    <div class="step active">
+                        <div class="icon-box">
+                            <i class="fa-regular fa-clipboard"></i>
+                        </div>
+                        <p>Cadastramento</p>
+                    </div>
+                    <div class="step">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-check-to-slot"></i>
+                        </div>
+                        <p>Concluído!</p>
+                    </div>
+                </div>
+            </div>
 
             <div class="form_container">
                
@@ -51,7 +78,7 @@
                     <input type="text" placeholder="Endereçamento" class="input-field" name="enderecamento">
 
                     <!-- Botão de Enviar -->
-                    <button class="submit-btn">Enviar</button>
+                    <button class="submit-btn" id="confirmButton">Enviar</button>
                 </form>
 
             </div>

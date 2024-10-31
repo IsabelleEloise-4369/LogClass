@@ -13,7 +13,7 @@ class Estoque:
         self.quant_saida = None
         self.saldo = None
         self.func_responsavel = None
-        self.cpf = None
+        self.cod_aluno = None
 
     # função para o cadastro de estoque
     def estoque (self, cod_prod_est, num_lote_est, loc_est, desc_tec, data_entrega, quant_itens_entrada, data_saida, qt_saida, saldo, fuc_responsavel, cod_aluno, turma):
