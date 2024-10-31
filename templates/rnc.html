@@ -28,6 +28,7 @@
 
         <section class="container-tabela">
             <h2>Produtos Cadastrados</h2>
+<<<<<<< HEAD
             <table>
                 <thead>
                     <tr>
@@ -52,6 +53,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+=======
+            <a href="/inventario" class="botao-inventario">Abrir Inventário</a>
+>>>>>>> b55074e36eff6a99c9d0a03880a3fae4f5f5f04d
         </section>
 
 
@@ -68,19 +72,20 @@
                     <input type="text" placeholder="Número da RNC" class="input-field" name="numRNC">
 
                     <!-- Campo "Número do Código do Produto" -->
-                    <input type="text" placeholder="Código do Produto" class="input-field" name="codProd">
+                    <input type="text" placeholder="Código do Produto" class="input-field" id="codigoProduto" name="codProd">
 
                     <!-- Campo "Local" -->
-                    <input type="text" placeholder="Local" class="input-field" name="local">
+                    <input type="text" placeholder="Local" class="input-field" id="enderecamentoProduto" name="local">
 
                     <!-- Campo "Quantidade entregue" -->
-                    <input type="text" placeholder= "Quantidade Entregue" class="input-field" name="qtdentregue">
+                    <input type="text" placeholder= "Quantidade Entregue" class="input-field"
+                    name="qtdentregue">
 
                     <!-- Campo "Quantidade Reprovada" -->
                     <input type="text" placeholder="Quantidade Reprovada" class="input-field" name="qtdrepro">
 
                     <!-- Campo "Descrição da RNC" -->
-                    <textarea placeholder="Descrição da RNC" class="textarea-field" name="descRNC"></textarea>
+                    <textarea placeholder="Descrição da RNC" class="textarea-field" id="descricaoProduto" name="descRNC"></textarea>
 
                     <!-- Campo "Responsável pela inspeção" -->
                     <input type="text" placeholder="Responsável pela inspeção" class="input-field" name="respInsp">
@@ -95,5 +100,22 @@
         
     </section>
 
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const produtos = {{ lista_produtos | tojson }};
+        
+            const codigoInput = document.getElementById("codigoProduto");
+        
+            codigoInput.addEventListener("input", function() {
+                const codigoDigitado = codigoInput.value.trim();
+                
+                const produto = produtos.find(p => p.codigo === codigoDigitado);
+                
+                if (produto) {
+                    document.getElementById("descricaoProduto").value = produto.descricao;
+                    document.getElementById("enderecamentoProduto").value = produto.enderecamento;
+                }
+            });
+        });
+    </script>
 {% endblock %}

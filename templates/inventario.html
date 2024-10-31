@@ -1,14 +1,18 @@
 <!-- EXTENDENDO O CSS DA PAGINA PRINCIPAL (LAYOUT) -->
 {% block css %}
 <link rel="stylesheet" href="/static/styles/media/layout-media.css">
+<<<<<<< HEAD
 <link rel="stylesheet" href="/static/styles/inventario.css">
 <link rel="stylesheet" href="/static/styles/media/inventario-media.css">
+=======
+>>>>>>> b55074e36eff6a99c9d0a03880a3fae4f5f5f04d
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 {% endblock %}
 
 {% extends "layout.html" %}
 {% block conteudo %}
 
+<<<<<<< HEAD
 
     <div class="geral-inventario">
 
@@ -41,5 +45,40 @@
         
 
     </div>
+=======
+<section class="container-inventario">
+    <h2>Inventário de Produtos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Modelo</th>
+                <th>Fabricante</th>
+                <th>Número do Lote</th>
+                <th>Endereçamento</th>
+                <th>Saldo</th> <!-- Nova coluna para o saldo -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in lista_produtos %}
+            <tr>
+                <td>{{ produto['codigo'] }}</td>
+                <td>{{ produto['descricao'] }}</td>
+                <td>{{ produto['modelo'] }}</td>
+                <td>{{ produto['fabricante'] }}</td>
+                <td>{{ produto['numero_lote'] }}</td>
+                <td>{{ produto['enderecamento'] }}</td>
+                <td>{{ produto['quantidade'] }}</td> <!-- Exibe o saldo do produto -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="botoes">
+        <a href="/picking" class="botao-voltar">Voltar para Picking</a>
+    </div>
+</section>
+
+>>>>>>> b55074e36eff6a99c9d0a03880a3fae4f5f5f04d
 
 {% endblock %}

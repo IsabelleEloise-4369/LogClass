@@ -287,29 +287,21 @@ def pagina_cadastramento():
                 return 'Erro ao realizar o processo de Cadastramento'
     else:
         return redirect("/login")
-
-
-# roteamento da página dos processos de registro estoque
-# RF008
-@app.route("/estoque", methods=["GET", "POST"])
-def pagina_estoque():
-    # Verifica se o usuário está logado (aluno ou professor)
+    
+@app.route('/inventario')
+def inventario():
     if "usuario_logado" in session or "professor_logado" in session:
-        # Se a requisição é GET, exibimos a página de produtos cadastrados
         if request.method == "GET":
-            # Conectando ao banco de dados
             mydb = Conexao.conectar()
             mycursor = mydb.cursor()
 
-            # Obtendo a turma do usuário logado
             turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
 
-            # Query SQL para buscar todos os produtos cadastrados na tabela específica da turma
-            produtos = f"SELECT * FROM {turma}.tb_cadastramento"
+            # Ajustando a query para incluir o saldo
+            produtos = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, quantidade FROM {turma}.tb_cadastramento"
             mycursor.execute(produtos)
             resultado = mycursor.fetchall()
 
-            # Adicionando produtos na lista de dicionários para exibir no frontend
             lista_produtos = []
             for produto in resultado:
                 lista_produtos.append({
@@ -318,42 +310,78 @@ def pagina_estoque():
                     "modelo": produto[2],
                     "fabricante": produto[3],
                     "numero_lote": produto[4],
-                    "enderecamento": produto[5]
+                    "enderecamento": produto[5],
+                    "quantidade": produto[6]  # Adiciona o saldo ao dicionário
                 })
 
-            # Renderizando o template estoque.html com a lista de produtos
+            return render_template('inventario.html', lista_produtos=lista_produtos)
+
+# Página de controle de estoque
+@app.route("/estoque", methods=["GET", "POST"])
+def pagina_estoque():
+    if "usuario_logado" in session or "professor_logado" in session:
+        if request.method == "GET":
+            mydb = Conexao.conectar()
+            mycursor = mydb.cursor()
+            turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
+            produtos = f"SELECT * FROM {turma}.tb_cadastramento"
+            mycursor.execute(produtos)
+            resultado = mycursor.fetchall()
+
+            lista_produtos = [{"codigo": produto[0], "descricao": produto[1], "modelo": produto[2], "fabricante": produto[3], "numero_lote": produto[4], "enderecamento": produto[5]} for produto in resultado]
+
             return render_template("estoque.html", lista_produtos=lista_produtos)
-        
-        # Caso a requisição seja POST, processamos o formulário de cadastro de estoque
+
         if request.method == "POST":
-            # Coletando dados do formulário enviados pelo usuário
             cod_prod = request.form.get("cod_prod")
             num_lote = request.form.get("num_lt")
             loc_ = request.form.get("loc_")
             descricao = request.form.get("descricao")
             dt_enter = request.form.get("dt_enter")
-            qt_item = request.form.get("qt_item")
+            qt_item = int(request.form.get("qt_item") or 0)  # Define 0 se o campo estiver vazio
             dt_end = request.form.get("dt_end")
-            qt_saida = request.form.get("qt_saida")
-            _saldo = request.form.get("_saldo")
+            qt_saida = int(request.form.get("qt_saida") or 0)  # Define 0 se o campo estiver vazio
+            _saldo = int(request.form.get("_saldo") or 0)  # Define 0 se o campo estiver vazio
             funcionario = request.form.get("funcionario")
 
-            # Criando instância do modelo Estoque para registrar dados
+            # armazenando o banco de dados de cada usuário logado e seus respectivos códigos que são AUTO_INCREMENT
+            if "usuario_logado" in session:           
+                turma = session['usuario_logado']['turma']
+                cod_aluno = session['usuario_logado']['cod_aluno']
+            else:
+                turma = session['professor_logado']['turma']
+                cod_aluno = session['professor_logado']['cod_aluno']
+
+            # Conectar ao banco e buscar o saldo atual
+            mydb = Conexao.conectar()
+            
+            mycursor = mydb.cursor()
+            mycursor.execute(f"SELECT saldo FROM {turma}.tb_estoque WHERE cod_prod_est = %s", (cod_prod,))
+            resultado = mycursor.fetchone()
+            saldo_atual = resultado[0] if resultado else 0
+
+            # Atualizar saldo
+            saldo_novo = saldo_atual + qt_item - qt_saida
+
+            # Inserir/Atualizar registro no estoque
             tbEstoque = Estoque()
-
-            # Obtendo a turma e o código do usuário logado para associar ao registro
-            turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
-            cod_aluno = session['usuario_logado']['cod_aluno'] if "usuario_logado" in session else session['professor_logado']['cod_aluno']
-
-            # Realizando o cadastro dos dados no estoque e retornando uma mensagem de sucesso ou erro
-            if tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, _saldo, funcionario, cod_aluno, turma):
-                flash("alert('Parabéns, você acabou de realizar o processo de cadastramento de estoque!!🎉')")
+            sucesso = tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, saldo_novo, funcionario, cod_aluno, turma)
+            
+            mycursor.execute(
+                "UPDATE tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
+                (qt_item - qt_saida, cod_prod)
+            )
+            mydb.commit()
+            
+            if sucesso:
+                flash("alert('Movimentação de estoque registrada com sucesso!')")
                 return redirect("/")
             else:
-                return "Erro ao realizar o processo de Controle de Estoque"
+                return "Erro ao registrar movimentação de estoque"
+
     else:
-        # Se o usuário não estiver logado, redirecionamos para a página de login
         return redirect("/login")
+
 
 # Nova rota para buscar informações do produto pelo código para preenchimento automático
 # Rota para obter informações de um produto pelo código para preenchimento automático
@@ -456,7 +484,7 @@ def pagina_expedicao():
             # realizando o processo de registro de expedição
             if tbExpedicao.expedicao(cod_prod, descricao_tec, num_lote, quantidade, data_saida, responsavel, cod_aluno, turma):
                 # exibindo uma mensagem na interface do usuário para quando o cadastro for realizado com sucesso
-                flash("alert('Parabéns, você acaou de realizar o processo de registro de expedição!!🎉')")
+                flash("alert('Parabéns, você acabou de realizar o processo de registro de expedição!!🎉')")
                 return redirect ('/')
             else:
                 # exibindo uma mensagem na interface do usuário para quando o cadastro não for realizado
@@ -502,7 +530,8 @@ def pagina_picking():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6],
                 })
             return render_template("picking.html", lista_produtos=lista_produtos)
         
@@ -839,7 +868,7 @@ def excluir_banco(nomeBD):
         mydb.commit()
         mycursor.close()
         mydb.close()
-
+ 
         # mensagem na interface do usuário para quando a turma for excluída
         flash("alert('Turma finalizada com sucesso!!🎉')")
         # retornando para a página em que estão sendo exibidos os bancos de dados em forma de lista 

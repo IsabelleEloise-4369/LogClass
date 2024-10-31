@@ -32,31 +32,8 @@
         
 
         <section class="container-tabela">
-            <h1>Produtos Cadastrados</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Modelo</th>
-                        <th>Fabricante</th>
-                        <th>Número do Lote</th>
-                        <th>Endereçamento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for produto in lista_produtos %}
-                    <tr>
-                        <td>{{produto['codigo']}}</td>
-                        <td>{{produto['descricao']}}</td>
-                        <td>{{produto['modelo']}}</td>
-                        <td>{{produto['fabricante']}}</td>
-                        <td>{{produto['numero_lote']}}</td>
-                        <td>{{produto['enderecamento']}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h2>Produtos Cadastrados</h2>
+            <a href="/inventario" class="botao-inventario">Abrir Inventário</a>
         </section>
     
     <!-- Section 02. Formulário de Cadastro de Expedição
@@ -68,18 +45,18 @@
 
                 <form action="/expedicao" method="POST">
 
-                    <input type="text" placeholder="Código do Produto:" class="input-field" name="cod_prod">
+                    <input type="text" placeholder="Código do Produto:" class="input-field" id="codigoProduto" name="cod_prod">
 
                     <span class="cadastramentoD"> Data da Embalagem: </span>
                     <input type="date" placeholder="Data de Saída:" class="input-field" name="data_saida">
 
-                    <input type="text" placeholder="Número do Lote:" class="input-field" name="num_lote">
+                    <input type="text" placeholder="Número do Lote:" class="input-field" id="numeroLote" name="num_lote">
 
                     <input type="text" placeholder="Responsável pela embalagem:" class="input-field" name="responsavel">
 
                     <input type="number" placeholder="Quantidade" class="input-field" name="quantidade">
 
-                    <textarea placeholder="Descrição Técnica:" class="textarea-field" name="descricao_tec"></textarea>
+                    <textarea placeholder="Descrição Técnica:" class="textarea-field" id="descricaoProduto" name="descricao_tec"></textarea>
                 
                     <!-- Botão para enviar os dados para o Banco de Dados -->
                     <button class="submit-btn">Enviar</button>
@@ -91,5 +68,25 @@
         </div>
 
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const produtos = {{ lista_produtos | tojson }};
+        
+            const codigoInput = document.getElementById("codigoProduto");
+        
+            codigoInput.addEventListener("input", function() {
+                const codigoDigitado = codigoInput.value.trim();
+                
+                const produto = produtos.find(p => p.codigo === codigoDigitado);
+                
+                if (produto) {
+                    document.getElementById("descricaoProduto").value = produto.descricao;
+                    document.getElementById("numeroLote").value = produto.numero_lote;
+                    document.getElementById("quantidadeProduto").value = produto.quantidade;
+                }
+            });
+        });
+    </script>
 
     {% endblock %}

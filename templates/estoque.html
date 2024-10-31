@@ -28,31 +28,8 @@
 
 
     <section class="container-tabela">
-        <h1>Produtos Cadastrados</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Modelo</th>
-                    <th>Fabricante</th>
-                    <th>Número do Lote</th>
-                    <th>Endereçamento</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for produto in lista_produtos %}
-                <tr>
-                    <td>{{ produto['codigo'] }}</td>
-                    <td>{{ produto['descricao'] }}</td>
-                    <td>{{ produto['modelo'] }}</td>
-                    <td>{{ produto['fabricante'] }}</td>
-                    <td>{{ produto['numero_lote'] }}</td>
-                    <td>{{ produto['enderecamento'] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h2>Produtos Cadastrados</h2>
+        <a href="/inventario" class="botao-inventario">Abrir Inventário</a>
     </section>
 
     <!-- Formulário para cadastro de estoque com todos os campos originais -->
@@ -62,19 +39,19 @@
                 <span class="cadastramentoD"> Cadastrar dados: </span>
                 
                 <!-- Campo de código do produto para busca automática -->
-                <input type="number" placeholder="Código do Produto" class="input-field" name="cod_prod" id="cod_prod">
+                <input type="number" placeholder="Código do Produto" class="input-field" name="cod_prod" id="codigoProduto">
                 
                 <!-- Campos já existentes para informações do produto -->
-                <input type="number" placeholder="Número de Lote" class="input-field" name="num_lt" id="num_lt">
-                <input type="text" placeholder="Localização" class="input-field" name="loc_" id="loc_">
-                <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao" id="descricao"></textarea>
+                <input type="number" placeholder="Número de Lote" class="input-field" name="num_lt" id="numeroLote">
+                <input type="text" placeholder="Localização" class="input-field" name="loc_" id="enderecamentoProduto">
+                <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao" id="descricaoProduto"></textarea>
                 <span class="cadastramento">Data de entrada:</span>
                 <input type="date" placeholder="Data de Entrada:" class="input-field" name="dt_enter">
                 <input type="number" placeholder="Quantidade de itens" class="input-field" name="qt_item">
                 <span class="cadastramento">Data de saída:</span>
                 <input type="date" placeholder="Data de Saída:" class="input-field" name="dt_end">
                 <input type="number" placeholder="Quantidade da Saída" class="input-field" name="qt_saida">
-                <input type="number" placeholder="Saldo" class="input-field" name="_saldo">
+                <input type="number" placeholder="Saldo" class="input-field" name="_saldo" id="saldoProduto">
                 <input type="text" placeholder="Funcionário Responsável" class="input-field" name="funcionario">
 
                 <!-- Botão de envio do formulário -->
@@ -85,25 +62,23 @@
 </section>
     
 <script>
-    // JavaScript para preenchimento automático ao sair do campo de código do produto
-    document.getElementById("cod_prod").addEventListener("blur", function() {
-        let codigo = this.value;  // Obtém o valor digitado no campo de código
-        if (codigo.length > 0) {  // Verifica se o campo não está vazio
-            fetch(`/produto-info/${codigo}`)  // Requisição GET para a rota /produto-info com o código do produto
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Produto não encontrado');
-                })
-                .then(data => {
-                    // Preenche os campos com as informações do produto
-                    document.getElementById("descricao").value = data.descricao || '';
-                    document.getElementById("loc_").value = data.enderecamento || '';
-                    document.getElementById("num_lt").value = data.numero_lote || '';
-                })
-                .catch(error => console.error('Erro ao buscar dados do produto:', error));  // Exibe erros no console
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+        const produtos = {{ lista_produtos | tojson }};
+    
+        const codigoInput = document.getElementById("codigoProduto");
+    
+        codigoInput.addEventListener("input", function() {
+            const codigoDigitado = codigoInput.value.trim();
+            
+            const produto = produtos.find(p => p.codigo === codigoDigitado);
+            
+            if (produto) {
+                document.getElementById("descricaoProduto").value = produto.descricao;
+                document.getElementById("numeroLote").value = produto.numero_lote;
+                document.getElementById("enderecamentoProduto").value = produto.enderecamento;
+                document.getElementById("saldoProduto").value = produto.quantidade;
+            }
+        });
     });
 </script>
     

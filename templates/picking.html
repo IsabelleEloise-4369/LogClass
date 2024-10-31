@@ -4,25 +4,19 @@
 <link rel="stylesheet" href="/static/styles/media/picking-media.css">
 <link rel="stylesheet" href="/static/styles/media/layout-media.css">
 <link rel="stylesheet" href="/static/styles/variaveis.css">
-
-
 {% endblock %}
 
 {% extends "layout.html" %}
 {% block conteudo %}
 
-<!-- LINK PARA O JAVASCRIPT(FUNCIONALIDADE)   -->
+<!-- LINK PARA O JAVASCRIPT(FUNCIONALIDADE) -->
 <script src="/static/js/picking.js" defer></script>
 
-
 <section class="geral-cadastramento">
-
     <div class="container-cadastramento">
-
         <div class="cadastramento-titulo">
             <span class="cadastramento1"> PICKING </span>
         </div>
-
         <div class="container-img"></div>
     </div>
 
@@ -61,62 +55,34 @@
 
     <section class="container-tabela">
         <h2>Produtos Cadastrados</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Modelo</th>
-                    <th>Fabricante</th>
-                    <th>Número do Lote</th>
-                    <th>Endereçamento</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for produto in lista_produtos %}
-                <tr>
-                    <td>{{produto['codigo']}}</td>
-                    <td>{{produto['descricao']}}</td>
-                    <td>{{produto['modelo']}}</td>
-                    <td>{{produto['fabricante']}}</td>
-                    <td>{{produto['numero_lote']}}</td>
-                    <td>{{produto['enderecamento']}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <a href="/inventario" class="botao-inventario">Abrir Inventário</a>
     </section>
 
-
     <div class="formulario">
-
         <div class="form_container">
-
             <form action="/picking" method="POST">
-
-
                 <!-- Campo "Código do Produto" -->
-                <input type="number" placeholder="Código do Produto" class="input-field" name="codProd">
+                <input type="number" placeholder="Código do Produto" class="input-field" id="codigoProduto" name="codProd">
 
                 <!-- Campo "Endereçamento" -->
-                <input type="text" placeholder="Endereçamento" class="input-field" name="enderecamento">
+                <input type="text" placeholder="Endereçamento" class="input-field" id="enderecamentoProduto" name="enderecamento">
 
                 <!-- Campo "Descrição Técnica" -->
-                <textarea placeholder="Descrição Técnica" class="textarea-field" name="descTec"></textarea>
+                <textarea placeholder="Descrição Técnica" class="textarea-field" id="descricaoProduto" name="descTec"></textarea>
 
-                <input list="browsers" name="modeloPick" placeholder="Modelo do Produto" class="input-field">
+                <input list="browsers" name="modeloPick" placeholder="Modelo do Produto" id="modeloProduto" class="input-field">
 
                 <!-- Campo "Fabricante" -->
-                <input type="text" placeholder="Fabricante" class="input-field" name="fabri">
+                <input type="text" placeholder="Fabricante" class="input-field" id="fabricanteProduto" name="fabri">
 
                 <!-- Campo "Quantidade" -->
-                <input type="text" placeholder= "Quantidade" class="input-field" name="qtde">
+                <input type="text" placeholder="Quantidade" class="input-field" id="quantidadeProduto" name="qtde">
 
                 <!-- Campo "Data" -->
                 <input type="date" placeholder="Data:" class="input-field" name="data">
                 
                 <!-- Campo "lote" -->
-                <input type="text" placeholder="Lote" class="input-field" name="lote">
+                <input type="text" placeholder="Lote" class="input-field" id="numeroLote" name="lote">
 
                 <!-- Campo "número de Picking" -->
                 <input type="number" placeholder="Número de Picking" class="input-field" name="numPicking">
@@ -126,16 +92,39 @@
                 
                 <!-- Botão de Enviar -->
                 <button class="submit-btn">Enviar</button>
-
             </form>
         </div>
 
         <div class="botoes">
             <a href="/simulador" class="botao-simulador">Ir para Simulador</a>
         </div>
-
     </div>
-    
 </section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const produtos = {{ lista_produtos | tojson }};
+    
+        const codigoInput = document.getElementById("codigoProduto");
+    
+        codigoInput.addEventListener("input", function() {
+            const codigoDigitado = codigoInput.value.trim();
+            
+            const produto = produtos.find(p => p.codigo === codigoDigitado);
+            
+            if (produto) {
+                document.getElementById("descricaoProduto").value = produto.descricao;
+                document.getElementById("modeloProduto").value = produto.modelo;
+                document.getElementById("fabricanteProduto").value = produto.fabricante;
+                document.getElementById("numeroLote").value = produto.numero_lote;
+                document.getElementById("enderecamentoProduto").value = produto.enderecamento;
+                document.getElementById("quantidadeProduto").value = produto.quantidade;
+            }
+        });
+    });
+</script>
+    
+    
 
 {% endblock %}
