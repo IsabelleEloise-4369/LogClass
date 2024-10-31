@@ -42,60 +42,48 @@
                 <!-- <figcaption>Logo da LogClass</figcaption> -->
             </figure>
 
-            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
+           
 
             <!-- Início da navegação principal -->
             <nav>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Dropdown</button>
+                    <button class="dropbtn">Processos</button>
                     <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
+                        <div class="card">
+                            <a href="/cadastramento">Cadastramento</a>
+                        </div>
+                    
+                        <div class="card">
+                            <a href="/rnc">RNC</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/picking">Cadastro de Picking</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/estoque">Controle de Estoque</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/pop">POP</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/expedicao">Cadastro de Expedição</a>
+                        </div>
                     </div>
                 </div>
                 
 
+                {% if "professor_logado" in session %}
                 <!-- Início do menu dropdown -->
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Menu</button>
+                    <button onclick="myFunction()" class="dropbtn">Gerenciar turmas</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class="dropdown-menu">
-                            <div class="card">
-                                <a href="/"><i class="fas fa-home"></i> Home</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/login"><i class="fa-solid fa-users"></i> Conecte-se</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastramento">Cadastramento</a>
-                            </div>
-                            {% if "usuario_logado" in session %}
-                            <div class="card">
-                                <a href="/rnc">RNC</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/picking">Cadastro de Picking</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/estoque">Controle de Estoque</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/pop">POP</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/expedicao">Cadastro de Expedição</a>
-                            </div>
-                            {% endif %}
-
-                            {% if "professor_logado" in session %}
+                            
                                 <div class="card">
                                     <a href="/criarBD">Crie sua turma</a>
                                 </div>
@@ -105,13 +93,22 @@
                                 <div class="card">
                                     <a href="/professor/listarBD">Gerencie sua turma</a>
                                 </div>
-                            {% endif %}
+                            
                         </div>
                   </div>
                 </div>
+                {% endif %}
                 <!-- Fim do menu dropdown -->
             </nav>
             <!-- Fim da navegação principal -->
+
+            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
+       
+
+            <div class="conectar">
+                <a href="/login"><i class="fa-solid fa-users"></i> Conecte-se</a>
+            </div>
+           
 
         </section>
         <!-- Fim da Seção do cabeçalho -->

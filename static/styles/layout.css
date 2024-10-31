@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -17,11 +17,10 @@
 }
 
 /* Estilização do cabeçalho */
-.header-container{
+.header-container {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: fixed;
   left: 0;
@@ -29,148 +28,175 @@
   margin: 0;
   transition: background-color 0.3s;
   z-index: 10;
-  
+
 }
 
 /* Estilização da imagem do logo */
-.header-container img{
-  max-width: 11rem;
-  max-height: 13rem;
-  border-radius: 100%;
+.header-container img {
+  width: 11rem;
+  height: 13rem;
   margin-top: 2rem;
 }
 
-.button-container{
+/* Estilização do botão de dropdown */
+
+.dropbtn {
+  background-color: #ffff;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  margin-right: 6rem;
+  text-transform: uppercase;
+
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #dfdfdf;
+}
+
+.dropdown {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  width: 100vw;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--cor-drop);
+  min-width: 8rem;
+  z-index: 15;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 100vw;
+  height: 44vh;
+}
+
+.dropdown-content a {
+  color: var(--cor-drop-letras);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  display: block;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+
+.dropdown-content a i {
+  font-size: 16px;
+  color: var(--cor-icone-cadastramento);
+}
+
+
+
+
+.dropdown a:hover {
+  background-color: var(--cor-drop-hover);
+  
+}
+
+.show {
+  display: block;
+}
+
+.dropdown-menu .card a i {
+  font-size: 16px;
+  color: var(--cor-icone-cadastramento);
+}
+
+.dropdown-menu .card a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-menu {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px
+}
+
+.dropdown-menu .card {
+  padding: 15px;
+  background-color: var(--cor-fundo-options);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.dropdown-menu .card:hover {
+  transform: scale(1.05);
+  background-color: var(--cor-hover-options);
+}
+
+.dropdown-menu .card a {
+  text-decoration: none;
+  color: var(--cor-drop-letras);
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.button-container {
   height: 3rem;
   width: 4rem;
   border-radius: 1.5rem;
   border: none;
   background-color: white;
+  margin-left:8rem;
 }
 
-/* Estilização do botão de dropdown */
-.dropbtn {
-    background-color: var(--cor-drop-btn);
-    color: var(--cor-padrao-letras);
-    padding: 10px 16px;
-    font-size: 16px;
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-    margin-right: 6rem;
-    text-transform: uppercase;
-  }
-  
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: var(--cor-drop-btn);
-  }
-  
-  .dropdown {
-    z-index: 1;
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--cor-drop);
-    min-width: 8rem;
-    overflow: auto;
-    box-shadow: 0rem 4rem 6rem 0rem var(--cor-sombra-drop);
-    z-index: 15;
-    margin-right: 1rem;
-    right: 0;
-    border-radius: 8px;
-    padding: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
-  .dropdown-content a {
-    color: var(--cor-drop-letras);
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown a:hover {background-color:var(--cor-drop-hover);}
-  
-  .show {
-    display: block;
-  }
 
-  .dropdown-menu .card a i {
-    font-size: 16px;
-    color: var(--cor-icone-cadastramento);
-  }
 
-  .dropdown-menu .card a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.conectar{
+  padding: 3rem;
+  margin-left: 10rem;
+  margin-top: 2rem;
+}
 
-  .dropdown-menu .card a i {
-    font-size: 16px;
-    color: #0073e6;
-  }
+.conectar a{
+  color: var(----cor-titulos);
+}
 
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  .dropdown-menu {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px
-  }
-
-  .dropdown-menu .card {
-    padding: 15px;
-    background-color: var(--cor-fundo-options);
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-
-  .dropdown-menu .card:hover {
-    transform: scale(1.05);
-    background-color: var(--cor-hover-options);
-  }
-
-  .dropdown-menu .card a {
-    text-decoration: none;
-    color: var(--cor-drop-letras);
-    font-weight: bold;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
 
 /* ****************************** Padronização/ estilização RODAPÉ ************************************ */
 
 /* Estilização do rodapé */
-footer{
-    width: 100vw;
-    height: 4vh;
-    background-color: var(--cor-footer);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    color:var(--cor-padrao-letras);
-    display: flex;
+footer {
+  width: 100vw;
+  height: 4vh;
+  background-color: var(--cor-footer);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: var(--cor-padrao-letras);
+  display: flex;
 }
 
-footer p{
+footer p {
   margin-left: 2rem;
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
@@ -204,10 +230,10 @@ footer p{
   background-color: var(--sidebar-bg-dark);
 }
 
-.theme-container.dark td{
+.theme-container.dark td {
   color: var(--text-color-dark);
 }
 
-.theme-container.dark td{
+.theme-container.dark td {
   border: var(--text-color-dark);
 }
