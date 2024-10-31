@@ -267,22 +267,22 @@
 @media (min-width: 1440px){
       
     .titulo-destaque .part1{
-        font-size: 19.5rem;
+        font-size: 22.5rem;
         margin-left: 2rem;
     }
 
     .titulo-destaque .part2{
-        font-size: 19.5rem;
+        font-size: 22.5rem;
     }
 
     .shape {
-        height: 13rem;
-        width: 13rem;
+        height: 15rem;
+        width: 15rem;
         margin-left: 0.2rem;
     }
 
     .titulo-destaque .partG {
-        font-size: 19.5rem;
+        font-size: 22.5rem;
         opacity: 0.7;
         margin-left: 0.2rem;
         z-index: 0;
@@ -290,9 +290,8 @@
 
     .servicos{
         /*LARGURA DO CARD.*/
-        width: 100%;
-        /*COR DE FUNDO DO CARD*/
-        height: 100%;
+        width: 80%;
+        height: 110%;
     }
 
     .container-mensagem_professor{
@@ -311,7 +310,7 @@
         height: 20rem;
         margin-top: 2rem;
         margin-bottom: 10rem;
-        margin-left: 52rem;
+        margin-left: 65rem;
     }
 }
 

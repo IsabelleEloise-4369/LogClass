@@ -3,61 +3,9 @@
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="container-bem-vindo" id="intro-section">
-    <div class="inicio-bem-vindo">
-        <h2 id="logo-h2">BEM-VINDO AO LOG CLASS</h2>
-        <figure>
-            <img src="/static/img/logo.png" alt="Logo" class="logo-image">
-        </figure>
-    </div>
 
-    <div class="login-prompt">
-        <h3 class="login-question">Ainda não possui cadastro?</h3>
-        <button class="signup-btn" id="signup-btn"> CADASTRE-SE AQUI!</button>
-        <button class="login-btn" id="login-btn"> IR PARA LOGIN </button>
-    </div>
-
-</div>
-
-<div class="container-bem-vindo" id="register-section" >
-    <div class="connect-box">
-        <h2>CONECTE-SE</h2>
-        <p>Selecione seu tipo de conta.</p>
-        <button class="account-type" id="aluno-register-btn">ALUNO</button>
-        <button class="account-type" id="professor-register-btn">PROFESSOR</button>
-    </div>
-
-    <div class="register-box" id="register-aluno">
-        <h2>Cadastro do Aluno</h2>
-        <form action="/login" method="POST">
-            <input type="hidden" value="Aluno" name="tipo">
-            <input type="text" placeholder="Nome Completo" required name="nome">
-            <input type="email" placeholder="E-mail" required name="email">
-            <input type="password" placeholder="Senha" required name="senha">
-            <input list="browsers" name="turma" placeholder="Turma">
-            <datalist id="browsers">
-            {% for nomeBD in lista_nomes %}
-            <option value="{{nomeBD['database']}}">{{nomeBD['database']}}</option>
-            {% endfor %}
-            </datalist>
-            <button type="submit">IR</button>
-            <a href="#" id="voltar-register" class="voltar-btn">VOLTAR</a>
-        </form>
-    </div>
-
-    <div class="register-box" id="register-professor">
-        <h2>Cadastro do Professor</h2>
-        <form action="/login" method="POST">
-            <input type="hidden" value="Professor" name="tipo">
-            <input type="text" placeholder="Nome Completo" required name="nome">
-            <input type="email" placeholder="E-mail" required name="email">
-            <input type="password" placeholder="Código de Acesso" required name="senha">
-            <button type="submit">IR</button>
-            <a href="#" id="voltar-register" class="voltar-btn">VOLTAR</a>
-        </form>
-    </div>
-</div>
 
 <!-- Seção de login -->
 <div class="container-bem-vindo" id="login-section" style="display: none;">
@@ -68,22 +16,23 @@
         <button class="account-type" id="professor-login-btn">PROFESSOR</button>
     </div>
     
-    <div class="login-box" id="login-aluno">
-        <h2>Login do Aluno</h2>
-        <form action="/login" method="POST">
-            <input type="hidden" value="LoginAluno" name="tipo">
-            <input type="email" placeholder="E-mail" required name="email">
-            <input type="password" placeholder="Senha" required name="senha">
-            <input list="browsers" name="turma" placeholder="Turma">
-            <datalist id="browsers">
-            {% for nomeBD in lista_nomes %}
-            <option value="{{nomeBD['database']}}">{{nomeBD['database']}}</option>
-            {% endfor %}
-            </datalist>
-            <button type="submit">IR</button>
-            <a href="#" id="voltar-login" class="voltar-btn">VOLTAR</a>
-        </form>
-    </div>
+    
+        <div class="login-box" id="login-aluno">
+            <h2>Login do Aluno</h2>
+            <form action="/login" method="POST">
+                <input type="hidden" value="LoginAluno" name="tipo">
+                <input type="email" placeholder="E-mail" required name="email">
+                <input type="password" placeholder="Senha" required name="senha">
+                <input list="browsers" name="turma" placeholder="Turma">
+                <datalist id="browsers">
+                {% for nomeBD in lista_nomes %}
+                <option value="{{nomeBD['database']}}">{{nomeBD['database']}}</option>
+                {% endfor %}
+                </datalist>
+                <button type="submit">IR</button>
+                <a href="#" id="voltar-login" class="voltar-btn">VOLTAR</a>
+            </form>
+        </div>
 
     <div class="login-box" id="login-professor">
         <h2>Login do Professor</h2>

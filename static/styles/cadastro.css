@@ -1,0 +1,269 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(0,0,0);
+    background: var( --cor-fundo-login);
+    font-family: Arial, sans-serif;
+    color: var(--cor-padrao-letras);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container-bem-vindo {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    align-content: center;
+    gap: 4rem;
+    flex-wrap: wrap
+    
+}
+
+.inicio-bem-vindo, .login-prompt {
+    height: 23rem;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    width: 20rem;
+    background: var(--cor-cards-pgLogin);
+}
+
+.inicio-bem-vindo h2 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    color:var(--cor-padrao-letras);
+}
+
+.login-prompt h3 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    color:var(--cor-padrao-letras);
+}
+
+.signup-btn, .login-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--cor-btns);
+    color: var(--cor-padrao-letras);
+    font-weight: bold;
+    cursor: pointer;
+    height: 4.5rem;
+    width: 70%;
+}
+
+.signup-btn {
+    margin-top: 2rem;
+}
+
+.register-box, .connect-box {
+    background: var(--cor-fundo-inputs);
+    background: var(--cor-cards-pgLogin);
+    border-radius: 1rem;
+    padding: 4rem;
+    width: 5rem;
+    text-align: center;
+    
+}
+
+.register-box h2, .connect-box h2 {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input {
+    padding: 1rem;
+    width: 97%;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: var(--cor-fundo-inputs);
+    color: var(--cor-padrao-letras);
+}
+
+button[type="submit"] {
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--cor-btns);
+    color: var(--cor-padrao-letras);
+    font-weight: bold;
+    cursor: pointer;
+    width: 97%;
+}
+
+.signup-link {
+    display: block;
+    margin-top: 1rem;
+    color: var(--cor-btns);
+    text-decoration: none;
+}
+
+.account-type {
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--cor-btns);
+    color: var(--cor-padrao-letras);
+    font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.select-menu {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.select-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: #686868;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    width: 90%;
+}
+
+.select-btn i {
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.select-menu.active .select-btn i {
+    transform: rotate(-180deg);
+}
+
+.options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 80%;
+    padding: 0;
+    list-style: none;
+    border-radius: 1.5rem;
+    max-height: 5rem;
+    overflow-y: auto;
+    display: none;
+}
+
+.select-menu.active .options {
+    display: block;
+    z-index: 10;
+}
+
+.option {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #696969;
+}
+
+.logo-image {
+    margin-top: 1.5rem;
+    width: 12rem; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-btn {
+    background-color: var(--cor-btns);
+    color: var(--cor-padrao-letras);
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#register-aluno, #register-professor {
+    display: none;
+}
+.active {
+    display: block;
+}
+
+#login-existente-box {
+    background: var(--cor-btns);
+    background: var(--cor-cards-pgLogin);
+    border-radius: 1rem;
+    padding: 3rem;
+    width: 3rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#login-existente-box h2 {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+#login-existente-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#email-login, #senha-login {
+    padding: 1rem;
+    width: 90%;
+    border: none;
+    border-radius: 1.5rem;
+    outline: none;
+    background-color: var(--cor-fundo-inputs);
+    color: var(--cor-padrao-letras);
+}
+
+#login-existente-btn {
+    padding: 1rem;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: var(--cor-btns);
+    color: var(--cor-padrao-letras);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup-link {
+    display: block;
+    margin-top: 1rem;
+    color: var(--cor-btns);
+}
+
+.register-box, .login-box, .connect-box {
+    background: var(--cor-cards-pgLogin);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 20rem;
+    text-align: center;
+    display: none;
+}
+
+
+.voltar-btn {
+    display: block;
+    width: 97%;
+    margin-top: 0.5rem; 
+    border: none;
+    border-radius: 1.5rem;
+    color: var(--cor-padrao-letras);
+    font-weight: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+

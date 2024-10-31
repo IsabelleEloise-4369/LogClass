@@ -104,8 +104,43 @@ def pagina_inicial():
 # RF002
 # RF003
 # RF004
-@app.route("/login", methods=["GET", "POST"])
+
+
+@app.route("/cadastro", methods=["GET", "POST"])
 def pagina_cadastro():
+     if request.method == "GET":
+        # conectando com o banco de dados
+        mydb = Conexao.conectar()
+        # criando um objeto Aluno
+        mycursor = mydb.cursor()
+        # criando uma variável para armazenar a lista de turmas
+        mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+        resultado = mycursor.fetchall()
+        mydb.close()
+
+        # criando uma lista para armazenar todas as turmas que foram "retirados"
+        lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
+        return render_template("login.html", lista_nomes=lista_nomes)
+
+        
+    if request.method == "POST":
+        # criando uma variável para armazenar o valor do input no formulário
+        formulario = request.json.get("tipo")
+
+        # realizando o cadastro do aluno
+        if formulario == "Aluno":
+            # pegando os dados do formulário, mas em forma de json
+            nome = request.json.get("nome")
+            email = request.json.get("email")
+            senha = request.json.get("senha")
+            turma = request.json.get("turma")
+            # criando um objeto Aluno
+            aluno = Aluno()
+
+
+
+@app.route("/login", methods=["GET", "POST"])
+def pagina_login():
     if request.method == "GET":
         # conectando com o banco de dados
         mydb = Conexao.conectar()
