@@ -53,7 +53,7 @@
 .dropbtn {
   background-color: #e7e7e7;
   padding: 1rem 1rem;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -181,19 +181,37 @@
   margin-top: 2.5rem;
 }
 
+.inventario{
+  margin-left: 3rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+
+.inventario a{
+  color: var(--primary-color-dark);
+  font-family:"Bebas Neue", sans-serif ;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+
+
 .button-container {
   height: 3rem;
   width: 4rem;
   border-radius: 1.5rem;
   border: none;
   background-color: white;
-  margin-left:20rem;
+  margin-left:5rem;
+  margin-bottom: 1.5rem;
 }
+
 
 .conectar{
   padding: 3rem;
   margin-left: 10rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .conectar a{
@@ -250,11 +268,11 @@ footer p {
 }
 
 .theme-container.dark td {
-  color: var(--text-color-dark);
+  color: var( --text-color-light);
 }
 
 .theme-container.dark td {
-  border: var(--text-color-dark);
+  border: var(--sidebar-bg-dark);
 }
 
 .theme-container.dark .dropdown{
@@ -263,4 +281,12 @@ footer p {
 
 .theme-container.dark .sombreado{
   background-color: var( --secondary-color-light);
+}
+
+.theme-container.dark .container-grid a{
+  color: var(--text-color-dark);
+}
+
+.theme-container.dark .inventario a{
+  color: var(--text-color-dark);
 }
