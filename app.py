@@ -57,9 +57,6 @@ def aprovar_usuario():
             
             mycursor = mydb.cursor()
 
-              
-
-
 #roteamento da página inicial
 @app.route("/")
 #função da página inicial
@@ -84,6 +81,7 @@ def pagina_inicial():
         mydb.close()
         # criando uma lista para armazenar todas as mensagens que foram "retiradas" do banco de dados
         lista_mensagens = []
+
         # criando um loop para cada mensagem que foi "retirada" do banco de dados
         for mensagens_enviadas in resultado:
             lista_mensagens.append({
@@ -188,6 +186,7 @@ def pagina_login():
         mycursor = mydb.cursor()
         # criando uma variável para armazenar a lista de turmas
         mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+        # pegando todos os dados que o select trouxe 
         resultado = mycursor.fetchall()
         mydb.close()
 
@@ -197,7 +196,7 @@ def pagina_login():
     
     if request.method == "POST":
         # RF003
-        # login de alunos e professores
+        # login de alunos
         formulario = request.form.get("tipo")  
         if formulario == "LoginAluno":
             # pegando os dados do formulário, mas em forma de json
@@ -226,6 +225,8 @@ def pagina_login():
                 return 'Email ou senha incorretos.', 401
 
         if formulario == "LoginProfessor":
+            # RF004
+            # login de professores
             # pegando os dados do formulário, mas em forma de json
             email = request.form.get("email")
             senha = request.form.get("senha")
@@ -307,6 +308,7 @@ def pagina_cadastramento():
 # roteamento da página inventário
 @app.route('/inventario')
 def inventario():
+    # verificando se há algum tipo de usuário logado para poder liberar a vizualização da página
     if "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
             mydb = Conexao.conectar()
