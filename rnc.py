@@ -18,10 +18,12 @@ class Rnc:
 
         mycursor = mydb.cursor()
 
-        dados = f"INSERT INTO tb_rnc(desc_rnc, recebimento, num_rnc, local_rnc, quant_entregue, quant_reprovada, resp_inspecao, cod_prod, cod_aluno) VALUES('{desc_rnc}', '{recebimento}', '{num_rnc}', '{local_rnc}', '{quant_entregue}', '{quant_reprovada}', '{resp_inspecao}', '{cod_prod}', '{cod_aluno}')"
+        valores = (desc_rnc, recebimento, num_rnc, local_rnc, quant_entregue, quant_reprovada, resp_inspecao, cod_prod, cod_aluno)
+
+        dados = f"INSERT INTO tb_rnc(desc_rnc, recebimento, num_rnc, local_rnc, quant_entregue, quant_reprovada, resp_inspecao, cod_prod, cod_aluno) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         #executar
-        mycursor.execute(dados)
+        mycursor.execute(dados, valores)
 
         # realiza o commit da transação, garantindo que as alterações feitas na base de dados sejam salvas
         mydb.commit()

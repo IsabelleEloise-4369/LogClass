@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/styles/media/layout-media.css">
+<link rel="stylesheet" href="/static/styles/simulador.css">
+<link rel="stylesheet" href="/static/styles/variaveis.css">
+<script src="https://kit.fontawesome.com/cbfeaec436.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block conteudo %}
+    <section class="nota-fiscal">
+        <h1>Informações da Encomenda</h1>
+    
+    
+    <div class="empresa">
+        <h2><i class="fa-solid fa-building"></i> Empresa: {{ pedido['fabricante'] }} </h2>
+        <p>Código do Pedido: {{ pedido['codigo'] }}</p>
+    </div>
+<!-- 
+    <div class="detalhes">
+        <h3>Detalhes do Pedido</h3>
+        <ul>
+            <li>Produto: {{ pedido['descricao'] }} </li>
+            <li>Quantidade a Separar: {{ pedido['qtde'] }} </li>
+            <li>Endereçamento: {{ pedido['enderacamento'] }} </li>
+            <li>Número do Lote: {{ pedido['numero_lote'] }} </li>
+            <li>Data: {{ pedido['data'] }} </li>
+            <li>Número de Picking: {{ pedido['numPicking'] }} </li>
+            <li>Total de Produtos Separados: {{ pedido['totalProd'] }} </li>
+        </ul>
+    </div> -->
+
+    <p>Número do Picking: {{ pedido.num_picking }} </p>
+    <p>Endereçamento: {{ pedido.enderecamento }} </p>
+    <p>Descrição Técnica: {{ pedido.desc_tecnica }} </p>
+    <p>Modelo: {{ pedido.modelo }} </p>
+    <p>Fabricante: {{ pedido.fabricante }} </p>
+    <p>Quantidade: {{ pedido.quantidade }} </p>
+    <p>Data: {{ pedido.data }} </p>
+    <p>Lote: {{ pedido.lote }} </p>
+    <p>Total de Produtos Separados: {{ pedido.total_produtos }} </p>
+    <p>Código do Produto: {{ pedido.cod_prod }} </p>
+
+</section>
+
+{% endblock %}

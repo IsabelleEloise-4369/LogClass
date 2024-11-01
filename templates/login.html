@@ -1,8 +1,15 @@
+{% block css %}
 <link rel="stylesheet" href="/static/styles/login.css">
 <link rel="stylesheet" href="/static/styles/media/login-media.css">
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% endblock %}
+
+{% extends "layout.html" %}
+{% block conteudo %}
 
 <div class="container-bem-vindo" id="intro-section">
     <div class="inicio-bem-vindo">
@@ -100,6 +107,7 @@
 
 
 <script src="/static/js/login.js"></script>
+
 <script >
     {% with messages = get_flashed_messages() %}
         {% for mensagem in messages %}
@@ -108,3 +116,4 @@
     {% endwith %}
 </script>
 
+{% endblock %}
