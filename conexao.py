@@ -5,6 +5,7 @@ class Conexao:
         # chama a função connect do módulo mysql.connector para estabelecer uma nova conexão com o banco de dados MySQL
         mydb = mysql.connector.connect(
             host ="127.0.0.1",
+            port ="3307",
             # não esquecer de modificar isso conforme a porta do banco de dados
             user ="usuario_logclass",
             password ="logclass",
@@ -16,6 +17,7 @@ class Conexao:
     def conectarAluno(databaseAluno):
         mydb = mysql.connector.connect(
             host ="127.0.0.1",
+            port ="3307",
             # não esquecer de modificar isso conforme a porta do banco de dados
             user ="usuario_logclass",
             password ="logclass",

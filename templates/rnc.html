@@ -28,30 +28,7 @@
 
         <section class="container-tabela">
             <h2>Produtos Cadastrados</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Modelo</th>
-                        <th>Fabricante</th>
-                        <th>Número do Lote</th>
-                        <th>Endereçamento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for produto in lista_produtos %}
-                    <tr>
-                        <td data-label="Código">{{ produto['codigo'] }}</td>
-                        <td data-label="Descrição">{{ produto['descricao'] }}</td>
-                        <td data-label="Modelo">{{ produto['modelo'] }}</td>
-                        <td data-label="Fabricante">{{ produto['fabricante'] }}</td>
-                        <td data-label="Número do Lote">{{ produto['numero_lote'] }}</td>
-                        <td data-label="Endereçamento">{{ produto['enderecamento'] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <a href="/inventario" class="botao-inventario">Abrir Inventário</a>
         </section>
 
 
@@ -68,19 +45,20 @@
                     <input type="text" placeholder="Número da RNC" class="input-field" name="numRNC">
 
                     <!-- Campo "Número do Código do Produto" -->
-                    <input type="text" placeholder="Código do Produto" class="input-field" name="codProd">
+                    <input type="text" placeholder="Código do Produto" class="input-field" id="codigoProduto" name="codProd">
 
                     <!-- Campo "Local" -->
-                    <input type="text" placeholder="Local" class="input-field" name="local">
+                    <input type="text" placeholder="Local" class="input-field" id="enderecamentoProduto" name="local">
 
                     <!-- Campo "Quantidade entregue" -->
-                    <input type="text" placeholder= "Quantidade Entregue" class="input-field" name="qtdentregue">
+                    <input type="text" placeholder= "Quantidade Entregue" class="input-field"
+                    name="qtdentregue">
 
                     <!-- Campo "Quantidade Reprovada" -->
                     <input type="text" placeholder="Quantidade Reprovada" class="input-field" name="qtdrepro">
 
                     <!-- Campo "Descrição da RNC" -->
-                    <textarea placeholder="Descrição da RNC" class="textarea-field" name="descRNC"></textarea>
+                    <textarea placeholder="Descrição da RNC" class="textarea-field" id="descricaoProduto" name="descRNC"></textarea>
 
                     <!-- Campo "Responsável pela inspeção" -->
                     <input type="text" placeholder="Responsável pela inspeção" class="input-field" name="respInsp">
@@ -95,5 +73,22 @@
         
     </section>
 
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const produtos = {{ lista_produtos | tojson }};
+        
+            const codigoInput = document.getElementById("codigoProduto");
+        
+            codigoInput.addEventListener("input", function() {
+                const codigoDigitado = codigoInput.value.trim();
+                
+                const produto = produtos.find(p => p.codigo === codigoDigitado);
+                
+                if (produto) {
+                    document.getElementById("descricaoProduto").value = produto.descricao;
+                    document.getElementById("enderecamentoProduto").value = produto.enderecamento;
+                }
+            });
+        });
+    </script>
 {% endblock %}

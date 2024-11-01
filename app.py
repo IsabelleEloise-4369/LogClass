@@ -1,4 +1,5 @@
 # importando módulos e classes necessários para a aplicação
+import random
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
 from conexao import Conexao
 from aluno import Aluno
@@ -9,11 +10,55 @@ from expedicao import Expedicao
 from picking import Picking
 from pop import Pop
 from rnc import Rnc
+from simulador import Simulador
 
 #app é o servidor
 #criei o objeto app usando a classe Flask
 app = Flask(__name__)
 app.secret_key = 'logclass'
+
+
+@app.route("/confirmacao")
+def confirmacao_usuario():
+    # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
+    if "usuario_logado" in session or "professor_logado" in session:
+        if request.method == "GET":
+            #conectando com o banco de dados
+            mydb = Conexao.conectar()
+            
+            mycursor = mydb.cursor()
+
+            confirmacao = (f"SELECT * FROM databaseProfessor.tb_aluno")
+
+            mycursor.execute(confirmacao)
+
+            resultado = mycursor.fetchall()
+
+            # fechar a conexão
+            mydb.close()
+
+            lista_usuarios = []
+
+            for usuario in resultado:
+                lista_usuarios.append({
+                    "id": usuario[0],
+                    "nome": usuario[1]
+                })
+
+            return render_template("confirmacao.html", lista_usuarios = lista_usuarios)
+        
+@app.route("/aprovar_usuario")
+def aprovar_usuario():
+    # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
+    if "usuario_logado" in session or "professor_logado" in session:
+        if request.method == "GET":
+            #conectando com o banco de dados
+            mydb = Conexao.conectar()
+            
+            mycursor = mydb.cursor()
+
+              
+
 
 #roteamento da página inicial
 @app.route("/")
@@ -34,6 +79,7 @@ def pagina_inicial():
         mycursor.execute(mensagens)
 
         resultado = mycursor.fetchall()
+
         # fechar a conexão
         mydb.close()
         # criando uma lista para armazenar todas as mensagens que foram "retiradas" do banco de dados
@@ -51,14 +97,16 @@ def pagina_inicial():
         return render_template("pagina-inicial.html")
     # se não houver nenhum usuário logado o mesmo será direcionado para a página de cadastro e login
     else:
-        return redirect("/login")
+        return redirect("/cadastro")
     
 # roteamento da página de cadastro e login que no caso são "juntas" 
 # RF001
 # RF002
 # RF003
 # RF004
-@app.route("/login", methods=["GET", "POST"])
+
+
+@app.route("/cadastro", methods=["GET", "POST"])
 def pagina_cadastro():
     if request.method == "GET":
         # conectando com o banco de dados
@@ -70,21 +118,21 @@ def pagina_cadastro():
         resultado = mycursor.fetchall()
         mydb.close()
 
-        # criando uma lista para armazenar todas as turmas que foram "retirados"
+        # criando uma lista para armazenar todas as turmas que foram "retiradas"
         lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
-        return render_template("login.html", lista_nomes=lista_nomes)
+        return render_template("cadastro.html", lista_nomes=lista_nomes)
 
     if request.method == "POST":
         # criando uma variável para armazenar o valor do input no formulário
-        formulario = request.json.get("tipo")
+        formulario = request.form.get("tipo")
 
         # realizando o cadastro do aluno
         if formulario == "Aluno":
             # pegando os dados do formulário, mas em forma de json
-            nome = request.json.get("nome")
-            email = request.json.get("email")
-            senha = request.json.get("senha")
-            turma = request.json.get("turma")
+            nome = request.form.get("nome")
+            email = request.form.get("email")
+            senha = request.form.get("senha")
+            turma = request.form.get("turma")
             # criando um objeto Aluno
             aluno = Aluno()
 
@@ -104,9 +152,9 @@ def pagina_cadastro():
         # realizando o cadastro do professor
         if formulario == "Professor":
             # pegando os dados do formulário, mas em forma de json
-            nome = request.json.get("nome")
-            email = request.json.get("email")
-            senha = request.json.get("senha")
+            nome = request.form.get("nome")
+            email = request.form.get("email")
+            senha = request.form.get("senha")
 
             # criando um objeto para armazrnar a classe Professor
             professor = Professor()
@@ -121,7 +169,7 @@ def pagina_cadastro():
                 # realizando o cadastro do professor através da função que está dentro do objeto
                 if professor.cadastrarProf(nome, email, senha):
                     # retornando um arquivo json confirmando o cadastro realizado com sucesso
-                    return jsonify({'mensagem': 'Cadastro realizado com sucesso'}), 201
+                    return redirect("/login")
                 else:
                     # retornando um arquivo json caso o cadastro nao seja concluído
                     return jsonify({'mensagem': 'Erro ao cadastrar o professor'}), 400
@@ -131,14 +179,31 @@ def pagina_cadastro():
 
         # Adicionando aqui a lógica para login de alunos e professores...
 
+@app.route("/login", methods=["GET", "POST"])
+def pagina_login():
+    if request.method == "GET":
+        # conectando com o banco de dados
+        mydb = Conexao.conectar()
+        # criando um objeto Aluno
+        mycursor = mydb.cursor()
+        # criando uma variável para armazenar a lista de turmas
+        mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+        resultado = mycursor.fetchall()
+        mydb.close()
+
+        # criando uma lista para armazenar todas as turmas que foram "retiradas"
+        lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
+        return render_template("login.html", lista_nomes=lista_nomes)
+    
+    if request.method == "POST":
         # RF003
         # login de alunos e professores
-        formulario = request.json.get("tipo")  
+        formulario = request.form.get("tipo")  
         if formulario == "LoginAluno":
             # pegando os dados do formulário, mas em forma de json
-            email = request.json.get("email")
-            senha = request.json.get("senha")
-            turma = request.json.get("turma")
+            email = request.form.get("email")
+            senha = request.form.get("senha")
+            turma = request.form.get("turma")
 
             # criando um objeto com a classe Aluno
             loginAluno = Aluno()
@@ -162,11 +227,14 @@ def pagina_cadastro():
 
         if formulario == "LoginProfessor":
             # pegando os dados do formulário, mas em forma de json
-            email = request.json.get("email")
-            senha = request.json.get("senha")
+            email = request.form.get("email")
+            senha = request.form.get("senha")
 
             # criando um objeto com a classe Professor
             loginProfessor = Professor()
+
+            # realizando a verificação do usuário master (ou seja, ele pode aceitar ou não os professores que irão acessar a plataforma)
+            # if email == 'admim@adimim.com' and senha == 'K8$tY9':
 
             # realizando o login do aluno por meio da função armazenada na variável
             if loginProfessor.logarProf(email, senha):
@@ -210,8 +278,7 @@ def pagina_cadastramento():
 
             # chamando a função que está dentro da classe 
             if tbCadastramento.cadastramento(codigo, descricao, modelo, fabricante, numeroLote, enderecamento, session['usuario_logado']['turma']):
-                flash("alert('Parabéns, você acaou de realizar o processo de cadastramento de um produto!!🎉')")
-                return redirect("/")
+                return render_template("cadastramento.html")
             else:
                 return 'Erro ao realizar o processo de Cadastramento'
     # verificando se o usuário logado é o professor, para poder liberar a vizualização das páginas
@@ -231,68 +298,73 @@ def pagina_cadastramento():
 
             # pegando a função armazenada no objeto para realizar o processo de cadastramento de um produto
             if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento):
-                flash("alert('Parabéns, você acaou de realizar o processo de cadastramento de um produto!!🎉')")
-                return redirect("/")
+                return render_template("cadastramento.html")
             else:
                 return 'Erro ao realizar o processo de Cadastramento'
     else:
         return redirect("/login")
-
-
-# roteamento da página dos processos de registro estoque
-# RF008
-@app.route("/estoque",  methods=["GET", "POST"])
-def pagina_estoque():
-    # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
+    
+@app.route('/inventario')
+def inventario():
     if "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
-            #conectando com o banco de dados
             mydb = Conexao.conectar()
-            
             mycursor = mydb.cursor()
 
-            # armazenando o banco de dados dos usuários que estão logados, em uma variável
-            if "usuario_logado" in session:           
-                turma = session['usuario_logado']['turma']
-            else:
-                turma = session['professor_logado']['turma']
-            
-            
-            produtos = (f"SELECT * FROM {turma}.tb_cadastramento")
-            
+            turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
+
+            # Ajustando a query para incluir o saldo
+            produtos = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, quantidade FROM {turma}.tb_cadastramento"
             mycursor.execute(produtos)
-            
             resultado = mycursor.fetchall()
-            
-            # armazenando os produtos em uma lista
+
             lista_produtos = []
-            # adicioando cada produto na lista 
             for produto in resultado:
                 lista_produtos.append({
-                    "codigo":produto[0],
-                    "descricao":produto[1],
-                    "modelo":produto[2],
-                    "fabricante":produto[3],
-                    "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "codigo": produto[0],
+                    "descricao": produto[1],
+                    "modelo": produto[2],
+                    "fabricante": produto[3],
+                    "numero_lote": produto[4],
+                    "enderecamento": produto[5],
+                    "quantidade": produto[6]  # Adiciona o saldo ao dicionário
                 })
+
+            return render_template('inventario.html', lista_produtos=lista_produtos)
+
+# @app.route("/escluir_inventario", methods=["GET", "POST"])
+# def excluir_mensagem():
+#     if "professor_logado" in session:
+#         if request.method == "GET":
+
+
+# Página de controle de estoque
+@app.route("/estoque", methods=["GET", "POST"])
+def pagina_estoque():
+    if "usuario_logado" in session or "professor_logado" in session:
+        if request.method == "GET":
+            mydb = Conexao.conectar()
+            mycursor = mydb.cursor()
+            turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
+            produtos = f"SELECT * FROM {turma}.tb_cadastramento"
+            mycursor.execute(produtos)
+            resultado = mycursor.fetchall()
+
+            lista_produtos = [{"codigo": produto[0], "descricao": produto[1], "modelo": produto[2], "fabricante": produto[3], "numero_lote": produto[4], "enderecamento": produto[5], "quantidade": produto[6]} for produto in resultado]
+
             return render_template("estoque.html", lista_produtos=lista_produtos)
-        
+
         if request.method == "POST":
-            # pegando os dados do formulário
             cod_prod = request.form.get("cod_prod")
             num_lote = request.form.get("num_lt")
             loc_ = request.form.get("loc_")
             descricao = request.form.get("descricao")
             dt_enter = request.form.get("dt_enter")
-            qt_item = request.form.get("qt_item")
+            qt_item = int(request.form.get("qt_item") or 0)  # Define 0 se o campo estiver vazio
             dt_end = request.form.get("dt_end")
-            qt_saida = request.form.get("qt_saida")
-            _saldo = request.form.get("_saldo")
+            qt_saida = int(request.form.get("qt_saida") or 0)  # Define 0 se o campo estiver vazio
+            _saldo = int(request.form.get("_saldo") or 0)  # Define 0 se o campo estiver vazio
             funcionario = request.form.get("funcionario")
-
-            # criando um objeto aramzenando a classe Estoque em uma variável
-            tbEstoque = Estoque()
 
             # armazenando o banco de dados de cada usuário logado e seus respectivos códigos que são AUTO_INCREMENT
             if "usuario_logado" in session:           
@@ -302,14 +374,73 @@ def pagina_estoque():
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
 
-            # realizando o cadastro do controle de estoque, por meio da função que foi armazenada dentro do objeto Estoque
-            if tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, _saldo, funcionario, cod_aluno, turma):
-                flash("alert('Parabéns, você acaou de realizar o processo de cadastramento de estoque!!🎉')")
+            # Conectar ao banco e buscar o saldo atual
+            mydb = Conexao.conectar()
+            
+            mycursor = mydb.cursor()
+            mycursor.execute(f"SELECT saldo FROM {turma}.tb_estoque WHERE cod_prod_est = %s", (cod_prod,))
+            resultado = mycursor.fetchone()
+            saldo_atual = resultado[0] if resultado else 0
+
+            # Atualizar saldo
+            saldo_novo = saldo_atual + qt_item - qt_saida
+
+            # Inserir/Atualizar registro no estoque
+            tbEstoque = Estoque()
+            sucesso = tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, saldo_novo, funcionario, cod_aluno, turma)
+            
+            mycursor.execute(
+                "UPDATE tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
+                (qt_item - qt_saida, cod_prod)
+            )
+            mydb.commit()
+            
+            if sucesso:
+                flash("alert('Movimentação de estoque registrada com sucesso!')")
                 return redirect("/")
             else:
-                return "Erro ao realizar o processo de Controle de Estoque"
+                return "Erro ao registrar movimentação de estoque"
+
+    else:
+        return redirect("/login")
+
+
+# Nova rota para buscar informações do produto pelo código para preenchimento automático
+# Rota para obter informações de um produto pelo código para preenchimento automático
+@app.route("/produto-info/<codigo>", methods=["GET"])
+def produto_info(codigo):
+    # Obtém o código do produto passado como query string
+    codigo_produto = codigo
+    if "usuario_logado" in session or "professor_logado" in session:
+        # Obtendo a turma do usuário logado para acessar a tabela correta
+        turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
+        
+        # Conectando ao banco de dados
+        mydb = Conexao.conectar()
+        mycursor = mydb.cursor()
+        
+        # Consulta SQL para buscar as informações do produto pelo código
+        query = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento FROM {turma}.tb_cadastramento WHERE cod_prod = %s"
+        mycursor.execute(query, (codigo_produto,))
+        produto = mycursor.fetchone()
+
+        # Verifica se o produto foi encontrado e retorna os dados em JSON
+        if produto:
+            produto_info = {
+                "codigo": produto[0],
+                "descricao": produto[1],
+                "modelo": produto[2],
+                "fabricante": produto[3],
+                "numero_lote": produto[4],
+                "enderecamento": produto[5]
+            }
+            return jsonify(produto_info), 200
         else:
-            return redirect("/login")
+            # Retorna um erro 404 se o produto não foi encontrado
+            return jsonify({"erro": "Produto não encontrado"}), 404
+    return jsonify({"erro": "Usuário não autorizado"}), 403
+
+        
 # roteamento da página dos processos de registro expedição
 # RF010
 @app.route("/expedicao", methods=["GET", "POST"])
@@ -337,8 +468,10 @@ def pagina_expedicao():
             
             resultado = mycursor.fetchall()
             
+            # criando uma lista para armazenar os produtos
             lista_produtos = []
             
+            # usando um loop para ir adicionando os produtos na lista (variável) que foi criada anteriormente
             for produto in resultado:
                 lista_produtos.append({
                     "codigo":produto[0],
@@ -346,9 +479,11 @@ def pagina_expedicao():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6]
                 })
             return render_template("expedicao.html", lista_produtos=lista_produtos)
+        
         if request.method == "POST":
             # armazenando os dados do formulário
             cod_prod = request.form.get("cod_prod")
@@ -361,7 +496,7 @@ def pagina_expedicao():
             # transformando a classe em um objeto
             tbExpedicao = Expedicao()
 
-            # pegando dados que foram armazenados na session e "guardandando" em uma variável 
+            # pegando dados que foram armazenados na session e "guardando" em uma variável 
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
@@ -372,13 +507,14 @@ def pagina_expedicao():
             # realizando o processo de registro de expedição
             if tbExpedicao.expedicao(cod_prod, descricao_tec, num_lote, quantidade, data_saida, responsavel, cod_aluno, turma):
                 # exibindo uma mensagem na interface do usuário para quando o cadastro for realizado com sucesso
-                flash("alert('Parabéns, você acaou de realizar o processo de registro de expedição!!🎉')")
+                flash("alert('Parabéns, você acabou de realizar o processo de registro de expedição!!🎉')")
                 return redirect ('/')
             else:
                 # exibindo uma mensagem na interface do usuário para quando o cadastro não for realizado
                 return "Erro ao realizar o processo de cadastro de expedição."
     else:
         return redirect("/login")
+    
 # roteamento da página dos processos de registro picking
 # RF007
 @app.route("/picking", methods=["GET", "POST"])
@@ -391,6 +527,7 @@ def pagina_picking():
             
             mycursor = mydb.cursor()
 
+            # verificando se os usuários estão logados para poder armazenar as informações que foram guardadas na sessão, em uma variável 
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
@@ -398,14 +535,17 @@ def pagina_picking():
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
 
+            # comando sql para poder pegar todos os produtos que foram cadastrados no banco de dados
             produtos = (f"SELECT * FROM {turma}.tb_cadastramento")
             
             mycursor.execute(produtos)
             
             resultado = mycursor.fetchall()
             
+            # criando uma lista para posterioirmente armazenar os produtos
             lista_produtos = []
             
+            # loop para poder ir adicionando os produtos na lista 
             for produto in resultado:
                 lista_produtos.append({
                     "codigo":produto[0],
@@ -413,10 +553,13 @@ def pagina_picking():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6],
                 })
             return render_template("picking.html", lista_produtos=lista_produtos)
+        
         if request.method == "POST":
+            # pegando os dados que foram enviados pelo formulário
             numPicking = request.form.get("numPicking")
             enderecamento = request.form.get("enderecamento")
             descTec = request.form.get("descTec")
@@ -428,8 +571,10 @@ def pagina_picking():
             totalProd = request.form.get("totalProd")
             codProd = request.form.get("codProd")
 
+            # criando um objeto para aramzenar a classe Picking
             tbpicking = Picking()
 
+            # armazenando as irformações que são guardadas na session, em uma variável 
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
@@ -437,23 +582,65 @@ def pagina_picking():
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
 
+            # realizando o registro de picking por meio da função que pertence ao objeto criado
             if tbpicking.picking(numPicking, enderecamento, descTec, modeloPick, fabri, qtde, data, lote, totalProd, codProd, turma):
+                # emitindo uma mensagem para quando o cadastro for realizado com sucesso
                 flash("alert('Parabéns, você acaou de realizar o processo de picking!!🎉')")
                 return redirect("/")
             else:
+                # emitindo uma mensagem para quando o cadastro não for realizado
                 return 'Erro ao realizar o processo de Picking'
     
     else:
         return redirect("/login")
     
+
+@app.route('/simulador')
+def simulador():
+    if "usuario_logado" in session or "professor_logado" in session:
+        mydb = Conexao.conectar()
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SELECT * FROM turma1.tb_picking")
+        pedidos = mycursor.fetchall()
+
+        pedido_aleatorio = random.choice(pedidos) if pedidos else {}
+
+        if pedido_aleatorio:
+            pedido_info = {
+                "num_picking": pedido_aleatorio[0],
+                "enderecamento": pedido_aleatorio[1],
+                "desc_tecnica": pedido_aleatorio[2],
+                "modelo": pedido_aleatorio[3],
+                "fabricante": pedido_aleatorio[4],
+                "quantidade": pedido_aleatorio[5],
+                "data": pedido_aleatorio[6],
+                "lote": pedido_aleatorio[7],
+                "total_produtos": pedido_aleatorio[8],
+                "cod_prod": pedido_aleatorio[9]
+            }
+        else:
+            pedido_info = {}
+
+        mycursor.close()
+        mydb.close()
+
+
+        return render_template("simulador.html", pedido=pedido_info)
+    else:
+        return redirect("/login")
+       
+    
 # roteamento da página dos processos de registro pop
 # RF009
 @app.route("/pop", methods=["GET", "POST"])
 def pagina_pop():
+    # verificando se há algum perfil logado no sistema
     if "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
             return render_template("pop.html")
         if request.method == "POST":
+            # pegando os dados que foram enviados pelo formulário
             dt_end1 = request.form.get("dt_end1")
             task_name = request.form.get("task_name")
             resp_ = request.form.get("resp_")
@@ -462,8 +649,11 @@ def pagina_pop():
             manuseio = request.form.get("manuseio")
             resultados = request.form.get("resultados")
             acoes = request.form.get("acoes")
+
+            # criando um objeto com a classe Pop
             tbPop = Pop()
 
+            # armazenando os dados da session em uma variável
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
@@ -471,10 +661,13 @@ def pagina_pop():
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
 
+            # realizandpo o processo de registro de POP por meio de uma função que está armazenada no objeto criado anteriormente
             if tbPop.pop(dt_end1, task_name, resp_, material, passos, manuseio, resultados, acoes, cod_aluno, turma):
+                # emitindo uma mensagem para quando o processo for realizado com sucesso
                 flash("alert('Parabéns, você acaou de realizar o processo de registro de POP!!🎉')")
                 return redirect ('/')
             else:
+                # emitindo uma mensagem para quando o processo não for realizado
                 return 'Erro ao realizar o processo de POP'
     else:
         return redirect("/login")
@@ -483,6 +676,7 @@ def pagina_pop():
 # RF006
 @app.route("/rnc", methods=["GET", "POST"])
 def pagina_rnc():
+    # verificando se há alguém logado no sistema 
     if  "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
             #conectando com o banco de dados
@@ -490,21 +684,25 @@ def pagina_rnc():
             
             mycursor = mydb.cursor()
             
+            # armazenando os dados que estão na session em uma variável 
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
             else:
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
-
+            
+            # comando sql para pegar todos os produtos que foram cadastrados no banco de dados 
             produtos = (f"SELECT * FROM {turma}.tb_cadastramento")
             
             mycursor.execute(produtos)
             
             resultado = mycursor.fetchall()
             
+            # criando uma lista para armazenar os produtos posteriormente 
             lista_produtos = []
             
+            # loop para ir adicioando cada produto na lista
             for produto in resultado:
                 lista_produtos.append({
                     "codigo":produto[0],
@@ -512,11 +710,14 @@ def pagina_rnc():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6]
                 })
 
             return render_template("rnc.html", lista_produtos = lista_produtos)
+        
         if request.method == "POST":
+            # pegando os dados que foram enviados pelo formulário
             data = request.form.get("date")
             numRNC = request.form.get("numRNC")
             local = request.form.get("local")
@@ -526,8 +727,10 @@ def pagina_rnc():
             respInsp = request.form.get("respInsp")
             codProd = request.form.get("codProd")
 
+            # criando um objeto para armazenar a classe
             tbrnc = Rnc()
 
+            # armazendo os dados que estão guardados na session, em uma variável
             if "usuario_logado" in session:           
                 turma = session['usuario_logado']['turma']
                 cod_aluno = session['usuario_logado']['cod_aluno']
@@ -535,7 +738,9 @@ def pagina_rnc():
                 turma = session['professor_logado']['turma']
                 cod_aluno = session['professor_logado']['cod_aluno']
 
+            # realizando o processo de RNC por meio de uma função que está armazenada no objeto criado anteriormente 
             if tbrnc.rnc(descRNC, data, numRNC, local, qtdentregue, qtdrepro, respInsp, codProd, cod_aluno, turma):
+                # emitindo uma mensagem de confirmação da realização do processo na interface do sistema 
                 flash("alert('Parabéns, você acaou de realizar o processo de Registro de Não Conformidade!!🎉')")
                 return redirect("/")
             else:
@@ -543,46 +748,26 @@ def pagina_rnc():
     
     else:
         return redirect("/login")
-    
-# @app.route("/api/get/produtos")
-# def get_produtos():
-#     #conectando com o banco de dados
-#     mydb = Conexao.conectar()
-    
-#     mycursor = mydb.cursor()
-    
-#     produtos = ("SELECT * FROM databaseProfessor.tb_cadastramento")
-    
-#     mycursor.execute(produtos)
-    
-#     resultado = mycursor.fetchall()
-    
-#     lista_produtos = []
-    
-#     for produto in resultado:
-#         lista_produtos.append({
-#             "codigo":produto[0],
-#             "descricao":produto[1],
-#             "modelo":produto[2],
-#             "fabricante":produto[3],
-#             "numero_lote":produto[4],
-#             "enderecamento":produto[5]
-#         })
-#     return jsonify(lista_produtos), 200
 
 # Roteamento da página que cria os bancos de dados para cada turma 
 # RF011
 @app.route("/criarBD", methods=["GET", "POST"])
 def criarBD():
+    # verificando se o usuário está logado no sistema 
     if "professor_logado" in session:
         if request.method == "GET":
             return render_template("professor.html")
         if request.method == "POST":
+            # pegando os dados que foram enviados pelo formulário
             nomeBD = request.form.get("nomeTurma")
+
+            # criando um objeto 
             criarDataBase = Professor()
 
+            # criando uma turma (banco de dados) por meio de uma função armazenada dentro do objeto
             if criarDataBase.criaDatabse(nomeBD):
-                flash("alert('Parabéns, você acaou de criar uma nova turma!!🎉')")
+                # emitindo uma mensagem na interfacew do usuário quando o processo por realizado 
+                flash("alert('Parabéns, você acabou de criar uma nova turma!!🎉')")
                 return redirect("/")
             else:
                 return "Erro ao criar o banco de dados"
@@ -592,32 +777,34 @@ def criarBD():
 # roteamento da página que o professor utiliza para enviar mensagens para os alunos 
 @app.route("/enviar_mensagem", methods=["GET", "POST"])
 def enviar_mensagens():
+    # verificando se o usuário está logado para poder permitir a vizualização da página
     if "professor_logado" in session:
         # Conectando ao banco de dados
         mydb = Conexao.conectar()
         mycursor = mydb.cursor()
 
         if request.method == "GET":
-            # Consulta ao banco de dados para obter as mensagens
-            consulta_mensagens = "SELECT cod_mensagem, mensagens FROM databaseProfessor.tb_mensagens"
-            mycursor.execute(consulta_mensagens)
+            # Consulta para obter a lista de turmas
+            mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
             resultado = mycursor.fetchall()
-            
-            lista_mensagens = []
-            for mensagem in resultado:
-                lista_mensagens.append({
-                    "cod_mensagem": mensagem[0],
-                    "mensagem": mensagem[1]
-                })
+            lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
 
+            # Consulta para obter a lista de mensagens enviadas
+            mycursor.execute("SELECT cod_mensagem, mensagens, turma FROM tb_mensagens")
+            mensagens = mycursor.fetchall()
+            lista_mensagens = [{"cod_mensagem": msg[0], "mensagem": msg[1], "turma": msg[2]} for msg in mensagens]
+
+            # Fechar a conexão com o banco de dados
             mydb.close()
 
-            return render_template("mensagem.html", lista_mensagens=lista_mensagens)
+            # Renderizar a página com as listas de turmas e mensagens
+            return render_template("mensagem.html", lista_nomes=lista_nomes, lista_mensagens=lista_mensagens)
 
         if request.method == "POST":
-            # Conectando ao banco de dados
+            # Conectando ao banco de dados para enviar mensagem
             mydb = Conexao.conectar()
             mycursor = mydb.cursor()
+
             # Pega a mensagem do formulário
             mensagem = request.form.get("mensagem")
             bancoDados = request.form.get("turma")
@@ -626,16 +813,19 @@ def enviar_mensagens():
             inserir_mensagem = f"INSERT INTO tb_mensagens (mensagens, turma) VALUES (%s, %s)"
             mycursor.execute(inserir_mensagem, (mensagem, bancoDados))
             mydb.commit()
-
-            flash("alert('Mensagem enviada para a turma com sucesso! 🎉')")
             mydb.close()
 
-            return redirect("/")
+            # Emite uma mensagem de confirmação ao usuário
+            flash("alert('Mensagem enviada para a turma com sucesso! 🎉')")
+            return redirect("/enviar_mensagem")
 
 
+
+# rota em que está a função que o professor usará para excluir uma mensagem do banco de dados e da interface do usuário
 @app.route("/excluir_mensagem", methods=["POST"])
 def excluir_mensagem():
     if "professor_logado" in session:
+        # peagndo o id da mensagem 
         mensagem_id = request.form.get("mensagem_id")
         
         if mensagem_id:
@@ -651,15 +841,18 @@ def excluir_mensagem():
             mydb.commit()
             mydb.close()
 
+            # mensagem na interface do usuário para quando der certo o processo de excluir uma mensagem 
             flash("alert('Mensagem excluída com sucesso!')")
         else:
+            # mensagem na interface do usuário para quando não for possível excluir uma mensagem
             flash("alert('Erro ao excluir a mensagem. ID inválido.')")
-    
+    # retornando para a p´gina inicial 
     return redirect("/")
 
-
+# roteamento para exibir todos os bancos de dados que foram criados pelo professor 
 @app.route("/professor/listarBD")
 def listar_bancos():
+    # verificando se o usuário está logado para poder exibir a página
     if "professor_logado" in session:
         # Conectando ao banco de dados
         mydb = Conexao.conectar()
@@ -681,9 +874,12 @@ def listar_bancos():
     else:
         return "Acesso negado", 403
 
+# roteamento para excluir os bancos de dados criados pelo professor 
 @app.route("/professor/excluirBD/<nomeBD>", methods=["POST"])
 def excluir_banco(nomeBD):
+    # verificando se há algum usuário logado para poder liberar a visualização da página 
     if "professor_logado" in session:
+        # Conectando ao banco de dados
         mydb = Conexao.conectar()
         mycursor = mydb.cursor()
 
@@ -696,12 +892,14 @@ def excluir_banco(nomeBD):
         mydb.commit()
         mycursor.close()
         mydb.close()
-
+ 
+        # mensagem na interface do usuário para quando a turma for excluída
         flash("alert('Turma finalizada com sucesso!!🎉')")
+        # retornando para a página em que estão sendo exibidos os bancos de dados em forma de lista 
         return redirect("/professor/listarBD")
     else:
         return "Acesso negado", 403
 
 
-
+# atualizando o arquivo
 app.run(debug=True)

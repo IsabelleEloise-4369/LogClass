@@ -21,10 +21,6 @@ body {
     
 }
 
-.login-box{
-    display: flex;
-}
-
 .inicio-bem-vindo, .login-prompt {
     height: 23rem;
     text-align: center;
@@ -248,7 +244,7 @@ button[type="submit"] {
     color: var(--cor-btns);
 }
 
-.register-box, .login-box {
+.register-box, .login-box, .connect-box {
     background: var(--cor-cards-pgLogin);
     border-radius: 1rem;
     padding: 1.5rem;

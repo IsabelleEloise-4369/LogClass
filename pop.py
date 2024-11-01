@@ -19,10 +19,12 @@ class Pop:
 
         mycursor = mydb.cursor()
 
-        dados = f"INSERT INTO tb_pop(data_pop, tarefa_pop, responsavel_pop, material_pop, passos_pop, manuseio_pop, resul_pop, acao_pop, cod_aluno) VALUES('{data_pop}', '{tarefa_pop}', '{responsavel_pop}', '{material_pop}', '{passos_pop}', '{manuseio_pop}', '{resul_pop}', '{acao_pop}', '{cod_aluno}')"
+        valores = (data_pop, tarefa_pop, responsavel_pop, material_pop, passos_pop, manuseio_pop, resul_pop, acao_pop, cod_aluno)
+        
+        dados = f"INSERT INTO tb_pop(data_pop, tarefa_pop, responsavel_pop, material_pop, passos_pop, manuseio_pop, resul_pop, acao_pop, cod_aluno) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         #executar
-        mycursor.execute(dados)
+        mycursor.execute(dados, valores)
 
         mydb.commit()
 

@@ -1,0 +1,52 @@
+{% block css %}
+<link rel="stylesheet" href="/static/styles/expedicao.css">
+<link rel="stylesheet" href="/static/styles/media/expedicao-media.css">
+<link rel="stylesheet" href="/static/styles/media/layout-media.css">
+<link rel="stylesheet" href="/static/styles/variaveis.css">
+<link rel="stylesheet" href="/static/styles/confirmacao.css">
+
+{% endblock %}
+
+{% extends "layout.html" %}
+{% block conteudo %}
+
+    <div class="container">
+        <div class="filter-btn">
+            <label for="status-filter">Filtro:</label>
+            <select id="status-filter">
+                <option value="all">Todos</option>
+                <option value="active">Ativos</option>
+                <option value="inactive">Desativados</option>
+                <option value="pending">Em Aguardo</option>
+            </select>
+        </div>
+
+        <!-- Início lista de usuários -->
+        <ul class="user-list">
+            <!-- Primeira caixa -->
+            <div class="caixa_1">
+            <li class="user-item">
+                <i class="fa-solid fa-fire fa-2x"></i>
+            </li>
+            <div class="actions">
+                <i class="fa-solid fa-circle-xmark fa-2x"></i>
+                <i class="fa-solid fa-circle-check fa-2x"></i>
+            </div> 
+            </div>
+
+
+            <!-- Segunda caixa -->
+            <div class="caixa_1">
+                <li class="user-item">
+                    <i class="fa-solid fa-fire fa-2x"></i>
+                </li>
+                <div class="actions">
+                    <i class="fa-solid fa-circle-xmark fa-2x"></i>
+                    <i class="fa-solid fa-circle-check fa-2x"></i>
+                </div> 
+                </div>
+
+        </ul>
+    </div>
+
+{% endblock %}

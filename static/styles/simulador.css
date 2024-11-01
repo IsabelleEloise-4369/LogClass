@@ -1,0 +1,17 @@
+body {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nota-fiscal{
+    background-color: #9b59b6; /* Fundo roxo */
+    color: white; /* Texto branco */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 20px; /* Borda arredondada */
+    width: 300px; /* Largura do card */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    line-height: 1.8; /* Espaçamento entre as linhas */
+    margin-top: 5rem;
+}
