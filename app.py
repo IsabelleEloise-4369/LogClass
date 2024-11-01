@@ -97,12 +97,14 @@ def pagina_inicial():
         return render_template("pagina-inicial.html")
     # se não houver nenhum usuário logado o mesmo será direcionado para a página de cadastro e login
     else:
-        return redirect("/cadastro")
+        return redirect("/login")
     
-# roteamento da página de cadastro 
+# roteamento da página de cadastro e login que no caso são "juntas" 
 # RF001
 # RF002
-@app.route("/cadastro", methods=["GET", "POST"])
+# RF003
+# RF004
+@app.route("/login", methods=["GET", "POST"])
 def pagina_cadastro():
     if request.method == "GET":
         # conectando com o banco de dados
@@ -114,21 +116,21 @@ def pagina_cadastro():
         resultado = mycursor.fetchall()
         mydb.close()
 
-        # criando uma lista para armazenar todas as turmas que foram "retiradas"
+        # criando uma lista para armazenar todas as turmas que foram "retirados"
         lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
-        return render_template("cadastro.html", lista_nomes=lista_nomes)
+        return render_template("login.html", lista_nomes=lista_nomes)
 
     if request.method == "POST":
         # criando uma variável para armazenar o valor do input no formulário
-        formulario = request.form.get("tipo")
+        formulario = request.json.get("tipo")
 
         # realizando o cadastro do aluno
         if formulario == "Aluno":
             # pegando os dados do formulário, mas em forma de json
-            nome = request.form.get("nome")
-            email = request.form.get("email")
-            senha = request.form.get("senha")
-            turma = request.form.get("turma")
+            nome = request.json.get("nome")
+            email = request.json.get("email")
+            senha = request.json.get("senha")
+            turma = request.json.get("turma")
             # criando um objeto Aluno
             aluno = Aluno()
 
@@ -148,9 +150,9 @@ def pagina_cadastro():
         # realizando o cadastro do professor
         if formulario == "Professor":
             # pegando os dados do formulário, mas em forma de json
-            nome = request.form.get("nome")
-            email = request.form.get("email")
-            senha = request.form.get("senha")
+            nome = request.json.get("nome")
+            email = request.json.get("email")
+            senha = request.json.get("senha")
 
             # criando um objeto para armazrnar a classe Professor
             professor = Professor()
@@ -165,7 +167,7 @@ def pagina_cadastro():
                 # realizando o cadastro do professor através da função que está dentro do objeto
                 if professor.cadastrarProf(nome, email, senha):
                     # retornando um arquivo json confirmando o cadastro realizado com sucesso
-                    return redirect("/login")
+                    return jsonify({'mensagem': 'Cadastro realizado com sucesso'}), 201
                 else:
                     # retornando um arquivo json caso o cadastro nao seja concluído
                     return jsonify({'mensagem': 'Erro ao cadastrar o professor'}), 400
@@ -175,35 +177,14 @@ def pagina_cadastro():
 
         # Adicionando aqui a lógica para login de alunos e professores...
 
-
-# roteamento  para a página de login
-# RF003
-# RF004
-@app.route("/login", methods=["GET", "POST"])
-def pagina_login():
-    if request.method == "GET":
-        # conectando com o banco de dados
-        mydb = Conexao.conectar()
-        # criando um objeto Aluno
-        mycursor = mydb.cursor()
-        # criando uma variável para armazenar a lista de turmas
-        mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
-        resultado = mycursor.fetchall()
-        mydb.close()
-
-        # criando uma lista para armazenar todas as turmas que foram "retiradas"
-        lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
-        return render_template("login.html", lista_nomes=lista_nomes)
-    
-    if request.method == "POST":
         # RF003
         # login de alunos e professores
-        formulario = request.form.get("tipo")  
+        formulario = request.json.get("tipo")  
         if formulario == "LoginAluno":
             # pegando os dados do formulário, mas em forma de json
-            email = request.form.get("email")
-            senha = request.form.get("senha")
-            turma = request.form.get("turma")
+            email = request.json.get("email")
+            senha = request.json.get("senha")
+            turma = request.json.get("turma")
 
             # criando um objeto com a classe Aluno
             loginAluno = Aluno()
@@ -227,14 +208,11 @@ def pagina_login():
 
         if formulario == "LoginProfessor":
             # pegando os dados do formulário, mas em forma de json
-            email = request.form.get("email")
-            senha = request.form.get("senha")
+            email = request.json.get("email")
+            senha = request.json.get("senha")
 
             # criando um objeto com a classe Professor
             loginProfessor = Professor()
-
-            # realizando a verificação do usuário master (ou seja, ele pode aceitar ou não os professores que irão acessar a plataforma)
-            # if email == 'admim@adimim.com' and senha == 'K8$tY9':
 
             # realizando o login do aluno por meio da função armazenada na variável
             if loginProfessor.logarProf(email, senha):
