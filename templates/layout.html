@@ -22,6 +22,7 @@
     <script src="/static/js/menu.js" defer></script>
     <script src="/static/js/light&dark.js" defer></script>
 
+
     {% block css %}
     {% endblock %}
 
@@ -46,6 +47,10 @@
 
             <!-- Início da navegação principal -->
             <nav>
+
+                <!-- <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                    <span id="hamburguer"></span>
+                </button> -->
 
                 <div class="dropdown">
                     <button class="dropbtn">Processos</button>
@@ -73,9 +78,10 @@
                         <div class="card">
                             <a href="/expedicao">Cadastro de Expedição</a>
                         </div>
+                        <div class="sombreado"></div>
                     </div>
                 </div>
-                
+                      
 
                 {% if "professor_logado" in session %}
                 <!-- Início do menu dropdown -->
@@ -94,10 +100,13 @@
                                     <a href="/professor/listarBD">Gerencie sua turma</a>
                                 </div>
                             
+                                <div class="sombreado"></div>
                         </div>
                   </div>
                 </div>
                 {% endif %}
+
+                
                 <!-- Fim do menu dropdown -->
             </nav>
             <!-- Fim da navegação principal -->

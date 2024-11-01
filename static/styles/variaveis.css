@@ -4,7 +4,7 @@
 
     /* Cores do cabeçalho */
     --cor-drop-btn: #2980B9;
-    --cor-drop: #f1f1f1;
+    --cor-drop: #f9f9f9;
     --cor-drop-letras: black;
     --cor-drop-hover: #ddd;
     --cor-sombra-drop: rgba(0, 0, 0, 0.2);
@@ -46,7 +46,7 @@
 
     /* Cores do tema claro */
     --primary-color-light: #f0f0f0; /* Cor de fundo clara */
-    --secondary-color-light: #ffffff; /* Cor secundária clara */
+    --secondary-color-light: #e4e4e494; /* Cor secundária clara */
     --text-color-light: #333; /* Cor do texto claro */
     --hover-color-light: #ddd; /* Cor de hover clara */
     --button-bg-light: #e0e0e0; /* Cor de fundo do botão claro */
