@@ -282,6 +282,7 @@ def pagina_cadastramento():
                 return render_template("cadastramento.html")
             else:
                 return 'Erro ao realizar o processo de Cadastramento'
+            
     # verificando se o usuário logado é o professor, para poder liberar a vizualização das páginas
     elif "professor_logado" in session:
         if request.method == "GET":
@@ -301,8 +302,10 @@ def pagina_cadastramento():
             if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento):
                 return render_template("cadastramento.html")
             else:
+                # mensagem de erro caso  o processo de cadastramento não seja realizado com sucesso
                 return 'Erro ao realizar o processo de Cadastramento'
     else:
+        # e nenhum tipo de usuário estiver logado então  redireciona para a página de login 
         return redirect("/login")
 
 # roteamento da página inventário
@@ -311,14 +314,19 @@ def inventario():
     # verificando se há algum tipo de usuário logado para poder liberar a vizualização da página
     if "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
+            # conectando com o banco de dados
             mydb = Conexao.conectar()
             mycursor = mydb.cursor()
 
+            # armazenadno o banco de dados do usuário em uma variável
             turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
 
             # Ajustando a query para incluir o saldo
             produtos = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, quantidade FROM {turma}.tb_cadastramento"
+
+            # executando o código  SQL
             mycursor.execute(produtos)
+            # pegando os dados que foram 
             resultado = mycursor.fetchall()
 
             lista_produtos = []
