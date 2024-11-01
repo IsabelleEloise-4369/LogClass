@@ -116,7 +116,7 @@ def pagina_cadastro():
         resultado = mycursor.fetchall()
         mydb.close()
 
-        # criando uma lista para armazenar todas as turmas que foram "retiradas"
+        # criando uma lista para armazenar todas as turmas que foram "retirados"
         lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
         return render_template("login.html", lista_nomes=lista_nomes)
 
@@ -214,9 +214,6 @@ def pagina_cadastro():
             # criando um objeto com a classe Professor
             loginProfessor = Professor()
 
-            # realizando a verificação do usuário master (ou seja, ele pode aceitar ou não os professores que irão acessar a plataforma)
-            # if email == 'admim@adimim.com' and senha == 'K8$tY9':
-
             # realizando o login do aluno por meio da função armazenada na variável
             if loginProfessor.logarProf(email, senha):
                 # armazenando os dados em uma session para poder consultar posteriormente
@@ -235,11 +232,11 @@ def pagina_cadastro():
                 session.clear()
                 return 'Email ou senha incorretos.', 401
 
+
 # roteamento da página de cadastramento
 # RF005
 @app.route("/cadastramento", methods=["GET", "POST"])
 def pagina_cadastramento():
-
 # as páginas são protegidas por autenticação de sessão para garantir que apenas usuários autenticados possam acessá-las.
 # if que determina o acesso às páginas apenas se o aluno estiver logado.
     if "usuario_logado" in session:
@@ -284,7 +281,8 @@ def pagina_cadastramento():
                 return 'Erro ao realizar o processo de Cadastramento'
     else:
         return redirect("/login")
-    
+
+# roteamento da página inventário
 @app.route('/inventario')
 def inventario():
     if "usuario_logado" in session or "professor_logado" in session:
@@ -313,6 +311,13 @@ def inventario():
 
             return render_template('inventario.html', lista_produtos=lista_produtos)
 
+
+# @app.route("/escluir_inventario", methods=["GET", "POST"])
+# def excluir_mensagem():
+#     if "professor_logado" in session:
+#         if request.method == "GET":
+
+
 # Página de controle de estoque
 @app.route("/estoque", methods=["GET", "POST"])
 def pagina_estoque():
@@ -325,7 +330,7 @@ def pagina_estoque():
             mycursor.execute(produtos)
             resultado = mycursor.fetchall()
 
-            lista_produtos = [{"codigo": produto[0], "descricao": produto[1], "modelo": produto[2], "fabricante": produto[3], "numero_lote": produto[4], "enderecamento": produto[5]} for produto in resultado]
+            lista_produtos = [{"codigo": produto[0], "descricao": produto[1], "modelo": produto[2], "fabricante": produto[3], "numero_lote": produto[4], "enderecamento": produto[5], "quantidade": produto[6]} for produto in resultado]
 
             return render_template("estoque.html", lista_produtos=lista_produtos)
 
@@ -454,7 +459,8 @@ def pagina_expedicao():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6]
                 })
             return render_template("expedicao.html", lista_produtos=lista_produtos)
         
@@ -684,7 +690,8 @@ def pagina_rnc():
                     "modelo":produto[2],
                     "fabricante":produto[3],
                     "numero_lote":produto[4],
-                    "enderecamento":produto[5]
+                    "enderecamento":produto[5],
+                    "quantidade":produto[6]
                 })
 
             return render_template("rnc.html", lista_produtos = lista_produtos)

@@ -30,7 +30,7 @@ body, html {
 }
 
 .titulo-destaque .part1 {
-  font-size: 19rem;
+  font-size: 22rem;
   color: var(--cor-titulo1-pgInicial);
   opacity: 0.7;
   font-family: "Unlock", serif;
@@ -40,7 +40,7 @@ body, html {
 }
 
 .titulo-destaque .part2 {
-  font-size: 19rem;
+  font-size: 22rem;
   color: var(--cor-titulo2-pgInicial);
   font-family: "Unlock", serif;
   font-weight: 400;
@@ -48,7 +48,7 @@ body, html {
 }
 
 .titulo-destaque .partG {
-  font-size: 19rem;
+  font-size: 22rem;
   color: var(--cor-titulo1-pgInicial);
   opacity: 0.7;
   font-family: "Unlock", serif;
@@ -57,6 +57,10 @@ body, html {
   margin-left: 0.5rem;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fa890dfb7994c4d9f6e64cd7b6b8630685d63de
 .container-grid {
   color: black;
   display: flex;
@@ -114,14 +118,13 @@ body, html {
   overflow: hidden;
   display: flex;
   /*MARGEM EXTERNA*/
-  margin: 5.5rem;
+  margin: 8rem;
   margin-top: 10rem;
   /*FLUTUAR*/
   float: left;
   /*LARGURA DO CARD.*/
   width: 70%;
-  /*COR DE FUNDO DO CARD*/
-  height: 130%;
+  height: 150%;
   /*CENTRALIZA O TEXTO*/
   /*SUAVIZAR EFEITO DA TRANSIÇÃO*/
   transition: transform 0.5s;
@@ -185,11 +188,11 @@ body, html {
 .mensagem p{
   color: var(--cor-msg-professor);
   font-size: 1.6rem;
-  font-family: "Julius Sans One", sans-serif;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   font-weight: 400;
   font-style: normal;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 2rem;
 }
 

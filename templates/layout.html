@@ -89,15 +89,56 @@
                     <button onclick="myFunction()" class="dropbtn">Gerenciar turmas</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class="dropdown-menu">
+<<<<<<< HEAD
                             
+=======
+                            <div class="card">
+                                <a href="/"><i class="fas fa-home"></i> Home</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/cadastro"><i class="fa-solid fa-users"></i> Conecte-se</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/cadastramento">Cadastramento</a>
+                            </div>
+                            {% if "usuario_logado" in session %}
+                            <div class="card">
+                                <a href="/rnc">RNC</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/picking">Cadastro de Picking</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/estoque">Controle de Entrada e saída</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/pop">POP</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/expedicao">Cadastro de Expedição</a>
+                            </div>
+
+                            <div class="card">
+                                <a href="/inventario.html">Inventário</a>
+                            </div>
+                            {% endif %}
+
+                            {% if "professor_logado" in session %}
+>>>>>>> 0fa890dfb7994c4d9f6e64cd7b6b8630685d63de
                                 <div class="card">
-                                    <a href="/criarBD">Crie sua turma</a>
+                                    <a href="/criarBD">Crie sua Turma</a>
                                 </div>
                                 <div class="card">
                                     <a href="/enviar_mensagem">Enviar Mensagem</a>
                                 </div>
                                 <div class="card">
-                                    <a href="/professor/listarBD">Gerencie sua turma</a>
+                                    <a href="/professor/listarBD">Gerenciar sua turma</a>
                                 </div>
                             
                                 <div class="sombreado"></div>
