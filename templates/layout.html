@@ -44,14 +44,14 @@
             </figure>
 
            
-
+        {% if "professor_logado" in session or "usuario_logado" in session %}
             <!-- Início da navegação principal -->
             <nav>
 
                 <!-- <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
                     <span id="hamburguer"></span>
                 </button> -->
-
+            
                 <div class="dropdown">
                     <button class="dropbtn">Processos</button>
                     <div class="dropdown-content">
@@ -89,48 +89,8 @@
                     <button onclick="myFunction()" class="dropbtn">Gerenciar turmas</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class="dropdown-menu">
-<<<<<<< HEAD
-                            
-=======
-                            <div class="card">
-                                <a href="/"><i class="fas fa-home"></i> Home</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastro"><i class="fa-solid fa-users"></i> Conecte-se</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastramento">Cadastramento</a>
-                            </div>
-                            {% if "usuario_logado" in session %}
-                            <div class="card">
-                                <a href="/rnc">RNC</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/picking">Cadastro de Picking</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/estoque">Controle de Entrada e saída</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/pop">POP</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/expedicao">Cadastro de Expedição</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/inventario.html">Inventário</a>
-                            </div>
-                            {% endif %}
-
                             {% if "professor_logado" in session %}
->>>>>>> 0fa890dfb7994c4d9f6e64cd7b6b8630685d63de
+
                                 <div class="card">
                                     <a href="/criarBD">Crie sua Turma</a>
                                 </div>
@@ -140,17 +100,23 @@
                                 <div class="card">
                                     <a href="/professor/listarBD">Gerenciar sua turma</a>
                                 </div>
+                            {% endif %}
                             
                                 <div class="sombreado"></div>
                         </div>
                   </div>
+
                 </div>
                 {% endif %}
-
-                
+            
                 <!-- Fim do menu dropdown -->
             </nav>
+        {% endif %}
             <!-- Fim da navegação principal -->
+
+            <div class="inventario">
+                <a href="/inventario.html">Inventário</a>
+            </div>
 
             <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
        

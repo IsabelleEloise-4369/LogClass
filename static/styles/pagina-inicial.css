@@ -57,10 +57,6 @@ body, html {
   margin-left: 0.5rem;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0fa890dfb7994c4d9f6e64cd7b6b8630685d63de
 .container-grid {
   color: black;
   display: flex;
@@ -171,13 +167,13 @@ body, html {
 }
 
 .container-mensagem_professor{
-  height: 30vh;
-  width: 40vw;
+  height: 30rem;
+  width: 40rem;
   border-radius: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10rem;
+  margin-left: 2rem;
 }
 
 .titulomensagem-prof h2{
@@ -199,7 +195,6 @@ body, html {
 .mensagem{
   width:  40vw;
   height: 30vh;
-  margin-top: 1rem;
   margin-top: 3rem;
   margin-bottom: 20rem;
   text-align: center;
