@@ -5,6 +5,7 @@ body, html {
   overflow-x: hidden;
   transition: background-color 0.5s ease, color 0.5s ease;
   z-index: -1;
+  scroll-behavior: smooth;
 }
 
 .container-geral{
@@ -18,7 +19,7 @@ body, html {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
-  height: 100vh;
+  height: 70vh;
   text-align: center;
   z-index: -5;
 }
@@ -56,15 +57,19 @@ body, html {
   margin-left: 0.5rem;
 }
 
-
-
 .container-grid {
-  width: 20rem;
-  height: 16rem;
-  /* background: linear-gradient(to bottom right, #a77aff, #65a3ff); */
-  filter: blur(3rem);
-  margin-bottom: 5rem;
-  border-radius: 2.5rem;
+  color: black;
+  display: flex;
+  margin-bottom: 10rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-grid a{
+  color: black;
+  font-size: 2rem;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-transform: uppercase;
 }
 
 .container-cards{

@@ -34,16 +34,14 @@
             <span class="partG">G</span>
             <span class="part2">CLASS</span>
 
-
-
         </div>
-
-        
-
-        <div class="container-grid"></div>
     
     </div>
     <!-- Fim da seção principal -->
+
+    <div class="container-grid">
+        <a href="#mensagem">Ver mensagem do Professor</a>
+    </div>
     
     <!-- Início da seção de cards -->
     <div class="container-cards">
@@ -112,11 +110,11 @@
     <!-- Início da seção de mensagem do professor -->
      
     {% if "usuario_logado" in session %}
-    <div class="titulomensagem-prof">
+    <div class="titulomensagem-prof" id="mensagem">
         <h2>Mensagem do Professor</h2>
     </div>
 
-    <div class="container-mensagem_professor">
+    <div class="container-mensagem_professor" id="mensagem">
         <div class="mensagem_prof">
             {% for mensagem in lista_mensagens %}
                 <div class="mensagem">
