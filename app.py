@@ -309,13 +309,40 @@ def inventario():
                     "quantidade": produto[6]  # Adiciona o saldo ao dicionário
                 })
 
-            return render_template('inventario.html', lista_produtos=lista_produtos)
+            # conectando com o banco de dados
+            mydb = Conexao.conectar()
+            # criando um objeto Aluno
+            mycursor = mydb.cursor()
+            # criando uma variável para armazenar a lista de turmas
+            mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+            resultado = mycursor.fetchall()
+            mydb.close()
+
+            # criando uma lista para armazenar todas as turmas que foram "retirados"
+            lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
+
+            return render_template("inventario.html", lista_produtos=lista_produtos, lista_nomes=lista_nomes)
 
 
-# @app.route("/escluir_inventario", methods=["GET", "POST"])
-# def excluir_mensagem():
-#     if "professor_logado" in session:
-#         if request.method == "GET":
+@app.route("/excluir_produto", methods=["GET", "POST"])
+def excluir_produto():  # Alterado para 'excluir_produto'
+    if "professor_logado" in session:
+        if request.method == "GET":
+            # Conectando com o banco de dados
+            mydb = Conexao.conectar()
+            mycursor = mydb.cursor()
+
+            # Criando uma variável para armazenar a lista de turmas
+            mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+            resultado = mycursor.fetchall()
+            mydb.close()
+
+            # Criando uma lista para armazenar todas as turmas
+            lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
+            return render_template("inventario.html", lista_nomes=lista_nomes)
+
+            
+
 
 
 # Página de controle de estoque
