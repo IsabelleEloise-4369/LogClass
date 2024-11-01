@@ -99,13 +99,9 @@ def pagina_inicial():
     else:
         return redirect("/cadastro")
     
-# roteamento da página de cadastro e login que no caso são "juntas" 
+# roteamento da página de cadastro 
 # RF001
 # RF002
-# RF003
-# RF004
-
-
 @app.route("/cadastro", methods=["GET", "POST"])
 def pagina_cadastro():
     if request.method == "GET":
@@ -179,6 +175,10 @@ def pagina_cadastro():
 
         # Adicionando aqui a lógica para login de alunos e professores...
 
+
+# roteamento  para a página de login
+# RF003
+# RF004
 @app.route("/login", methods=["GET", "POST"])
 def pagina_login():
     if request.method == "GET":
@@ -254,11 +254,11 @@ def pagina_login():
                 session.clear()
                 return 'Email ou senha incorretos.', 401
 
+
 # roteamento da página de cadastramento
 # RF005
 @app.route("/cadastramento", methods=["GET", "POST"])
 def pagina_cadastramento():
-
 # as páginas são protegidas por autenticação de sessão para garantir que apenas usuários autenticados possam acessá-las.
 # if que determina o acesso às páginas apenas se o aluno estiver logado.
     if "usuario_logado" in session:
@@ -303,7 +303,8 @@ def pagina_cadastramento():
                 return 'Erro ao realizar o processo de Cadastramento'
     else:
         return redirect("/login")
-    
+
+# roteamento da página inventário
 @app.route('/inventario')
 def inventario():
     if "usuario_logado" in session or "professor_logado" in session:
@@ -331,6 +332,7 @@ def inventario():
                 })
 
             return render_template('inventario.html', lista_produtos=lista_produtos)
+
 
 # @app.route("/escluir_inventario", methods=["GET", "POST"])
 # def excluir_mensagem():
