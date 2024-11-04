@@ -32,6 +32,7 @@
                 <td>{{ produto['numero_lote'] }}</td>
                 <td>{{ produto['enderecamento'] }}</td>
                 <td>{{ produto['quantidade'] }}</td> <!-- Exibe o saldo do produto -->
+                {% if "professor_logado" in session %}
                 <td>
                     <!-- Formulário com opção de escolha da turma -->
                     <form action="{{ url_for('excluir_produto') }}" method="POST">
@@ -48,12 +49,16 @@
                     </form>
 
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="botoes">
-        <a href="/" class="botao-voltar">Voltar para Picking</a>
+        <a href="/picking" class="botao-voltar">Voltar para picking</a>
+        <a href="/estoque" class="botao-voltar">Voltar para o controle de entrada e saída</a>
+        <a href="/expedicao" class="botao-voltar">Voltar para expedicão</a>
+        <a href="/rnc" class="botao-voltar">Voltar para rnc</a>
     </div>
 </section>
 

@@ -292,7 +292,7 @@ def inventario():
 
             turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
 
-            # Ajustando a query para incluir o saldo
+            # Query para listar os produtos do inventário
             produtos = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, quantidade FROM {turma}.tb_cadastramento"
             mycursor.execute(produtos)
             resultado = mycursor.fetchall()
@@ -306,40 +306,55 @@ def inventario():
                     "fabricante": produto[3],
                     "numero_lote": produto[4],
                     "enderecamento": produto[5],
-                    "quantidade": produto[6]  # Adiciona o saldo ao dicionário
+                    "quantidade": produto[6]
                 })
 
-            # conectando com o banco de dados
-            mydb = Conexao.conectar()
-            # criando um objeto Aluno
-            mycursor = mydb.cursor()
-            # criando uma variável para armazenar a lista de turmas
+            # Obtém a lista de bancos de dados, incluindo o do professor
             mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
             resultado = mycursor.fetchall()
+
+            # Adiciona a turma do professor à lista de opções se ele estiver logado
+            if "professor_logado" in session:
+                resultado.append((session['professor_logado']['turma'],))
+
             mydb.close()
 
-            # criando uma lista para armazenar todas as turmas que foram "retirados"
+            # Cria a lista de opções para o select
             lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
 
             return render_template("inventario.html", lista_produtos=lista_produtos, lista_nomes=lista_nomes)
 
 
-@app.route("/excluir_produto", methods=["GET", "POST"])
-def excluir_produto():  # Alterado para 'excluir_produto'
+
+@app.route("/excluir_produto", methods=["POST"])
+def excluir_produto():
     if "professor_logado" in session:
-        if request.method == "GET":
-            # Conectando com o banco de dados
+        # Captura os dados do formulário
+        cod_prod = request.form.get("cod_prod")
+        turma = request.form.get("turma")
+
+        if not cod_prod or not turma:
+            return "Erro: Código do produto ou banco de dados não fornecido."
+
+        try:
+            # Conecta ao banco de dados selecionado
             mydb = Conexao.conectar()
             mycursor = mydb.cursor()
 
-            # Criando uma variável para armazenar a lista de turmas
-            mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
-            resultado = mycursor.fetchall()
+            # Monta a query de exclusão com o banco de dados correto
+            sql_delete = f"DELETE FROM {turma}.tb_cadastramento WHERE cod_prod = %s"
+            mycursor.execute(sql_delete, (cod_prod,))
+
+            # Confirma a transação e fecha a conexão
+            mydb.commit()
             mydb.close()
 
-            # Criando uma lista para armazenar todas as turmas
-            lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
-            return render_template("inventario.html", lista_nomes=lista_nomes)
+            return redirect("/inventario")  # Redireciona para a página de inventário após a exclusão
+        except Exception as e:
+            return f"Erro ao excluir o produto: {e}"
+    else:
+        return redirect("/login")
+
 
             
 
