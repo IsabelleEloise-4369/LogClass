@@ -923,5 +923,12 @@ def excluir_banco(nomeBD):
         return "Acesso negado", 403
 
 
+<<<<<<< HEAD
 # atualizando o arquivo
+=======
+if  __name__ == "__main__":
+    app.run(debug=True, host="0.0.0", port=8080)  # Iniciando o servidor com debug ativado
+
+
+>>>>>>> cd57ab786d19d8cd2d7fb8d7d7b930fff131e936
 app.run(debug=True)
