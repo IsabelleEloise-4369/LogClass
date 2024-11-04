@@ -17,7 +17,8 @@ from simulador import Simulador
 app = Flask(__name__)
 app.secret_key = 'logclass'
 
-
+# -------------------------------------------------------------------
+# planejamento de código (ainda não está funcionando)
 @app.route("/confirmacao")
 def confirmacao_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
@@ -46,7 +47,7 @@ def confirmacao_usuario():
                 })
 
             return render_template("confirmacao.html", lista_usuarios = lista_usuarios)
-        
+   
 @app.route("/aprovar_usuario")
 def aprovar_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
@@ -56,9 +57,7 @@ def aprovar_usuario():
             mydb = Conexao.conectar()
             
             mycursor = mydb.cursor()
-
-              
-
+# -----------------------------------------------------------------------------
 
 #roteamento da página inicial
 @app.route("/")
@@ -78,12 +77,15 @@ def pagina_inicial():
         #executar
         mycursor.execute(mensagens)
 
+        # pegando os dados e guardando em uma variável
         resultado = mycursor.fetchall()
 
         # fechar a conexão
         mydb.close()
+        
         # criando uma lista para armazenar todas as mensagens que foram "retiradas" do banco de dados
         lista_mensagens = []
+        
         # criando um loop para cada mensagem que foi "retirada" do banco de dados
         for mensagens_enviadas in resultado:
             lista_mensagens.append({
@@ -91,12 +93,15 @@ def pagina_inicial():
                 "mensagem":mensagens_enviadas[1]
             })
 
+        # retornando para a página inicial juntamente com as mensagens que foram enviadas pelo professor
         return render_template("pagina-inicial.html", lista_mensagens = lista_mensagens)
 
+    # se o professor estiver logado então ele será redirecionado para a página inicial mas sem a vizualização das mensagens
     elif "professor_logado" in session:
         return render_template("pagina-inicial.html")
     # se não houver nenhum usuário logado o mesmo será direcionado para a página de cadastro e login
     else:
+        # se não estiver nehum usuário logado ele será redirecionado para a página de cadastro
         return redirect("/login")
     
 # roteamento da página de cadastro e login que no caso são "juntas" 
@@ -232,6 +237,52 @@ def pagina_cadastro():
                 session.clear()
                 return 'Email ou senha incorretos.', 401
 
+# Rota para exibir e processar a redefinição de senha
+@app.route("/redefinir_senha", methods=["GET", "POST"])
+def redefinir_senha():
+    # Verifica se o professor está logado
+    if "professor_logado" not in session:
+        return redirect("/login")
+
+    if request.method == "GET":
+        # Conectando ao banco de dados do professor para obter as turmas
+        mydb = Conexao.conectar()
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT nomeBase FROM databaseprofessor.tb_database")
+        turmas = mycursor.fetchall()
+        mydb.close()
+
+        # Lista para armazenar dados de todos os alunos
+        alunos = []
+
+        # Itera sobre cada turma e busca os alunos
+        for turma in turmas:
+            nome_turma = turma[0]
+            try:
+                mydb_turma = Conexao.conectarAluno(nome_turma)  # Conectando ao banco da turma
+                cursor_turma = mydb_turma.cursor()
+                cursor_turma.execute("SELECT nome, email, %s AS turma, senha, cod_aluno FROM tb_aluno", (nome_turma,))
+                alunos.extend(cursor_turma.fetchall())
+            finally:
+                mydb_turma.close()
+
+        return render_template("redefinir_senha.html", alunos=alunos)
+
+    elif request.method == "POST":
+        # Coletando dados do formulário para atualização
+        cod_aluno = request.form.get("cod_aluno")
+        nova_senha = request.form.get("nova_senha")
+        turma = request.form.get("turma")
+
+        # Atualiza a senha no banco de dados da turma específica
+        mydb_turma = Conexao.conectarAluno(turma)
+        cursor_turma = mydb_turma.cursor()
+        cursor_turma.execute("UPDATE tb_aluno SET senha = %s WHERE cod_aluno = %s", (nova_senha, cod_aluno))
+        mydb_turma.commit()
+        mydb_turma.close()
+
+        flash("Senha redefinida com sucesso!")
+        return redirect("/redefinir_senha")
 
 # roteamento da página de cadastramento
 # RF005
