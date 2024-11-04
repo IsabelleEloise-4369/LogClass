@@ -6,7 +6,7 @@
     <title>LogClass</title>
     <!-- importando o arquivo css da página -->
     <link rel="stylesheet" href="/static/styles/layout.css">
-    <link rel="stylesheet" href="/static/styles/media/layout-media.css">
+    <!-- <link rel="stylesheet" href="/static/styles/media/layout-media.css"> -->
     <link rel="stylesheet" href="/static/styles/variaveis.css">
 
     <script src="https://kit.fontawesome.com/cbfeaec436.js" crossorigin="anonymous"></script>
@@ -21,6 +21,7 @@
 
     <script src="/static/js/menu.js" defer></script>
     <script src="/static/js/light&dark.js" defer></script>
+
 
     {% block css %}
     {% endblock %}
@@ -42,52 +43,54 @@
                 <!-- <figcaption>Logo da LogClass</figcaption> -->
             </figure>
 
-            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
-
+           
+        {% if "professor_logado" in session or "usuario_logado" in session %}
             <!-- Início da navegação principal -->
             <nav>
+
+                <!-- <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                    <span id="hamburguer"></span>
+                </button> -->
+            
+                <div class="dropdown">
+                    <button class="dropbtn">Processos</button>
+                    <div class="dropdown-content">
+                        <div class="card">
+                            <a href="/cadastramento">Cadastramento</a>
+                        </div>
+                    
+                        <div class="card">
+                            <a href="/rnc">RNC</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/picking">Cadastro de Picking</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/estoque">Controle de Estoque</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/pop">POP</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/expedicao">Cadastro de Expedição</a>
+                        </div>
+                        <div class="sombreado"></div>
+                    </div>
+                </div>
+                      
+
+                {% if "professor_logado" in session %}
                 <!-- Início do menu dropdown -->
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Menu</button>
+                    <button onclick="myFunction()" class="dropbtn">Gerenciar turmas</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class="dropdown-menu">
-                            <div class="card">
-                                <a href="/"><i class="fas fa-home"></i> Home</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastro"><i class="fa-solid fa-users"></i> Conecte-se</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastramento">Cadastramento</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/rnc">RNC</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/picking">Cadastro de Picking</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/estoque">Controle de Entrada e saída</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/pop">POP</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/expedicao">Cadastro de Expedição</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/inventario">Inventário</a>
-                            </div>
-
                             {% if "professor_logado" in session %}
+
                                 <div class="card">
                                     <a href="/criarBD">Crie sua Turma</a>
                                 </div>
@@ -98,12 +101,30 @@
                                     <a href="/professor/listarBD">Gerenciar sua turma</a>
                                 </div>
                             {% endif %}
+                            
+                                <div class="sombreado"></div>
                         </div>
                   </div>
+
                 </div>
+                {% endif %}
+            
                 <!-- Fim do menu dropdown -->
             </nav>
+        {% endif %}
             <!-- Fim da navegação principal -->
+
+            <div class="inventario">
+                <a href="/inventario.html">Inventário</a>
+            </div>
+
+            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
+       
+
+            <div class="conectar">
+                <a href="/login"><i class="fa-solid fa-users"></i> Conecte-se</a>
+            </div>
+           
 
         </section>
         <!-- Fim da Seção do cabeçalho -->
