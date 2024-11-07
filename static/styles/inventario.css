@@ -79,7 +79,7 @@ select::-ms-expand {
     display: flex;
     width: 20em;
     height: 3em;
-    border-radius: .25rem;
+    border-radius: 25rem;
     overflow: hidden;
 }
 

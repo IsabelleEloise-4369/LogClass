@@ -20,6 +20,7 @@
                 <th>Número do Lote</th>
                 <th>Endereçamento</th>
                 <th>Saldo</th> <!-- Nova coluna para o saldo -->
+                <th>Turma</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                 <td>{{ produto['numero_lote'] }}</td>
                 <td>{{ produto['enderecamento'] }}</td>
                 <td>{{ produto['quantidade'] }}</td> <!-- Exibe o saldo do produto -->
+                
                 {% if "professor_logado" in session %}
                 <td>
                     <!-- Formulário com opção de escolha da turma -->
