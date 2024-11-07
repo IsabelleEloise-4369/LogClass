@@ -975,6 +975,3 @@ def excluir_banco(nomeBD):
 
 if  __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)  # Iniciando o servidor com debug ativado
-
-# atualizando o arquivo
-app.run(debug=True)
