@@ -9,8 +9,8 @@
 {% block conteudo %}
 
 <section class="container-inventario">
-    <h2>Inventário de Produtos</h2>
-    <table>
+    <div class="title">Inventário de Produtos</div>
+    <table class="tabela-inventario">
         <thead>
             <tr>
                 <th>Código</th>
@@ -20,6 +20,7 @@
                 <th>Número do Lote</th>
                 <th>Endereçamento</th>
                 <th>Saldo</th> <!-- Nova coluna para o saldo -->
+                <th>Turma</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                 <td>{{ produto['numero_lote'] }}</td>
                 <td>{{ produto['enderecamento'] }}</td>
                 <td>{{ produto['quantidade'] }}</td> <!-- Exibe o saldo do produto -->
+                
                 {% if "professor_logado" in session %}
                 <td>
                     <!-- Formulário com opção de escolha da turma -->
@@ -45,22 +47,18 @@
                             {% endfor %}
                         </select>
 
-                        <button type="submit" onclick="return confirm('Deseja realmente excluir este produto?')">Excluir</button>
+                        <button type="submit" onclick="return confirm('Deseja realmente excluir este produto?')"><i class="fa-solid fa-trash"></i>
+                        </button>
                     </form>
-
                 </td>
                 {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div class="botoes">
-        <a href="/picking" class="botao-voltar">Voltar para picking</a>
-        <a href="/estoque" class="botao-voltar">Voltar para o controle de entrada e saída</a>
-        <a href="/expedicao" class="botao-voltar">Voltar para expedicão</a>
-        <a href="/rnc" class="botao-voltar">Voltar para rnc</a>
-    </div>
+    
 </section>
+
 
 
 {% endblock %}
