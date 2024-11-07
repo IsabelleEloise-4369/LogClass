@@ -340,8 +340,8 @@
     }
 
     .inicio-bem-vindo, .login-prompt {
-        width: 25rem;
-        height: 30rem;
+        width: 30rem;
+        height: 33rem;
         border-radius: 2rem;
     }
 
@@ -443,7 +443,7 @@
 
     .inicio-bem-vindo, .login-prompt {
         width: 25rem;
-        height: 30rem;
+        height: 35rem;
         border-radius: 2rem;
     }
 
