@@ -31,6 +31,7 @@
 </head>
 <body class="theme-container">
 
+{% if "professor_logado" in session or "usuario_logado" in session %}
     <!-- Início do Cabeçalho -->
     <header class="sidebar">
 
@@ -44,7 +45,7 @@
             </figure>
 
            
-        {% if "professor_logado" in session or "usuario_logado" in session %}
+        
             <!-- Início da navegação principal -->
             <nav>
 
@@ -111,7 +112,7 @@
             
                 <!-- Fim do menu dropdown -->
             </nav>
-        {% endif %}
+        
             <!-- Fim da navegação principal -->
 
             <div class="inventario">
@@ -130,6 +131,7 @@
         <!-- Fim da Seção do cabeçalho -->
 
     </header>
+{% endif %}
     <!-- Fim do Cabeçalho -->
 
     <!-- Bloco de conteúdo dinâmico -->
