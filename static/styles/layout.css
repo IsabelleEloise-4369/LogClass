@@ -290,3 +290,8 @@ footer p {
 .theme-container.dark .inventario a{
   color: var(--text-color-dark);
 }
+
+
+.theme-container.light .login-box h2{
+  color: var(--text-color-dark);
+}
