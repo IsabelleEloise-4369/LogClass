@@ -1,0 +1,99 @@
+body {
+    background-color: #d5f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container-inventario{
+    background-color: #d0a8f1;
+    border-radius: 10px;
+    padding: 20px;
+    width: 2000px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #4e3276;
+    margin-bottom: 10px;
+}
+
+.tabela-inventario {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-inventario th {
+    background-color: #b084e8;
+    color: #3d1c5e;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.tabela-inventario td {
+    background-color: #d5c0f4;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.fa-trash {
+    color: gray;
+    font-size: 16px;
+    margin-left: 8px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.fa-trash:hover {
+    color: red;
+}
+
+
+/* SELECT */
+
+select {
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    flex: 1;
+    padding: 0 1rem;
+    color: #fff;
+    background-color: rgb(47, 47, 47);
+    cursor: pointer;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    border-radius: 25rem;
+    overflow: hidden;
+}
+
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #34495e;
+    transition: .25s all ease;
+    pointer-events: none;
+}
+
+.select:hover::after {
+    color: #f39c12;
+}

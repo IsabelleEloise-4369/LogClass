@@ -7,12 +7,15 @@ body {
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    overflow-x: hidden;
 }
   
-
+.titulomensagem{
+    margin-top: 10rem;
+}
 
 .titulomensagem h2{
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     font-size: 3rem;  
 }
 
@@ -62,6 +65,55 @@ button[type="submit"] {
     color: var(--cor-padrao-letras);
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
 }
 
+
+.container-mensagens-enviadas{
+    display: flex;
+    margin-top: 5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-mensagens-enviadas table{
+    width: 80%;
+    border: 0.2rem solid var(--cor-bordas);
+    background-color: var(--cor-fundo-formularios);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3rem;
+}
+
+table, th, td{
+    border: 0.2rem solid var(--cor-bordas);
+    color: black;
+}
+
+td{
+    padding: 1rem;
+    text-align: center;
+}
+
+th{
+    background-color: #f2f2f2;
+    padding: 1rem;
+}
+
+.btn-excluir{
+    background-color: var(--cor-btn-enviar);
+    color: var(--cor-fundo-options);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.btn-excluir:hover{
+    background-color: var(--cor-hover-btn-enviar);
+}
