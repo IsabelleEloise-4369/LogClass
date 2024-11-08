@@ -1,217 +1,103 @@
 /* Media de telas para smartphones */
-@media (max-width: 576px){
+@media (max-width:572px){
 
-    .container-bem-vindo {
+    .container-bem-vindo{
         flex-direction: column;
-        margin-top: 70rem;
+        margin-top: 23.5rem;
     }
 
-    .inicio-bem-vindo, .login-prompt {
-       width: 45rem;
-       height: 40rem;
-       border-radius: 2rem;
+    .inicio-bem-vindo, .login-prompt{
+        width: 19.3rem;
+        height: 20rem;
+        border-radius: 2rem;
     }
 
-    .inicio-bem-vindo h2 {
+    .inicio-bem-vindo{
         margin-top: 3rem;
-        font-size: 3.5rem;
     }
 
-    .logo-image {
-        margin-top: 4.5rem;
-        width: 17rem; 
-        
+    .inicio-bem-vindo h2{
+        margin-top: 1.5rem;
+        font-size: 1.3rem;
     }
 
-    .login-prompt h3 {
-        margin-top: 4.5rem;
-        margin-bottom: 6rem;
-        font-size: 3rem;
+    .login-prompt{
+        margin-bottom: 12rem;
+        height: 21rem;
     }
 
-    .signup-btn, .login-btn {
-        padding: 2rem 4rem;
-        border-radius: 1rem;
-        height: 7rem;
-        font-size: 2.5rem;
-        width: 80%;
-    }
-
-    .login-box{
-        border-radius: 1.5rem;
-        padding: 1.5rem;
-        width: 40rem;
-        height: 40rem;
+    .logo-image{
+        margin-top: 2.5rem;
+        width: 10rem;
     }
 
     .login-box h2{
-        font-size: 3.5rem;
-    }
-
-    .login-prompt{
-        margin-bottom: 4.5rem;
-    }
-
-    .login-btn{
-        margin-top: 4rem;
-    }
-
-    .connect-box {
-        border-radius: 2rem;
-        padding: 2.5rem;
-        width: 45rem;
-        height: 40rem;
-    }
-
-    .connect-box h2 {
-        margin-bottom: 5rem;
-        font-size: 3.5rem;
-    }
-
-    .connect-box p{
-        font-size: 3rem;
-    }
-
-    .account-type {
-        padding: 1rem;
-        border-radius: 1rem;
-        height: 5rem;
-        margin-top: 2.5rem;
-        font-size: 2.5rem;
-    }
-
-    .register-box {
-        border-radius: 2rem;
-        padding: 3rem;
-        width: 45rem;
-        height: 55rem;
-    }
-    
-    .register-box h2{
-        font-size: 3.5rem;
-        margin-bottom: 4rem;
-    }
-
-    input {
-        padding: 1.5rem;
-        border-radius: 1.5rem;
-        margin-top: 1rem;
-        font-size: 2rem;
-    }
-
-    button[type="submit"] {
-        padding: 1.5rem;
-        border-radius: 1rem;
-        font-size: 2.5rem;
-        margin-top: 2rem;
-    }
-
-    .voltar-btn {
-        margin-top: 3rem; 
-        font-size: 2.5rem;
-    }
-}
-
-/* Media de telas para smartphones */
-@media (min-width: 600px){
-    .container-bem-vindo {
-        flex-direction: column;
-        margin-top: 70rem;
-    }
-
-    .inicio-bem-vindo, .login-prompt {
-       width: 45rem;
-       height: 40rem;
-       border-radius: 2rem;
-    }
-
-    .inicio-bem-vindo h2 {
-        margin-top: 3rem;
-        font-size: 3.5rem;
-    }
-
-    .logo-image {
-        margin-top: 4.5rem;
-        width: 17rem; 
-        
-    }
-
-    .login-prompt h3 {
-        margin-top: 4.5rem;
-        margin-bottom: 6rem;
-        font-size: 3rem;
+        font-size: 1.3rem;
     }
 
     .signup-btn, .login-btn {
-        padding: 2rem 4rem;
+        height: 4rem;
+        width: 75%;
+        font-size: 0.95rem;
+    }
+
+    .connect-box{
         border-radius: 1rem;
-        height: 7rem;
-        font-size: 2.5rem;
-        width: 80%;
-    }
-
-    .login-prompt{
-        margin-bottom: 3rem;
-    }
-
-    .login-btn{
-        margin-top: 4rem;
-    }
-
-    .connect-box {
-        border-radius: 2rem;
-        padding: 2.5rem;
-        width: 45rem;
-        height: 40rem;
+        padding: 1.5rem;
+        width: 19.3rem;
+        height: 20rem;
+        margin-bottom: 18rem;
     }
 
     .connect-box h2 {
-        margin-bottom: 5rem;
-        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
     }
 
     .connect-box p{
-        font-size: 3rem;
+        font-size: 1rem;
     }
 
     .account-type {
         padding: 1rem;
         border-radius: 1rem;
-        height: 5rem;
+        height: 3rem;
         margin-top: 2.5rem;
-        font-size: 2.5rem;
+        font-size: 1.3rem;
     }
 
     .register-box {
-        border-radius: 2rem;
-        padding: 3rem;
-        width: 45rem;
-        height: 55rem;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        width: 19.3rem;
+        height: 35rem;
+        margin-bottom: 25rem;
     }
     
     .register-box h2{
-        font-size: 3.5rem;
-        margin-bottom: 4rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     input {
-        padding: 1.5rem;
-        border-radius: 1.5rem;
+        padding: 1rem;
+        border-radius: 1rem;
         margin-top: 1rem;
-        font-size: 2rem;
+        font-size: 1rem;
     }
 
     button[type="submit"] {
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 1rem;
-        font-size: 2.5rem;
-        margin-top: 2rem;
+        font-size: 1rem;
+        margin-top: 1rem;
     }
 
     .voltar-btn {
-        margin-top: 3rem; 
-        font-size: 2.5rem;
+        margin-top: 1rem; 
+        font-size: 1rem;
     }
+
 }
 
 /* Media de telas para Tablets */
@@ -225,7 +111,6 @@
         gap: 4rem;
         flex-wrap: wrap;
         margin-top: 40rem;
-        
     }
 
     .inicio-bem-vindo, .login-prompt {
@@ -236,19 +121,18 @@
 
     .inicio-bem-vindo h2 {
         margin-top: 3rem;
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 
     .logo-image {
         margin-top: 4.5rem;
-        width: 17rem; 
-        
+        width: 15rem; 
     }
 
     .login-prompt h3 {
-        margin-top: 3rem;
+        margin-top: 2rem;
         margin-bottom: 2.5rem;
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .signup-btn, .login-btn {
@@ -256,11 +140,126 @@
         border-radius: 1rem;
         height: 7rem;
         font-size: 2rem;
-        width: 80%;
+        width: 70%;
+        font-size: 1.5rem;
     }
 
     .login-prompt{
+        margin-bottom: 20rem;
+    }
+
+    .login-btn{
+        margin-top: 4rem;
+    }
+
+    .connect-box {
+        margin-top: 10rem;
+        border-radius: 2rem;
+        padding: 2.5rem;
+        width: 35rem;
+        height: 40rem;
+        margin-bottom: 10rem;
+    }
+
+    .connect-box h2 {
+        margin-bottom: 5rem;
+        font-size: 3.5rem;
+    }
+
+    .connect-box p{
+        font-size: 3rem;
+    }
+
+    .account-type {
+        padding: 1rem;
+        border-radius: 1rem;
+        height: 5rem;
+        margin-top: 2.5rem;
+        font-size: 2.5rem;
+    }
+
+    .register-box {
+        border-radius: 2rem;
+        padding: 3rem;
+        width: 35rem;
+        height: 55rem;
         margin-bottom: 3rem;
+        margin-top: 10rem;
+    }
+    
+    .register-box h2{
+        font-size: 3.5rem;
+        margin-bottom: 4rem;
+    }
+
+    input {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        margin-top: 1rem;
+        font-size: 2rem;
+    }
+
+    button[type="submit"] {
+        padding: 1.5rem;
+        border-radius: 1rem;
+        font-size: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .voltar-btn {
+        margin-top: 3rem; 
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+}
+
+/* Media de telas para Desktop */
+@media (min-width: 992px){
+
+    .container-bem-vindo {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        align-content: center;
+        gap: 4rem;
+        flex-wrap: wrap;
+        margin-top: 40rem;
+    }
+
+    .inicio-bem-vindo, .login-prompt {
+       width: 35rem;
+       height: 35rem;
+       border-radius: 2rem;
+    }
+
+    .inicio-bem-vindo h2 {
+        margin-top: 3rem;
+        font-size: 3rem;
+    }
+
+    .logo-image {
+        margin-top: 4.5rem;
+        width: 15rem; 
+    }
+
+    .login-prompt h3 {
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
+        font-size: 2.5rem;
+    }
+
+    .signup-btn, .login-btn {
+        padding: 2rem 4rem;
+        border-radius: 1rem;
+        height: 7rem;
+        font-size: 2rem;
+        width: 70%;
+        font-size: 1.5rem;
+    }
+
+    .login-prompt{
+        margin-bottom: 20rem;
     }
 
     .login-btn{
@@ -332,7 +331,7 @@
 /* Media de telas para Desktop */
 @media (min-width: 1200px){
 
-    .container-bem-vindo {
+    .container-bem-vindo{
         gap: 4rem;
         display: flex;
         flex-direction: row;
@@ -340,193 +339,550 @@
     }
 
     .inicio-bem-vindo, .login-prompt {
-        width: 25rem;
-        height: 30rem;
-        border-radius: 2rem;
-    }
-
-    .inicio-bem-vindo h2{
-        font-size: 2.5rem;
-    }
-
-    .logo-image {
-        margin-top: 4.5rem;
-        width: 15rem; 
-        
-    }
-
-    .login-prompt h3{
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-    .signup-btn, .login-btn {
-        padding: 2rem 2rem;
-        border-radius: 1rem;
-        height: 7rem;
-        font-size: 1.5rem;
-        width: 80%;
-    }
-
-    .connect-box{
-        margin-top: 2rem;
-        margin-bottom: 6rem;
-        height: 35rem;
-    }
-
-    .account-type {
-        height: 5rem;
-        margin-top: 2.5rem;
-        font-size: 2rem;
-    }
-
-    .connect-box h2 {
-        margin-bottom: 5rem;
-        font-size: 3rem;
-    }
-
-    .connect-box p{
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
-    .register-box{
+        height: 23rem;
         padding: 2rem;
-        width: 30rem;
-        height: 43rem;
-        margin-bottom: 3rem;
-        margin-top: 10rem;
-    }
-
-    .register-box h2{
-        font-size: 3rem;
-        margin-bottom: 2rem;
-    }
-
-    input{
-        padding: 1rem;
-        border-radius: 1rem;
-        font-size: 1.5rem;
-    }
-
-    button[type="submit"] {
-        padding: 1rem;
-        border-radius: 1rem;
-        font-size: 1.5rem;
-        margin-top: 1rem;
-    }
-
-    .voltar-btn {
-        margin-top: 2rem; 
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .login-box{
-        border-radius: 1rem;
-        padding: 1.5rem;
-        width: 25rem;
+        border-radius: 2rem;
+        width: 20rem;
     }
     
-}
+    .inicio-bem-vindo h2 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        color:var(--cor-padrao-letras);
+    }
+    
+    .login-prompt h3 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        color:var(--cor-padrao-letras);
+    }
+    
+    .signup-btn, .login-btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+        height: 4.5rem;
+        width: 70%;
+    }
+    
+    .signup-btn {
+        margin-top: 2rem;
+    }
+    
+    .register-box, .connect-box {
+        background: var(--cor-fundo-inputs);
+        background: var(--cor-cards-pgLogin);
+        border-radius: 1rem;
+        padding: 4rem;
+        text-align: center;
+    }
+    
+    .register-box h2, .connect-box h2 {
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        font-size: 1.7rem;
+        color: var( --text-color-dark);
+    }
+    
+    .connect-box{
+        width: 15rem;
+        height: 19.5rem;
+    }
+    
+    .connect-box p{
+        font-size: 1rem;
+        color: var(--text-color-dark);
+    }
+    
+    .register-box{
+        width: 20rem;
+        height: 33rem;
+        margin-bottom: 2rem;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    input {
+        padding: 1rem;
+        width: 97%;
+        border: none;
+        border-radius: 0.5rem;
+        outline: none;
+        background-color: var(--cor-fundo-inputs);
+        color: var(--cor-padrao-letras);
+    }
+    
+    button[type="submit"] {
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+        width: 97%;
+    }
+    
+    .signup-link {
+        display: block;
+        margin-top: 1rem;
+        color: var(--cor-btns);
+        text-decoration: none;
+    }
+    
+    .account-type {
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        width: 100%;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+    
+    .select-menu {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .select-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        color: #686868;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        width: 90%;
+    }
+    
+    .select-btn i {
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
+    
+    .select-menu.active .select-btn i {
+        transform: rotate(-180deg);
+    }
+    
+    .options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 80%;
+        padding: 0;
+        list-style: none;
+        border-radius: 1.5rem;
+        max-height: 5rem;
+        overflow-y: auto;
+        display: none;
+    }
+    
+    .select-menu.active .options {
+        display: block;
+        z-index: 10;
+    }
+    
+    .option {
+        padding: 1rem;
+        cursor: pointer;
+    }
+    
+    .option:hover {
+        background-color: #696969;
+    }
+    
+    .logo-image {
+        margin-top: 1.5rem;
+        width: 12rem; 
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .login-box  h2{
+        font-size: 2rem;
+    }
+    .login-btn {
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    #register-aluno, #register-professor {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+    
+    #login-existente-box {
+        background: var(--cor-btns);
+        background: var(--cor-cards-pgLogin);
+        border-radius: 1rem;
+        padding: 3rem;
+        width: 3rem;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    #login-existente-box h2 {
+        margin-bottom: 2rem;
+        font-weight: bold;
+    }
+    
+    #login-existente-box form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    #email-login, #senha-login {
+        padding: 1rem;
+        width: 90%;
+        border: none;
+        border-radius: 1.5rem;
+        outline: none;
+        background-color: var(--cor-fundo-inputs);
+        color: var(--cor-padrao-letras);
+    }
+    
+    #login-existente-btn {
+        padding: 1rem;
+        border: none;
+        border-radius: 1.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .signup-link {
+        display: block;
+        margin-top: 1rem;
+        color: var(--cor-btns);
+    }
+    
+    .register-box, .login-box, .connect-box {
+        background: var(--cor-cards-pgLogin);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        width: 20rem;
+        text-align: center;
+        display: none;
+    }
+    
+    
+    .voltar-btn {
+        display: block;
+        width: 97%;
+        margin-top: 0.5rem; 
+        border: none;
+        border-radius: 1.5rem;
+        color: var(--cor-padrao-letras);
+        font-weight: 1rem;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+} 
 
 /* Media de telas para Desktop */
 @media (min-width: 1440px){
 
 
     .container-bem-vindo {
-        gap: 4rem;
         display: flex;
-        flex-direction: row;
-        margin-top: 5rem;
-    }
-
-    .inicio-bem-vindo, .login-prompt {
-        width: 25rem;
-        height: 30rem;
-        border-radius: 2rem;
-    }
-
-    .inicio-bem-vindo h2{
-        font-size: 2.5rem;
-    }
-
-    .logo-image {
-        margin-top: 4.5rem;
-        width: 15rem; 
+        align-items: baseline;
+        justify-content: center;
+        align-content: center;
+        gap: 4rem;
+        flex-wrap: wrap
         
     }
-
-    .login-prompt h3{
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-    .signup-btn, .login-btn {
-        padding: 2rem 2rem;
+    
+    .inicio-bem-vindo, .login-prompt {
+        height: 23rem;
+        text-align: center;
+        padding: 1.5rem;
         border-radius: 1rem;
-        height: 7rem;
-        font-size: 1.5rem;
-        width: 80%;
+        width: 20rem;
+        background: var(--cor-cards-pgLogin);
     }
-
-    .connect-box{
+    
+    .inicio-bem-vindo h2 {
         margin-top: 2rem;
-        margin-bottom: 6rem;
-        height: 25rem;
-        width: 25rem;
-    }
-
-    .account-type {
-        height: 4rem;
-        margin-top: 2.5rem;
         font-size: 1.5rem;
+        color:var(--cor-padrao-letras);
     }
-
-    .connect-box h2 {
-        margin-bottom: 3rem;
-        font-size: 2.5rem;
+    
+    .login-prompt h3 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        color:var(--cor-padrao-letras);
     }
-
+    
+    .signup-btn, .login-btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+        height: 4.5rem;
+        width: 70%;
+    }
+    
+    .signup-btn {
+        margin-top: 2rem;
+    }
+    
+    .register-box, .connect-box {
+        background: var(--cor-fundo-inputs);
+        background: var(--cor-cards-pgLogin);
+        border-radius: 1rem;
+        padding: 4rem;
+        text-align: center;
+    }
+    
+    .register-box h2, .connect-box h2 {
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        font-size: 1.7rem;
+        color: var( --text-color-dark);
+    }
+    
+    .connect-box{
+        width: 15rem;
+        height: 19.5rem;
+    }
+    
     .connect-box p{
-        font-size: 2rem;
+        font-size: 1rem;
+        color: var(--text-color-dark);
     }
-
+    
     .register-box{
-        padding: 2rem;
-        width: 25rem;
-        height: 35rem;
-        margin-bottom: 3rem;
-    }
-
-    .register-box h2{
-        font-size: 2rem;
+        width: 20rem;
+        height: 33rem;
         margin-bottom: 2rem;
     }
-
-    input{
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    input {
         padding: 1rem;
-        border-radius: 1rem;
-        font-size: 1rem;
+        width: 97%;
+        border: none;
+        border-radius: 0.5rem;
+        outline: none;
+        background-color: var(--cor-fundo-inputs);
+        color: var(--cor-padrao-letras);
     }
 
+    .login-box h2{
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+    
     button[type="submit"] {
         padding: 1rem;
-        border-radius: 1rem;
-        font-size: 1rem;
-        margin-top: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+        width: 97%;
     }
-
-    .voltar-btn {
-        margin-top: 2rem; 
-        font-size: 1rem;
+    
+    .signup-link {
+        display: block;
+        margin-top: 1rem;
+        color: var(--cor-btns);
+        text-decoration: none;
+    }
+    
+    .account-type {
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        width: 100%;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+    
+    .select-menu {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .select-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        color: #686868;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        width: 90%;
+    }
+    
+    .select-btn i {
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
+    
+    .select-menu.active .select-btn i {
+        transform: rotate(-180deg);
+    }
+    
+    .options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 80%;
+        padding: 0;
+        list-style: none;
+        border-radius: 1.5rem;
+        max-height: 5rem;
+        overflow-y: auto;
+        display: none;
+    }
+    
+    .select-menu.active .options {
+        display: block;
+        z-index: 10;
+    }
+    
+    .option {
+        padding: 1rem;
+        cursor: pointer;
+    }
+    
+    .option:hover {
+        background-color: #696969;
+    }
+    
+    .logo-image {
+        margin-top: 1.5rem;
+        width: 12rem; 
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .login-btn {
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        padding: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    #register-aluno, #register-professor {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+    
+    #login-existente-box {
+        background: var(--cor-btns);
+        background: var(--cor-cards-pgLogin);
+        border-radius: 1rem;
+        padding: 3rem;
+        width: 3rem;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    #login-existente-box h2 {
+        margin-bottom: 2rem;
         font-weight: bold;
     }
-
-    .login-box{
+    
+    #login-existente-box form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    #email-login, #senha-login {
+        padding: 1rem;
+        width: 90%;
+        border: none;
+        border-radius: 1.5rem;
+        outline: none;
+        background-color: var(--cor-fundo-inputs);
+        color: var(--cor-padrao-letras);
+    }
+    
+    #login-existente-btn {
+        padding: 1rem;
+        border: none;
+        border-radius: 1.5rem;
+        background-color: var(--cor-btns);
+        color: var(--cor-padrao-letras);
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .signup-link {
+        display: block;
+        margin-top: 1rem;
+        color: var(--cor-btns);
+    }
+    
+    .register-box, .login-box, .connect-box {
+        background: var(--cor-cards-pgLogin);
         border-radius: 1rem;
         padding: 1.5rem;
-        width: 25rem;
+        width: 20rem;
+        text-align: center;
+        display: none;
     }
-
-}
+    
+    
+    .voltar-btn {
+        display: block;
+        width: 97%;
+        margin-top: 0.5rem; 
+        border: none;
+        border-radius: 1.5rem;
+        color: var(--cor-padrao-letras);
+        font-weight: 1rem;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+    }
+} 
