@@ -11,8 +11,8 @@ body {
 .container-inventario{
     background-color: #d0a8f1;
     border-radius: 10px;
-    padding: 20px;
-    width: 2000px;
+    /* padding: 20px; */
+    width: 1000px;
 }
 
 .title {
@@ -21,6 +21,7 @@ body {
     text-align: center;
     color: #4e3276;
     margin-bottom: 10px;
+    margin-top: 0.5rem;
 }
 
 .tabela-inventario {
@@ -32,24 +33,30 @@ body {
     background-color: #b084e8;
     color: #3d1c5e;
     padding: 10px;
-    text-align: left;
+    text-align: center;
     font-weight: bold;
-    border-radius: 5px;
+    font-family: "Oswald", sans-serif;;
 }
 
 .tabela-inventario td {
     background-color: #d5c0f4;
     padding: 10px;
-    border-radius: 5px;
     text-align: center;
+    font-family: "Host Grotesk", sans-serif;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-top: 0.3rem;
 }
 
 .fa-trash {
     color: gray;
     font-size: 16px;
-    margin-left: 8px;
     transition: color 0.3s ease;
-    cursor: pointer;
 }
 
 .fa-trash:hover {
@@ -68,6 +75,9 @@ select {
     color: #fff;
     background-color: rgb(47, 47, 47);
     cursor: pointer;
+    /* Resetando select */
+    appearance: none;
+    background-image: none;
 }
 
 select::-ms-expand {
@@ -77,9 +87,9 @@ select::-ms-expand {
 .select {
     position: relative;
     display: flex;
-    width: 20em;
-    height: 3em;
-    border-radius: 25rem;
+    width: 4rem;
+    height: 3rem;
+    border-radius: 5rem;
     overflow: hidden;
 }
 
@@ -88,7 +98,7 @@ select::-ms-expand {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 1em;
+    padding: 0.5rem;
     background-color: #34495e;
     transition: .25s all ease;
     pointer-events: none;
