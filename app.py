@@ -22,7 +22,7 @@ app.secret_key = 'logclass'
 @app.route("/confirmacao")
 def confirmacao_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "usuario_logado" in session or "professor_logado" in session:
+    if "master_logado" in session:
         if request.method == "GET":
             #conectando com o banco de dados
             mydb = Conexao.conectar()
@@ -51,7 +51,7 @@ def confirmacao_usuario():
 @app.route("/aprovar_usuario")
 def aprovar_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "usuario_logado" in session or "professor_logado" in session:
+    if "master_logado" in session:
         if request.method == "GET":
             #conectando com o banco de dados
             mydb = Conexao.conectar()
@@ -152,6 +152,7 @@ def pagina_cadastro():
                 # retornando um arquivo json caso o cadastro nao seja concluído
                 return jsonify({'mensagem': 'Erro ao cadastrar o aluno'}), 400
         
+
         # realizando o cadastro do professor
         if formulario == "Professor":
             # pegando os dados do formulário, mas em forma de json
@@ -176,6 +177,7 @@ def pagina_cadastro():
                 else:
                     # retornando um arquivo json caso o cadastro nao seja concluído
                     return jsonify({'mensagem': 'Erro ao cadastrar o professor'}), 400
+                
             else:
                 # retornando um arquivo json caso a senha inserida seja incorreta
                 return jsonify({'mensagem': 'Senha incorreta'}), 401
