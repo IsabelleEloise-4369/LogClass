@@ -42,7 +42,7 @@ class Cadastramento:
         mycursor = mydb.cursor()
 
         dados = f"INSERT INTO databaseProfessor.tb_cadastramento (cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento) VALUES ('{cod_prod}', '{descricao_tecnica}', '{modelo}', '{fabricante}', '{num_lote}', '{enderecamento}')"
-
+        
         #executando a variável a cima
         mycursor.execute(dados)
 
