@@ -231,10 +231,13 @@ footer {
   left: 0;
   color: var(--cor-padrao-letras);
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer p {
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
+  
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
   font-style: normal;
