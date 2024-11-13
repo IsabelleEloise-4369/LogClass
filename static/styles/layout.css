@@ -273,10 +273,6 @@ footer p {
   background-color: var(--secondary-color-dark);
 }
 
-.theme-container.dark .dropbtn{
-  height: ;
-}
-
 .theme-container.dark .sombreado{
   background-color: var( --secondary-color-light);
 }
