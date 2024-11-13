@@ -90,7 +90,6 @@
   display: none;
   position: fixed; /* Independente do botão e do header */
   top: 5.5rem; /* Espaço abaixo do header */
-  left: 0;
   width: 100vw; /* Largura total da viewport */
   z-index: 15;
   padding: 1rem 0;
@@ -126,7 +125,6 @@
 }
 
 .dropdown-menu .card a i {
-
   font-size: 1rem;
   color: var(--cor-icone-cadastramento);
 }
