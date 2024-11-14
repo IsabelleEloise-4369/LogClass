@@ -41,7 +41,6 @@
 }
 
 
-
 /* Estilização da imagem do logo */
 .header-container img{
   width: 11rem;
@@ -61,10 +60,15 @@
   border-radius: 2rem;
   cursor: pointer;
   text-transform: uppercase;
+<<<<<<< HEAD
+  margin-left: 2rem;
+  margin-bottom: 1.7rem;
+=======
   margin-left: 1rem;
   margin-top: 0.5rem;
   margin-right:2rem;
   font-size: 1.5rem;
+>>>>>>> 64d3e2c56e009aeda8a3da2202546281ceaf9360
 }
 
 .dropbtn:hover,
@@ -182,6 +186,7 @@
 .inventario{
   margin-left: 2rem;
   text-decoration: none;
+  margin-top: 1rem;
 }
 
 .inventario a{
@@ -203,8 +208,13 @@
 
 .conectar{
   padding: 3rem;
+<<<<<<< HEAD
+  margin-left: 10rem;
+  margin-top: 2.5rem;
+=======
   margin-left: 20rem;
   margin-top: 2rem;
+>>>>>>> 64d3e2c56e009aeda8a3da2202546281ceaf9360
   margin-bottom: 2rem;
 }
 
@@ -225,10 +235,13 @@ footer {
   left: 0;
   color: var(--cor-padrao-letras);
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer p {
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
+  
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
   font-style: normal;
