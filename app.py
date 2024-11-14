@@ -324,11 +324,12 @@ def pagina_cadastramento():
             codigo = request.form.get("codigo")
             numeroLote = request.form.get("numeroLote")
             enderecamento = request.form.get("enderecamento")
+            turma = request.form.get("turma")
             # transformando a classe Cadastramento em um objeto
             tbCadastramento = Cadastramento()
 
             # pegando a função armazenada no objeto para realizar o processo de cadastramento de um produto
-            if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento):
+            if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento, turma):
                 return render_template("cadastramento.html")
             else:
                 return 'Erro ao realizar o processo de Cadastramento'

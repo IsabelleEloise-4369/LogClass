@@ -20,7 +20,9 @@
                 <th>Número do Lote</th>
                 <th>Endereçamento</th>
                 <th>Saldo</th> <!-- Nova coluna para o saldo -->
+                {% if "professor_logado" in session %}
                 <th>Turma</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
