@@ -14,6 +14,7 @@
 
     .inicio-bem-vindo{
         margin-top: 3rem;
+        margin-bottom: 1rem;
     }
 
     .inicio-bem-vindo h2{
@@ -155,7 +156,7 @@
         border-radius: 2rem;
         padding: 2.5rem;
         width: 35rem;
-        height: 40rem;
+        height: 36rem;
         margin-bottom: 24rem;
     }
 
@@ -180,7 +181,7 @@
         border-radius: 2rem;
         padding: 3rem;
         width: 35rem;
-        height: 62rem;
+        height: 52rem;
         margin-bottom: 18rem;
         margin-top: 3rem;
     }
@@ -228,35 +229,35 @@
 @media (min-width: 992px){
 
     .container-bem-vindo {
-        margin-top: 40rem;
+        margin-top: 60rem;
     }
 
     .inicio-bem-vindo, .login-prompt {
-       width: 38rem;
-       height: 38rem;
+       width: 28rem;
+       height: 32rem;
        border-radius: 2rem;
     }
 
     .inicio-bem-vindo h2 {
         margin-top: 3rem;
-        font-size: 3.2rem;
+        font-size: 2.5rem;
     }
 
     .logo-image {
-        margin-top: 4.5rem;
-        width: 18rem; 
+        margin-top: 3.5rem;
+        width: 17rem; 
     }
 
     .login-prompt h3 {
         margin-top: 2rem;
-        margin-bottom: 2.5rem;
-        font-size: 3rem;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
     }
 
     .signup-btn, .login-btn {
-        padding: 2rem 4rem;
+        padding: 2rem 2rem;
         border-radius: 1rem;
-        height: 8rem;
+        height: 7rem;
         font-size: 2rem;
         width: 80%;
     }
@@ -272,18 +273,18 @@
     .connect-box {
         border-radius: 2rem;
         padding: 2.5rem;
-        width: 43rem;
-        height: 40rem;
-        margin-bottom: 30rem;
+        width: 30rem;
+        height: 36rem;
+        margin-bottom: 50rem;
     }
 
     .connect-box h2 {
-        margin-bottom: 5rem;
-        font-size: 3.5rem;
+        margin-bottom: 2rem;
+        font-size: 3rem;
     }
 
     .connect-box p{
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .account-type {
@@ -292,20 +293,20 @@
         height: 6rem;
         width:90%;
         margin-top: 2.5rem;
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .register-box {
         border-radius: 2rem;
         padding: 3rem;
-        width: 40rem;
-        height: 65rem;
+        width: 30rem;
+        height: 50rem;
         margin-bottom: 35rem;
     }
     
     .register-box h2{
-        font-size: 3.5rem;
-        margin-bottom: 4rem;
+        font-size: 3rem;
+        margin-bottom: 2rem;
     }
 
     input {
@@ -324,18 +325,18 @@
 
     .voltar-btn {
         margin-top: 3rem; 
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: bold;
     }
 
     .login-box{
-        width: 38rem;
-        height: 50rem;
+        width: 30rem;
+        height: 43rem;
         border-radius: 1.5rem;
     }
 
     .login-box h2{
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
         font-size: 3rem;
     }
 
@@ -348,131 +349,19 @@
         gap: 4rem;
         display: flex;
         flex-direction: row;
-        margin-top: 15rem;
+        margin-top: 10rem;
     }
 
     .inicio-bem-vindo, .login-prompt {
-        height: 35rem;
+        height: 25rem;
         padding: 2rem;
         border-radius: 2rem;
-        width: 30rem;
-    }
-    
-    .inicio-bem-vindo h2 {
-        margin-top: 2rem;
-        font-size: 2.5rem;
-        color:var(--cor-padrao-letras);
-    }
-
-    .logo-image {
-        margin-top: 3rem;
-        width: 18rem; 
-    }
-    
-    .login-prompt h3 {
-        margin-top: 2rem;
-        font-size: 2.5rem;
-    }
-    
-    .signup-btn, .login-btn {
-        padding: 1rem 2rem;
-        height: 7rem;
-        width: 80%;
-    }
-    
-    .signup-btn {
-        margin-top: 2rem;
-    }
-    
-    .connect-box{
-        margin-top: 15rem;
-        width: 30rem;
-        height: 32rem;
-    }
-    
-    .register-box h2, .connect-box h2 {
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
-        font-weight: bold;
-        font-size: 2.5rem;
-    }
-    
-    .connect-box p{
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .account-type {
-        padding: 1rem;
-        border-radius: 1rem;
-        width: 90%;
-        height: 6rem;
-        margin-top: 2rem;
-    }
-    
-    .register-box{
-        width: 38rem;
-        height: 50rem;
-        margin-bottom: 15rem;
-        margin-top: 8rem;
-    }
-    
-    .voltar-btn {
-        margin-top: 1.5rem; 
-        font-size: 2rem;
-    }
-
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    input {
-        padding: 1rem;
-        width: 97%;
-        border: none;
-        border-radius: 0.5rem;
-        outline: none;
-        background-color: var(--cor-fundo-inputs);
-        color: var(--cor-padrao-letras);
-    }
-    
-    button[type="submit"] {
-        padding: 1rem;
-        width: 97%;
-        border-radius: 1.5rem;
-    }
-    
-    .login-box{
-        width: 38rem;
-        margin-top: 18rem;
-        margin-bottom: 20rem;
-    }
-    
-} 
-
-/* Media de telas para Desktop */
-@media (min-width: 1440px){
-
-    .container-bem-vindo{
-        gap: 4rem;
-        display: flex;
-        flex-direction: row;
-        margin-top: 20rem;
-    }
-
-    .inicio-bem-vindo, .login-prompt {
-        height: 28rem;
-        padding: 2rem;
-        border-radius: 2rem;
-        width: 25rem;
+        width: 22rem;
     }
     
     .inicio-bem-vindo h2 {
         margin-top: 1rem;
-        font-size: 2rem;
+        font-size: 2.5rem;
         color:var(--cor-padrao-letras);
     }
 
@@ -483,7 +372,7 @@
     
     .login-prompt h3 {
         margin-top: 1rem;
-        font-size: 2rem;
+        font-size: 2.2em;
     }
     
     .signup-btn, .login-btn {
@@ -498,20 +387,20 @@
     }
     
     .connect-box{
-        margin-top: 10rem;
-        width: 25rem;
-        height: 28rem;
+        margin-top: 20rem;
+        width: 22rem;
+        height: 25rem;
     }
     
     .register-box h2, .connect-box h2 {
         margin-top: 1rem;
         margin-bottom: 1rem;
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size: 2.5rem;
     }
     
     .connect-box p{
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         margin-bottom: 1rem;
     }
 
@@ -519,50 +408,164 @@
         padding: 1rem;
         border-radius: 1rem;
         width: 90%;
-        height: 4rem;
+        height: 5rem;
         margin-top: 2rem;
         font-size: 2rem;
     }
     
     .register-box{
-        width: 25rem;
-        height: 37rem;
-        margin-bottom: 30rem;
+        width: 22rem;
+        height: 36rem;
+        margin-bottom: 15rem;
     }
     
     .voltar-btn {
         margin-top: 1rem; 
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
     
     input {
         padding: 1rem;
         width: 100%;
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
     
     button[type="submit"] {
         border-radius: 0.5rem;
         width: 97%;
         height:3rem;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         padding: 0.5rem;
     }
 
     .voltar-btn {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
     
     .login-box{
-        width: 25rem;
-        height: 31rem;
-        margin-bottom: 40rem;
+        width: 23rem;
+        height: 29rem;
+        margin-bottom: 10rem;
     }
 
     .login-box h2{
         margin-top: 1rem;
         margin-bottom: 1rem;
         font-weight: bold;
+        font-size: 2.3rem;
+    }
+} 
+
+/* Media de telas para Desktop */
+@media (min-width: 1440px){
+
+    .container-bem-vindo{
+        gap: 4rem;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10rem;
+    }
+
+    .inicio-bem-vindo, .login-prompt {
+        height: 25rem;
+        padding: 2rem;
+        border-radius: 2rem;
+        width: 22rem;
+    }
+    
+    .inicio-bem-vindo h2 {
+        margin-top: 1rem;
+        font-size: 2.5rem;
+        color:var(--cor-padrao-letras);
+    }
+
+    .logo-image {
+        margin-top: 3rem;
+        width: 16rem; 
+    }
+    
+    .login-prompt h3 {
+        margin-top: 1rem;
+        font-size: 2.2em;
+    }
+    
+    .signup-btn, .login-btn {
+        padding: 1rem 2rem;
+        height: 5rem;
+        width: 90%;
+        font-size: 1.5rem;
+    }
+    
+    .signup-btn {
+        margin-top: 1rem;
+    }
+    
+    .connect-box{
+        margin-top: 20rem;
+        width: 22rem;
+        height: 25rem;
+    }
+    
+    .register-box h2, .connect-box h2 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+    
+    .connect-box p{
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .account-type {
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 90%;
+        height: 5rem;
+        margin-top: 2rem;
         font-size: 2rem;
+    }
+    
+    .register-box{
+        width: 22rem;
+        height: 36rem;
+        margin-bottom: 15rem;
+    }
+    
+    .voltar-btn {
+        margin-top: 1rem; 
+        font-size: 1.5rem;
+    }
+    
+    input {
+        padding: 1rem;
+        width: 100%;
+        font-size: 1.3rem;
+    }
+    
+    button[type="submit"] {
+        border-radius: 0.5rem;
+        width: 97%;
+        height:3rem;
+        font-size: 1.3rem;
+        padding: 0.5rem;
+    }
+
+    .voltar-btn {
+        font-size: 1.3rem;
+    }
+    
+    .login-box{
+        width: 23rem;
+        height: 29rem;
+        margin-bottom: 10rem;
+    }
+
+    .login-box h2{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        font-size: 2.3rem;
     }
 } 

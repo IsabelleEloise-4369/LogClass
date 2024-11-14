@@ -1,5 +1,5 @@
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background: rgb(0,0,0);
@@ -22,8 +22,14 @@ body {
     
 }
 
+<<<<<<< HEAD
 .inicio-bem-vindo, .login-prompt {
     height: 25rem;
+=======
+.inicio-bem-vindo, .login-prompt{
+    margin-top: 15rem;
+    height: 20rem;
+>>>>>>> 64d3e2c56e009aeda8a3da2202546281ceaf9360
     text-align: center;
     padding: 1.5rem;
     border-radius: 1rem;
@@ -88,7 +94,6 @@ body {
 .register-box{
     width: 20rem;
     height: 33rem;
-    margin-bottom: 2rem;
 }
 
 form {
@@ -266,7 +271,6 @@ button[type="submit"] {
     background: var(--cor-cards-pgLogin);
     border-radius: 1rem;
     padding: 1.5rem;
-    width: 20rem;
     text-align: center;
     display: none;
 }
