@@ -38,10 +38,11 @@
     
     </div>
     <!-- Fim da seção principal -->
-
+    {% if "usuario_logado" in session %}
     <div class="container-grid">
-        <a href="#mensagem">Ver mensagem do Professor</a>
+        <a href="#mensagem">Ver mensagem do Professor <i class="fa-solid fa-message"></i></a>
     </div>
+    {% endif %}
     
     <!-- Início da seção de cards -->
     <div class="container-cards">

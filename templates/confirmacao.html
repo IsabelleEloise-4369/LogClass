@@ -23,27 +23,18 @@
         <!-- Início lista de usuários -->
         <ul class="user-list">
             <!-- Primeira caixa -->
+            {% for usuario in lista_usuarios %}
             <div class="caixa_1">
             <li class="user-item">
                 <i class="fa-solid fa-fire fa-2x"></i>
+                {{ usuario['nome'] }}
             </li>
             <div class="actions">
                 <i class="fa-solid fa-circle-xmark fa-2x"></i>
                 <i class="fa-solid fa-circle-check fa-2x"></i>
             </div> 
             </div>
-
-
-            <!-- Segunda caixa -->
-            <div class="caixa_1">
-                <li class="user-item">
-                    <i class="fa-solid fa-fire fa-2x"></i>
-                </li>
-                <div class="actions">
-                    <i class="fa-solid fa-circle-xmark fa-2x"></i>
-                    <i class="fa-solid fa-circle-check fa-2x"></i>
-                </div> 
-                </div>
+            {% endfor %}
 
         </ul>
     </div>

@@ -1,3 +1,4 @@
+# importando a classe necessária para poder realizar a conexão com o banco de dados
 from conexao import Conexao
 # classe que irá contar todas as funções referente a tudo que diz respeito ao aluno
 class Aluno:

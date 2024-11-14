@@ -17,11 +17,12 @@ from simulador import Simulador
 app = Flask(__name__)
 app.secret_key = 'logclass'
 
-
+# -------------------------------------------------------------------
+# planejamento de código (ainda não está funcionando)
 @app.route("/confirmacao")
 def confirmacao_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "usuario_logado" in session or "professor_logado" in session:
+    if "master_logado" in session:
         if request.method == "GET":
             #conectando com o banco de dados
             mydb = Conexao.conectar()
@@ -46,19 +47,17 @@ def confirmacao_usuario():
                 })
 
             return render_template("confirmacao.html", lista_usuarios = lista_usuarios)
-        
+   
 @app.route("/aprovar_usuario")
 def aprovar_usuario():
     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "usuario_logado" in session or "professor_logado" in session:
+    if "master_logado" in session:
         if request.method == "GET":
             #conectando com o banco de dados
             mydb = Conexao.conectar()
             
             mycursor = mydb.cursor()
-
-              
-
+# -----------------------------------------------------------------------------
 
 #roteamento da página inicial
 @app.route("/")
@@ -78,12 +77,15 @@ def pagina_inicial():
         #executar
         mycursor.execute(mensagens)
 
+        # pegando os dados e guardando em uma variável
         resultado = mycursor.fetchall()
 
         # fechar a conexão
         mydb.close()
+        
         # criando uma lista para armazenar todas as mensagens que foram "retiradas" do banco de dados
         lista_mensagens = []
+        
         # criando um loop para cada mensagem que foi "retirada" do banco de dados
         for mensagens_enviadas in resultado:
             lista_mensagens.append({
@@ -91,12 +93,15 @@ def pagina_inicial():
                 "mensagem":mensagens_enviadas[1]
             })
 
+        # retornando para a página inicial juntamente com as mensagens que foram enviadas pelo professor
         return render_template("pagina-inicial.html", lista_mensagens = lista_mensagens)
 
+    # se o professor estiver logado então ele será redirecionado para a página inicial mas sem a vizualização das mensagens
     elif "professor_logado" in session:
         return render_template("pagina-inicial.html")
     # se não houver nenhum usuário logado o mesmo será direcionado para a página de cadastro e login
     else:
+        # se não estiver nehum usuário logado ele será redirecionado para a página de cadastro
         return redirect("/login")
     
 # roteamento da página de cadastro e login que no caso são "juntas" 
@@ -147,6 +152,7 @@ def pagina_cadastro():
                 # retornando um arquivo json caso o cadastro nao seja concluído
                 return jsonify({'mensagem': 'Erro ao cadastrar o aluno'}), 400
         
+
         # realizando o cadastro do professor
         if formulario == "Professor":
             # pegando os dados do formulário, mas em forma de json
@@ -171,6 +177,7 @@ def pagina_cadastro():
                 else:
                     # retornando um arquivo json caso o cadastro nao seja concluído
                     return jsonify({'mensagem': 'Erro ao cadastrar o professor'}), 400
+                
             else:
                 # retornando um arquivo json caso a senha inserida seja incorreta
                 return jsonify({'mensagem': 'Senha incorreta'}), 401
@@ -232,6 +239,52 @@ def pagina_cadastro():
                 session.clear()
                 return 'Email ou senha incorretos.', 401
 
+# Rota para exibir e processar a redefinição de senha
+@app.route("/redefinir_senha", methods=["GET", "POST"])
+def redefinir_senha():
+    # Verifica se o professor está logado
+    if "professor_logado" not in session:
+        return redirect("/login")
+
+    if request.method == "GET":
+        # Conectando ao banco de dados do professor para obter as turmas
+        mydb = Conexao.conectar()
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT nomeBase FROM databaseprofessor.tb_database")
+        turmas = mycursor.fetchall()
+        mydb.close()
+
+        # Lista para armazenar dados de todos os alunos
+        alunos = []
+
+        # Itera sobre cada turma e busca os alunos
+        for turma in turmas:
+            nome_turma = turma[0]
+            try:
+                mydb_turma = Conexao.conectarAluno(nome_turma)  # Conectando ao banco da turma
+                cursor_turma = mydb_turma.cursor()
+                cursor_turma.execute("SELECT nome, email, %s AS turma, senha, cod_aluno FROM tb_aluno", (nome_turma,))
+                alunos.extend(cursor_turma.fetchall())
+            finally:
+                mydb_turma.close()
+
+        return render_template("redefinir_senha.html", alunos=alunos)
+
+    elif request.method == "POST":
+        # Coletando dados do formulário para atualização
+        cod_aluno = request.form.get("cod_aluno")
+        nova_senha = request.form.get("nova_senha")
+        turma = request.form.get("turma")
+
+        # Atualiza a senha no banco de dados da turma específica
+        mydb_turma = Conexao.conectarAluno(turma)
+        cursor_turma = mydb_turma.cursor()
+        cursor_turma.execute("UPDATE tb_aluno SET senha = %s WHERE cod_aluno = %s", (nova_senha, cod_aluno))
+        mydb_turma.commit()
+        mydb_turma.close()
+
+        flash("Senha redefinida com sucesso!")
+        return redirect("/redefinir_senha")
 
 # roteamento da página de cadastramento
 # RF005
@@ -271,11 +324,12 @@ def pagina_cadastramento():
             codigo = request.form.get("codigo")
             numeroLote = request.form.get("numeroLote")
             enderecamento = request.form.get("enderecamento")
+            turma = request.form.get("turma")
             # transformando a classe Cadastramento em um objeto
             tbCadastramento = Cadastramento()
 
             # pegando a função armazenada no objeto para realizar o processo de cadastramento de um produto
-            if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento):
+            if tbCadastramento.cadastramentoProf(codigo, descricao, modelo, fabricante, numeroLote, enderecamento, turma):
                 return render_template("cadastramento.html")
             else:
                 return 'Erro ao realizar o processo de Cadastramento'
@@ -292,7 +346,7 @@ def inventario():
 
             turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
 
-            # Ajustando a query para incluir o saldo
+            # Query para listar os produtos do inventário
             produtos = f"SELECT cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, quantidade FROM {turma}.tb_cadastramento"
             mycursor.execute(produtos)
             resultado = mycursor.fetchall()
@@ -306,16 +360,58 @@ def inventario():
                     "fabricante": produto[3],
                     "numero_lote": produto[4],
                     "enderecamento": produto[5],
-                    "quantidade": produto[6]  # Adiciona o saldo ao dicionário
+                    "quantidade": produto[6]
                 })
 
-            return render_template('inventario.html', lista_produtos=lista_produtos)
+            # Obtém a lista de bancos de dados, incluindo o do professor
+            mycursor.execute("SELECT * FROM databaseprofessor.tb_database")
+            resultado = mycursor.fetchall()
+
+            # Adiciona a turma do professor à lista de opções se ele estiver logado
+            if "professor_logado" in session:
+                resultado.append((session['professor_logado']['turma'],))
+
+            mydb.close()
+
+            # Cria a lista de opções para o select
+            lista_nomes = [{"database": nomeBD[0]} for nomeBD in resultado]
+
+            return render_template("inventario.html", lista_produtos=lista_produtos, lista_nomes=lista_nomes)
 
 
-# @app.route("/escluir_inventario", methods=["GET", "POST"])
-# def excluir_mensagem():
-#     if "professor_logado" in session:
-#         if request.method == "GET":
+
+@app.route("/excluir_produto", methods=["POST"])
+def excluir_produto():
+    if "professor_logado" in session:
+        # Captura os dados do formulário
+        cod_prod = request.form.get("cod_prod")
+        turma = request.form.get("turma")
+
+        if not cod_prod or not turma:
+            return "Erro: Código do produto ou banco de dados não fornecido."
+
+        try:
+            # Conecta ao banco de dados selecionado
+            mydb = Conexao.conectar()
+            mycursor = mydb.cursor()
+
+            # Monta a query de exclusão com o banco de dados correto
+            sql_delete = f"DELETE FROM {turma}.tb_cadastramento WHERE cod_prod = %s"
+            mycursor.execute(sql_delete, (cod_prod,))
+
+            # Confirma a transação e fecha a conexão
+            mydb.commit()
+            mydb.close()
+
+            return redirect("/inventario")  # Redireciona para a página de inventário após a exclusão
+        except Exception as e:
+            return f"Erro ao excluir o produto: {e}"
+    else:
+        return redirect("/login")
+
+
+            
+
 
 
 # Página de controle de estoque
@@ -880,7 +976,5 @@ def excluir_banco(nomeBD):
     else:
         return "Acesso negado", 403
 
-
 if  __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)  # Iniciando o servidor com debug ativado
-

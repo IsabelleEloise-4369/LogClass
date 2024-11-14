@@ -240,6 +240,12 @@ body, html {
   left: 10rem;
 }
 
+.fa-message {
+  color: green;
+  height: 3rem;
+  width: 3rem;
+}
+
 @keyframes morph {
   0% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
