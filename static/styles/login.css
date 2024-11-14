@@ -1,4 +1,5 @@
-body {
+body{
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background: rgb(0,0,0);
@@ -12,21 +13,22 @@ body {
 }
 
 .container-bem-vindo {
-    display: flex;
     align-items: baseline;
     justify-content: center;
     align-content: center;
     gap: 4rem;
-    flex-wrap: wrap
-    
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
 }
 
-.inicio-bem-vindo, .login-prompt {
-    height: 23rem;
+.inicio-bem-vindo, .login-prompt{
+    height: 20rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    width: 20rem;
     text-align: center;
     padding: 1.5rem;
-    border-radius: 1rem;
-    width: 20rem;
     background: var(--cor-cards-pgLogin);
 }
 
@@ -52,10 +54,7 @@ body {
     cursor: pointer;
     height: 4.5rem;
     width: 70%;
-}
-
-.signup-btn {
-    margin-top: 2rem;
+    font-size: 1rem;
 }
 
 .register-box, .connect-box {
@@ -63,14 +62,30 @@ body {
     background: var(--cor-cards-pgLogin);
     border-radius: 1rem;
     padding: 4rem;
-    width: 5rem;
     text-align: center;
-    
 }
 
 .register-box h2, .connect-box h2 {
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
     font-weight: bold;
+    font-size: 1.7rem;
+    color: var( --text-color-dark);
+}
+
+.connect-box{
+    width: 18rem;
+    height: 20rem;
+}
+
+.connect-box p{
+    font-size: 1rem;
+    color: var(--text-color-dark);
+}
+
+.register-box{
+    width: 20rem;
+    height: 28rem;
 }
 
 form {
@@ -98,6 +113,7 @@ button[type="submit"] {
     font-weight: bold;
     cursor: pointer;
     width: 97%;
+    font-size: 1.2rem;
 }
 
 .signup-link {
@@ -117,6 +133,7 @@ button[type="submit"] {
     width: 100%;
     margin-top: 1rem;
     cursor: pointer;
+    font-size: 1.2rem;
 }
 
 .select-menu {
@@ -169,6 +186,11 @@ button[type="submit"] {
 
 .option:hover {
     background-color: #696969;
+}
+
+.login-box{
+    width: 18rem;
+    height: 21rem;
 }
 
 .logo-image {
@@ -248,7 +270,6 @@ button[type="submit"] {
     background: var(--cor-cards-pgLogin);
     border-radius: 1rem;
     padding: 1.5rem;
-    width: 20rem;
     text-align: center;
     display: none;
 }
@@ -261,9 +282,8 @@ button[type="submit"] {
     border: none;
     border-radius: 1.5rem;
     color: var(--cor-padrao-letras);
-    font-weight: 1.5rem;
+    font-weight: 1rem;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
 }
-
