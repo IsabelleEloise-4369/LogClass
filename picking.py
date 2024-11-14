@@ -20,10 +20,12 @@ class Picking:
 
         mycursor = mydb.cursor()
 
-        dados = f"INSERT INTO tb_picking(num_picking, endereco, desc_tecnica, modelo_pk, fabricante_pk, quant_pk, data_pk, lote_pk, total_pk, cod_prod) VALUES( '{num_picking}', '{endereco}', '{desc_tecnica}', '{modelo_pk}', '{fabricante_pk}', '{quant_pk}', '{data_pk}', '{lote_pk}', '{total_pk}', '{cod_prod}')"
+        valores = (num_picking, endereco, desc_tecnica, modelo_pk, fabricante_pk, quant_pk, data_pk, lote_pk, total_pk, cod_prod)
+
+        dados = f"INSERT INTO tb_picking(num_picking, endereco, desc_tecnica, modelo_pk, fabricante_pk, quant_pk, data_pk, lote_pk, total_pk, cod_prod) VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         #executar
-        mycursor.execute(dados)
+        mycursor.execute(dados, valores)
 
         mydb.commit()
 
