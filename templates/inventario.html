@@ -12,9 +12,14 @@
 {% block conteudo %}
 <script src="/static/js/inventario.js" defer></script>
 
-<input type="text" id="pesquisa" oninput="pesquisar()" placeholder="Pesquise aqui...">
+
 <section class="container-inventario">
     <div class="title">Inventário de Produtos</div>
+
+    <div class="div-pesquisa">
+        <input type="text" id="pesquisa" oninput="pesquisar()" placeholder="Pesquise aqui...">
+        </div>
+        
     <table class="tabela-inventario">
         <thead>
             <tr>

@@ -109,10 +109,16 @@ select::-ms-expand {
 }
 
 #pesquisa {
-    width: 300px;
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 20px auto;
-    display: block;
+    margin-bottom: 15px;
+    max-width: 300px;
+}
+
+.div-pesquisa {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
 }
