@@ -25,6 +25,7 @@ class Cadastramento:
 
         #executando a variável a cima
         mycursor.execute(dados, valores)
+        
 
         # realiza o commit da transação, garantindo que as alterações feitas na base de dados sejam salvas
         mydb.commit()
@@ -34,7 +35,7 @@ class Cadastramento:
 
         return True
     
-    def cadastramentoProf (self, cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento):
+    def cadastramentoProf (self, cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento, turma):
         # conectando com o banco de dados
         mydb = Conexao.conectar()
 
@@ -42,9 +43,13 @@ class Cadastramento:
         mycursor = mydb.cursor()
 
         dados = f"INSERT INTO databaseProfessor.tb_cadastramento (cod_prod, descricao_tecnica, modelo, fabricante, num_lote, enderecamento) VALUES ('{cod_prod}', '{descricao_tecnica}', '{modelo}', '{fabricante}', '{num_lote}', '{enderecamento}')"
-
+        
         #executando a variável a cima
         mycursor.execute(dados)
+        
+        update = f"INSERT INTO {turma}.tb_cadastramento SELECT * FROM databaseProfessor.tb_cadastramento;"
+        
+        mycursor.execute(update)
 
         # realiza o commit da transação, garantindo que as alterações feitas na base de dados sejam salvas
         mydb.commit()

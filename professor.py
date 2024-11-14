@@ -78,7 +78,7 @@ class Professor:
             """,
             """
                 CREATE TABLE tb_cadastramento (
-                cod_prod VARCHAR(100),
+                cod_prod VARCHAR(100) PRIMARY KEY,
                 descricao_tecnica VARCHAR(100),
                 modelo VARCHAR(100),
                 fabricante VARCHAR(100),
@@ -86,9 +86,6 @@ class Professor:
                 enderecamento VARCHAR(100),
                 quantidade INT DEFAULT 0
                 );
-            """,
-            """
-                ALTER TABLE tb_cadastramento ADD CONSTRAINT PK_tb_cadastramento PRIMARY KEY (cod_prod);
             """,
             """
                 CREATE TABLE tb_estoque (
@@ -108,7 +105,7 @@ class Professor:
             """,
             """
                 CREATE TABLE tb_expedicao (
-                cod_prod_exp VARCHAR(100) ,
+                cod_prod_exp VARCHAR(100) PRIMARY KEY,
                 desc_exp VARCHAR(100) ,
                 num_lote_exp VARCHAR(100) ,
                 quant_exp VARCHAR(100) ,
@@ -118,11 +115,8 @@ class Professor:
                 );
             """,
             """
-                ALTER TABLE tb_expedicao ADD CONSTRAINT PK_tb_expedicao PRIMARY KEY (cod_prod_exp);
-            """,
-            """
                 CREATE TABLE tb_picking (
-                num_picking INT ,
+                num_picking INT PRIMARY KEY,
                 endereco VARCHAR(100) ,
                 desc_tecnica VARCHAR(100) ,
                 modelo_pk VARCHAR(100) ,
@@ -133,9 +127,6 @@ class Professor:
                 total_pk INT ,
                 cod_prod VARCHAR(100) 
                 );
-            """,
-            """
-                ALTER TABLE tb_picking ADD CONSTRAINT PK_tb_picking PRIMARY KEY (num_picking);
             """,
             """
                 CREATE TABLE tb_pop (
@@ -153,7 +144,7 @@ class Professor:
             """,
             """
                 CREATE TABLE tb_rnc (
-                desc_rnc VARCHAR(100) ,
+                desc_rnc VARCHAR(100) PRIMARY KEY,
                 recebimento DATE ,
                 num_rnc VARCHAR(100) ,
                 local_rnc VARCHAR(100) ,
@@ -163,9 +154,6 @@ class Professor:
                 cod_prod VARCHAR(100) ,
                 cod_aluno INT 
                 );
-            """,
-            """
-                ALTER TABLE tb_rnc ADD CONSTRAINT PK_tb_rnc PRIMARY KEY (desc_rnc);
             """,
             """
                 ALTER TABLE tb_estoque ADD CONSTRAINT FK_tb_estoque_0 FOREIGN KEY (cod_aluno) REFERENCES tb_aluno (cod_aluno);
