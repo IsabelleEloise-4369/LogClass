@@ -1,15 +1,11 @@
 {% block css %}
 <link rel="stylesheet" href="/static/styles/login.css">
-<!-- <link rel="stylesheet" href="/static/styles/media/login-media.css"> -->
+<link rel="stylesheet" href="/static/styles/media/login-media.css">
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{% endblock %}
-
-{% extends "layout.html" %}
-{% block conteudo %}
 
 <div class="container-bem-vindo" id="intro-section">
     <div class="inicio-bem-vindo">
@@ -33,6 +29,8 @@
         <p>Selecione seu tipo de conta.</p>
         <button class="account-type" id="aluno-register-btn">ALUNO</button>
         <button class="account-type" id="professor-register-btn">PROFESSOR</button>
+
+        <a href="#" id="#voltar-pgInicial" class="voltar-btn">VOLTAR</a>
     </div>
 
     <div class="register-box" id="register-aluno">
