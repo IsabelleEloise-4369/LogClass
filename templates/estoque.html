@@ -12,89 +12,64 @@
 
     <!-- Section 01. 
     Essa Section possui um espaço para imagem (cor solicitada pelo cliente) e nome da matéria. -->
-    <section class="geral-cadastramento">
-
-        <div class="container-cadastramento">
-
-            <div class="cadastramento-titulo">
-                <span class="controle1">CONTROLE DE</span>
-                <span class="controle2">ESTOQUE</span>
-            </div>
-
-            <div class="container-img"></div>
-
-
+<section class="geral-cadastramento">
+    <div class="container-cadastramento">
+        <div class="cadastramento-titulo">
+            <span class="controle1">CONTROLE DE</span>
+            <span class="controle2">ESTOQUE</span>
         </div>
+    </div>
 
 
-        <section class="container-tabela">
-            <h1>Produtos Cadastrados</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Modelo</th>
-                        <th>Fabricante</th>
-                        <th>Número do Lote</th>
-                        <th>Endereçamento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for produto in lista_produtos %}
-                    <tr>
-                        <td>{{produto['codigo']}}</td>
-                        <td>{{produto['descricao']}}</td>
-                        <td>{{produto['modelo']}}</td>
-                        <td>{{produto['fabricante']}}</td>
-                        <td>{{produto['numero_lote']}}</td>
-                        <td>{{produto['enderecamento']}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </section>
-    
-    <!-- Section 02. Formulário do CONTROLE DE ESTOQUE
-    Section que contém o formulário composto por inputs. Foi utilizado "number" para os dados numéricos, "text" para dados escritos e "date" para datas. Na descrição técnica, optamos por textarea
-    porque facilita a inserção de textos extensos. -->
-        <div class="formulario">
+    <!-- Formulário para cadastro de estoque com todos os campos originais -->
+    <div class="formulario">
+        <div class="form_container">
+            <form action="/estoque" method="POST">
+                <span class="cadastramentoD"> Cadastrar dados: </span>
+                
+                <!-- Campo de código do produto para busca automática -->
+                <input type="number" placeholder="Código do Produto" class="input-field" name="cod_prod" id="codigoProduto">
+                
+                <!-- Campos já existentes para informações do produto -->
+                <input type="number" placeholder="Número de Lote" class="input-field" name="num_lt" id="numeroLote">
+                <input type="text" placeholder="Localização" class="input-field" name="loc_" id="enderecamentoProduto">
+                <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao" id="descricaoProduto"></textarea>
+                <span class="cadastramento">Data de entrada:</span>
+                <input type="date" placeholder="Data de Entrada:" class="input-field" name="dt_enter">
+                <input type="number" placeholder="Quantidade de itens" class="input-field" name="qt_item">
+                <span class="cadastramento">Data de saída:</span>
+                <input type="date" placeholder="Data de Saída:" class="input-field" name="dt_end">
+                <input type="number" placeholder="Quantidade da Saída" class="input-field" name="qt_saida">
+                <input type="number" placeholder="Saldo" class="input-field" name="_saldo" id="saldoProduto">
+                <input type="text" placeholder="Funcionário Responsável" class="input-field" name="funcionario">
 
-            <div class="form_container">
-
-                <form action="/estoque" method="POST">
-    
-                    <span class="cadastramentoD"> Cadastrar dados: </span>
-                    <input type="number" placeholder="Código do Produto" class="input-field" name="cod_prod">
-
-                    <input type="number" placeholder="Número de Lote" class="input-field" name="num_lt">
-    
-                    <input type="text" placeholder="Localização" class="input-field" name="loc_">
-
-                    <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao"></textarea>
-
-                    <span class="cadastramentoD"> Data de Entrada: </span>
-                    <input type="date" placeholder="Data de Entrada:" class="input-field" name="dt_enter">
-                 
-                    <input type="number" placeholder= "Quantidade de itens" class="input-field" name="qt_item">
-
-                    <span class="cadastramentoD"> Data de Saída: </span>
-                    <input type="date" placeholder="Data de Saída:" class="input-field" name="dt_end">
-
-                    <input type="number" placeholder="Quantidade da Saída" class="input-field" name="qt_saida">
-    
-                    <input type="number" placeholder="Saldo" class="input-field" name="_saldo">
-                    
-                    <input type="text" placeholder="Funcionário Responsável" class="input-field" name="funcionario">
-                    <!-- Botão para enviar os dados para o Banco de Dados -->
-                    <button class="submit-btn">Enviar</button>
-    
-                </form>
-
-            </div>
-
+                <!-- Botão de envio do formulário -->
+                <button class="submit-btn">Enviar</button>
+            </form>
         </div>
-
-    </section>
+    </div>
+</section>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const produtos = {{ lista_produtos | tojson }};
+    
+        const codigoInput = document.getElementById("codigoProduto");
+    
+        codigoInput.addEventListener("input", function() {
+            const codigoDigitado = codigoInput.value.trim();
+            
+            const produto = produtos.find(p => p.codigo === codigoDigitado);
+            
+            if (produto) {
+                document.getElementById("descricaoProduto").value = produto.descricao;
+                document.getElementById("numeroLote").value = produto.numero_lote;
+                document.getElementById("enderecamentoProduto").value = produto.enderecamento;
+                document.getElementById("saldoProduto").value = produto.quantidade;
+            }
+        });
+    });
+</script>
+    
 
 {% endblock %}

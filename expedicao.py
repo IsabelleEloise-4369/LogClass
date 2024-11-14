@@ -17,10 +17,12 @@ class Expedicao:
 
         mycursor = mydb.cursor()
 
-        dados = f"INSERT INTO tb_expedicao(cod_prod_exp, desc_exp, num_lote_exp, quant_exp, data_emb_exp, respnsavel_exp, cod_aluno) VALUES ('{cod_prod_exp}', '{desc_exp}', '{num_lote_exp}', '{quant_exp}', '{data_emb_exp}', '{responsavel_exp}', '{cod_aluno}')"
+        valores = (cod_prod_exp, desc_exp, num_lote_exp, quant_exp, data_emb_exp, responsavel_exp, cod_aluno)
+
+        dados = f"INSERT INTO tb_expedicao(cod_prod_exp, desc_exp, num_lote_exp, quant_exp, data_emb_exp, respnsavel_exp, cod_aluno) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
         #executar
-        mycursor.execute(dados)
+        mycursor.execute(dados, valores)
 
         mydb.commit()
 

@@ -6,7 +6,7 @@
     <title>LogClass</title>
     <!-- importando o arquivo css da página -->
     <link rel="stylesheet" href="/static/styles/layout.css">
-    <link rel="stylesheet" href="/static/styles/media/layout-media.css">
+    <!-- <link rel="stylesheet" href="/static/styles/media/layout-media.css"> -->
     <link rel="stylesheet" href="/static/styles/variaveis.css">
 
     <script src="https://kit.fontawesome.com/cbfeaec436.js" crossorigin="anonymous"></script>
@@ -19,17 +19,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
 
-    <script src="/static/js/menu.js" defer></script>
+    <script src="/static/js/menu.js"></script>
     <script src="/static/js/light&dark.js" defer></script>
+
 
     {% block css %}
     {% endblock %}
 
+    
     <!-- Importando os ícones do bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="theme-container">
-
+{% if "professor_logado" in session or "usuario_logado" in session %}
     <!-- Início do Cabeçalho -->
     <header class="sidebar">
 
@@ -42,70 +44,97 @@
                 <!-- <figcaption>Logo da LogClass</figcaption> -->
             </figure>
 
-            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
-
+           
+        
             <!-- Início da navegação principal -->
             <nav>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Processos</button>
+                    <div class="dropdown-content">
+                        <div class="card">
+                            <a href="/cadastramento">Cadastramento</a>
+                        </div>
+                    
+                        <div class="card">
+                            <a href="/rnc">RNC</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/picking">Cadastro de Picking</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/estoque">Controle de Estoque</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/pop">POP</a>
+                        </div>
+
+                        <div class="card">
+                            <a href="/expedicao">Cadastro de Expedição</a>
+                        </div>
+                        <div class="sombreado"></div>
+                    </div>
+                </div>
+                      
+
+                {% if "professor_logado" in session %}
                 <!-- Início do menu dropdown -->
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Menu</button>
+                    <button onclick="myFunction()" class="dropbtn">Gerenciar turmas</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class="dropdown-menu">
-                            <div class="card">
-                                <a href="/"><i class="fas fa-home"></i> Home</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/login"><i class="fa-solid fa-users"></i> Conecte-se</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/cadastramento">Cadastramento</a>
-                            </div>
-                            {% if "usuario_logado" in session %}
-                            <div class="card">
-                                <a href="/rnc">RNC</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/picking">Cadastro de Picking</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/estoque">Controle de Estoque</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/pop">POP</a>
-                            </div>
-
-                            <div class="card">
-                                <a href="/expedicao">Cadastro de Expedição</a>
-                            </div>
-                            {% endif %}
-
                             {% if "professor_logado" in session %}
+
                                 <div class="card">
-                                    <a href="/criarBD">Crie sua turma</a>
+                                    <a href="/criarBD">Crie sua Turma</a>
                                 </div>
                                 <div class="card">
                                     <a href="/enviar_mensagem">Enviar Mensagem</a>
                                 </div>
                                 <div class="card">
-                                    <a href="/professor/listarBD">Gerencie sua turma</a>
+                                    <a href="/professor/listarBD">Gerenciar sua turma</a>
+                                </div>
+                                <div class="card">
+                                    <a href="/redefinir_senha">Redefinir senha dos alunos</a>
                                 </div>
                             {% endif %}
+                            
+                                <div class="sombreado"></div>
                         </div>
                   </div>
+
                 </div>
+                {% endif %}
+            
                 <!-- Fim do menu dropdown -->
             </nav>
+
             <!-- Fim da navegação principal -->
+
+            <div class="inventario">
+                <a href="/inventario">Inventário</a>
+            </div>
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64d3e2c56e009aeda8a3da2202546281ceaf9360
+            <div class="conectar">
+                <a href="/login"><i class="fa-solid fa-users"></i> Conecte-se</a>
+            </div>
+            
+            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
+
+            <button class="button-container" id="toggle-theme"><i class="fa-regular fa-lightbulb"></i></button>
 
         </section>
         <!-- Fim da Seção do cabeçalho -->
 
     </header>
+{% endif %}
     <!-- Fim do Cabeçalho -->
 
     <!-- Bloco de conteúdo dinâmico -->
