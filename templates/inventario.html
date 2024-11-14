@@ -1,0 +1,66 @@
+<!-- EXTENDENDO O CSS DA PAGINA PRINCIPAL (LAYOUT) -->
+{% block css %}
+<link rel="stylesheet" href="/static/styles/media/layout-media.css">
+<link rel="stylesheet" href="/static/styles/inventario.css">
+<link rel="stylesheet" href="/static/styles/variaveis.css">
+{% endblock %}
+
+{% extends "layout.html" %}
+{% block conteudo %}
+
+<section class="container-inventario">
+    <div class="title">Inventário de Produtos</div>
+    <table class="tabela-inventario">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Modelo</th>
+                <th>Fabricante</th>
+                <th>Número do Lote</th>
+                <th>Endereçamento</th>
+                <th>Saldo</th> <!-- Nova coluna para o saldo -->
+                {% if "professor_logado" in session %}
+                <th>Turma</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in lista_produtos %}
+            <tr>
+                <td>{{ produto['codigo'] }}</td>
+                <td>{{ produto['descricao'] }}</td>
+                <td>{{ produto['modelo'] }}</td>
+                <td>{{ produto['fabricante'] }}</td>
+                <td>{{ produto['numero_lote'] }}</td>
+                <td>{{ produto['enderecamento'] }}</td>
+                <td>{{ produto['quantidade'] }}</td> <!-- Exibe o saldo do produto -->
+                
+                {% if "professor_logado" in session %}
+                <td>
+                    <!-- Formulário com opção de escolha da turma -->
+                    <form action="{{ url_for('excluir_produto') }}" method="POST">
+                        <input type="hidden" name="cod_prod" value="{{ produto['codigo'] }}">
+                        
+                        <!-- Dropdown para selecionar a turma -->
+                        <select name="turma">
+                            {% for nomeBD in lista_nomes %}
+                            <option value="{{nomeBD['database']}}">{{nomeBD['database']}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit" onclick="return confirm('Deseja realmente excluir este produto?')"><i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</section>
+
+
+
+{% endblock %}

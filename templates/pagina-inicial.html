@@ -33,14 +33,16 @@
             </div>
             <span class="partG">G</span>
             <span class="part2">CLASS</span>
+
         </div>
-
-        
-
-        <div class="container-grid"></div>
     
     </div>
     <!-- Fim da seção principal -->
+    {% if "usuario_logado" in session %}
+    <div class="container-grid">
+        <a href="#mensagem">Ver mensagem do Professor</a>
+    </div>
+    {% endif %}
     
     <!-- Início da seção de cards -->
     <div class="container-cards">
@@ -80,7 +82,7 @@
                     <figure><img src="/static/img/caixas.png"></figure>
                     <a href="/estoque">
                     <div class="descricao">
-                        <img src="/static/img/estoque.png" alt="">
+                        <img src="/static/img/controleDeEntradaeSaída.png" alt="entrada e saída">
                     </div>
                     </a>
                 </div>
@@ -109,26 +111,18 @@
     <!-- Início da seção de mensagem do professor -->
      
     {% if "usuario_logado" in session %}
-    <div class="titulomensagem-prof">
+    <div class="titulomensagem-prof" id="mensagem">
         <h2>Mensagem do Professor</h2>
-     </div>
+    </div>
 
-    <div class="container-mensagem_professor">
-
+    <div class="container-mensagem_professor" id="mensagem">
         <div class="mensagem_prof">
-            <div class="mensagem">
-                {% for mensagem in lista_mensagens %}
-                <p>{{ mensagem['mensagem'] }}</p>
-                {% if "professor_logado" in session %}
-                <form action="{{ url_for('excluir_mensagem') }}" method="POST">
-                    <input type="hidden" name="mensagem_id" value="{{ mensagem['cod_mensagem'] }}">
-                    <button type="submit" class="btn-excluir">EXCLUIR MENSAGEM</button>
-                </form>
-                {% endif %}
-                {% endfor %}
-            </div>
+            {% for mensagem in lista_mensagens %}
+                <div class="mensagem">
+                    <p>{{ mensagem['mensagem'] }}</p>
+                </div>
+            {% endfor %}
         </div>
-        
     </div>
     {% endif %}
     <!-- Fim da seção de mensagem do professor -->

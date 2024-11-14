@@ -29,5 +29,7 @@
         "env.bak{,/**}",
         "venv.bak{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/fb5f43c7-f14f-49ef-ab86-e555872e3c30/resourceGroups/logclass/providers/Microsoft.Web/sites/logclass",
+    "appService.deploySubpath": "."
 }
