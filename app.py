@@ -881,5 +881,6 @@ def excluir_banco(nomeBD):
         return "Acesso negado", 403
 
 
-# atualizando o arquivo
-app.run(debug=True)
+if  __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=8080)  # Iniciando o servidor com debug ativado
+
