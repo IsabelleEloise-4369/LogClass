@@ -22,14 +22,14 @@ body {
     
 }
 
-<<<<<<< HEAD
+
 .inicio-bem-vindo, .login-prompt {
     height: 25rem;
-=======
+
 .inicio-bem-vindo, .login-prompt{
     margin-top: 15rem;
     height: 20rem;
->>>>>>> 64d3e2c56e009aeda8a3da2202546281ceaf9360
+
     text-align: center;
     padding: 1.5rem;
     border-radius: 1rem;
