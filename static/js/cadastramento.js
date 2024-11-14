@@ -15,3 +15,43 @@ document.querySelectorAll('.select-menu').forEach(menu => {
         });
     });
 });
+
+// Alert de confirmação
+
+document.getElementById('confirmButton').addEventListener('click', function() {
+    const steps = document.querySelectorAll('.step');
+
+    steps.forEach(step => {
+        step.classList.add('active');
+    });
+    
+    const successMessage = document.getElementById('successMessage');
+    successMessage.style.display = 'flex';
+
+    sessionStorage.setItem('showSuccessMessage', 'true');
+
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+        sessionStorage.removeItem('showSuccessMessage');
+    }, 3000);
+});
+
+
+window.addEventListener('load', () => {
+    const successMessage = document.getElementById('successMessage');
+
+    if (sessionStorage.getItem('showSuccessMessage') === 'true') {
+        successMessage.style.display = 'flex';
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+            sessionStorage.removeItem('showSuccessMessage');
+        }, 3000);
+    }
+});
+
+window.addEventListener('beforeunload', () => {
+    const successMessage = document.getElementById('successMessage');
+    if (successMessage.style.display === 'flex') {
+        sessionStorage.setItem('showSuccessMessage', 'true');
+    }
+})

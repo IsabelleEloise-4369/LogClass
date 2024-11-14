@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-btn {
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    background-color: #0d47a1;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.arrow {
+    margin-left: 10px;
+}
+
+.user-list {
+    list-style: none;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: #ce93d8;
+    border-radius: 20px;
+    padding: 10px;
+    width: 300px;
+}
+
+.user-icon {
+    background-color: #9575cd;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.actions { 
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.green-circle, .red-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.green-circle {
+    background-color: #66bb6a;
+}
+
+.red-circle {
+    background-color: #ef5350;
+}
+
+.fa-circle-xmark {
+    color: #66bb6a;
+}
+
+.fa-circle-check {
+    color: #ef5350;
+}
+
+.caixa_1 {
+    display: flex;
+}
+
+.user-item {
+    margin: 0.5rem;
+}

@@ -2,7 +2,6 @@
 {% block css %}
 <link rel="stylesheet" href="/static/styles/mensagem.css">
 <link rel="stylesheet" href="/static/styles/media/mensagem-media.css">
-<link rel="stylesheet" href="/static/styles/media/layout-media.css">
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 
 
@@ -29,6 +28,34 @@
             <textarea placeholder="Mensagem do Professor" class="textarea-mensagem" name="mensagem" type="text"></textarea>
             <button type="submit">ENVIAR</button>
         </form>        
+    </div>
+
+    <!-- Exibição das mensagens com opção de exclusão para o professor -->
+    <div class="container-mensagens-enviadas">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Turma</th>
+                    <th>Mensagem</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mensagem in lista_mensagens %}
+                <tr>
+                    <td><small>{{ mensagem['turma'] }}</small> <!-- Exibe a turma da mensagem --></td>
+                    <td>{{ mensagem['mensagem'] }}</td>
+                    <td>
+                        <form action="/excluir_mensagem" method="POST" style="display:inline;">
+                            <input type="hidden" name="mensagem_id" value="{{ mensagem['cod_mensagem'] }}">
+                            <button type="submit" class="btn-excluir">EXCLUIR MENSAGEM</button>
+                        </form> 
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
