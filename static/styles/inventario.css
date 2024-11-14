@@ -107,3 +107,12 @@ select::-ms-expand {
 .select:hover::after {
     color: #f39c12;
 }
+
+#pesquisa {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}

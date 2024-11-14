@@ -10,7 +10,9 @@
 
 {% extends "layout.html" %}
 {% block conteudo %}
+<script src="/static/js/inventario.js" defer></script>
 
+<input type="text" id="pesquisa" oninput="pesquisar()" placeholder="Pesquise aqui...">
 <section class="container-inventario">
     <div class="title">Inventário de Produtos</div>
     <table class="tabela-inventario">
