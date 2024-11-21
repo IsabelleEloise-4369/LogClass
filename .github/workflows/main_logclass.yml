@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'logclass'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BA9D2471209349138A2D3A82B2D15000 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6B2F285E71294CCDB6414862714DB28C }}
