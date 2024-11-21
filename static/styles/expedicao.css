@@ -18,7 +18,7 @@ body{
     align-items: center;
     text-align: center;
     justify-content: space-around;
-    gap: 45rem;
+    gap: 20rem;
 }
 
 .cadastramento-titulo span{
@@ -30,7 +30,7 @@ body{
 
 .container-img {
     width: 12rem;
-    height: 25rem;
+    height: 20rem;
     background: var( --cor-icone-cadastramento);
     filter: blur(3rem);
     margin-right: 10rem;
@@ -39,9 +39,8 @@ body{
 
 
 .formulario{
-    /* margin-left: 26.5rem; */
-    margin-top: 8rem;
-    margin-bottom: 10rem;
+    margin-top: 3rem;
+
 }
   
 .form_container {
