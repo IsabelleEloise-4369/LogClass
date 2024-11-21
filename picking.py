@@ -1,3 +1,4 @@
+# importando a classe necessária para poder realizar a conexão com o banco de dados
 from conexao import Conexao
 # classe que irá armazenar as funções de registro de picking
 class Picking:

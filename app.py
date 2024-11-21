@@ -677,7 +677,12 @@ def simulador():
         mydb = Conexao.conectar()
         mycursor = mydb.cursor()
 
-        mycursor.execute("SELECT * FROM turma1.tb_picking")
+        if "usuario_logado" in session:           
+            turma = session['usuario_logado']['turma']
+        else:
+            turma = session['professor_logado']['turma']
+
+        mycursor.execute(f"SELECT * FROM {turma}.tb_picking")
         pedidos = mycursor.fetchall()
 
         pedido_aleatorio = random.choice(pedidos) if pedidos else {}

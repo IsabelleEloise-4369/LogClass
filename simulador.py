@@ -1,6 +1,8 @@
+# importando a classe necessária para poder realizar a conexão com o banco de dados
 from conexao import Conexao
 import random
 
+# classe que armazena as funções referentes ao processo de simulador de pedidos
 class Simulador:
     def __init__(self):
         self.pedidos = []
