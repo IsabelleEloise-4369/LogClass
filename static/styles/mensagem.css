@@ -9,7 +9,12 @@ body {
     flex-direction: column;
     overflow-x: hidden;
 }
-  
+
+.container-mensagem_professor{
+    width: 90%;
+    padding-top: 40rem;
+}
+
 .titulomensagem{
     margin-top: 10rem;
 }
