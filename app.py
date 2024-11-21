@@ -17,47 +17,47 @@ from simulador import Simulador
 app = Flask(__name__)
 app.secret_key = 'logclass'
 
-# -------------------------------------------------------------------
-# planejamento de código (ainda não está funcionando)
-@app.route("/confirmacao")
-def confirmacao_usuario():
-    # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "master_logado" in session:
-        if request.method == "GET":
-            #conectando com o banco de dados
-            mydb = Conexao.conectar()
+# # -------------------------------------------------------------------
+# # planejamento de código (ainda não está funcionando)
+# @app.route("/confirmacao")
+# def confirmacao_usuario():
+#     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
+#     if "master_logado" in session:
+#         if request.method == "GET":
+#             #conectando com o banco de dados
+#             mydb = Conexao.conectar()
             
-            mycursor = mydb.cursor()
+#             mycursor = mydb.cursor()
 
-            confirmacao = (f"SELECT * FROM databaseProfessor.tb_aluno")
+#             confirmacao = (f"SELECT * FROM databaseProfessor.tb_aluno")
 
-            mycursor.execute(confirmacao)
+#             mycursor.execute(confirmacao)
 
-            resultado = mycursor.fetchall()
+#             resultado = mycursor.fetchall()
 
-            # fechar a conexão
-            mydb.close()
+#             # fechar a conexão
+#             mydb.close()
 
-            lista_usuarios = []
+#             lista_usuarios = []
 
-            for usuario in resultado:
-                lista_usuarios.append({
-                    "id": usuario[0],
-                    "nome": usuario[1]
-                })
+#             for usuario in resultado:
+#                 lista_usuarios.append({
+#                     "id": usuario[0],
+#                     "nome": usuario[1]
+#                 })
 
-            return render_template("confirmacao.html", lista_usuarios = lista_usuarios)
+#             return render_template("confirmacao.html", lista_usuarios = lista_usuarios)
    
-@app.route("/aprovar_usuario")
-def aprovar_usuario():
-    # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
-    if "master_logado" in session:
-        if request.method == "GET":
-            #conectando com o banco de dados
-            mydb = Conexao.conectar()
+# @app.route("/aprovar_usuario")
+# def aprovar_usuario():
+#     # verificando se o usuário logado é o aluno ou professor, para poder liberar a vizualização
+#     if "master_logado" in session:
+#         if request.method == "GET":
+#             #conectando com o banco de dados
+#             mydb = Conexao.conectar()
             
-            mycursor = mydb.cursor()
-# -----------------------------------------------------------------------------
+#             mycursor = mydb.cursor()
+# # -----------------------------------------------------------------------------
 
 #roteamento da página inicial
 @app.route("/")
@@ -378,7 +378,7 @@ def inventario():
             return render_template("inventario.html", lista_produtos=lista_produtos, lista_nomes=lista_nomes)
 
 
-
+# roteamento da função para excluir os produtos do inventário
 @app.route("/excluir_produto", methods=["POST"])
 def excluir_produto():
     if "professor_logado" in session:
@@ -408,21 +408,22 @@ def excluir_produto():
     else:
         return redirect("/login")
 
-
-            
-
-
-
 # Página de controle de estoque
 @app.route("/estoque", methods=["GET", "POST"])
 def pagina_estoque():
+    # verificando se há algum usuário logado no sistema, seja ele professor ou aluno
     if "usuario_logado" in session or "professor_logado" in session:
         if request.method == "GET":
             mydb = Conexao.conectar()
+
             mycursor = mydb.cursor()
+
             turma = session['usuario_logado']['turma'] if "usuario_logado" in session else session['professor_logado']['turma']
+            
             produtos = f"SELECT * FROM {turma}.tb_cadastramento"
+
             mycursor.execute(produtos)
+
             resultado = mycursor.fetchall()
 
             lista_produtos = [{"codigo": produto[0], "descricao": produto[1], "modelo": produto[2], "fabricante": produto[3], "numero_lote": produto[4], "enderecamento": produto[5], "quantidade": produto[6]} for produto in resultado]
@@ -453,6 +454,7 @@ def pagina_estoque():
             mydb = Conexao.conectar()
             
             mycursor = mydb.cursor()
+            # adicionando o saldo na tabela tb_estoque
             mycursor.execute(f"SELECT saldo FROM {turma}.tb_estoque WHERE cod_prod_est = %s", (cod_prod,))
             resultado = mycursor.fetchone()
             saldo_atual = resultado[0] if resultado else 0
@@ -669,7 +671,7 @@ def pagina_picking():
     else:
         return redirect("/login")
     
-
+# rota para a página do sorteador de simulação de pedidos
 @app.route('/simulador')
 def simulador():
     if "usuario_logado" in session or "professor_logado" in session:
