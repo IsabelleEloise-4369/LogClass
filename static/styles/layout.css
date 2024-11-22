@@ -19,7 +19,7 @@
 /* Estilização do cabeçalho */
 .header-container {
   width: 100%;
-  height: 15vh;
+  height: 16vh;
   display: flex;
   align-items: center; /* Centraliza os itens verticalmente */
   flex-direction: row;
@@ -51,7 +51,7 @@
 /* Estilização do botão de dropdown */
 
 .dropbtn{
-  background-color: #e7e7e7;
+  background-color: transparent;
   padding: 1rem 1rem;
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
@@ -69,10 +69,6 @@
 
 }
 
-.dropbtn:hover,
-.dropbtn:focus {
-  background-color: #dfdfdf;
-}
 
 .dropdown {
   z-index: 1;
@@ -184,6 +180,7 @@
 .inventario{
   margin-left: 2rem;
   text-decoration: none;
+  margin-bottom: 1.3rem;
 }
 
 .inventario a{
@@ -293,4 +290,8 @@ footer p {
 
 .theme-container.light .login-box h2{
   color: var(--text-color-dark);
+}
+
+.theme-container.dark .dropbtn{
+  background-color: var(--text-color-dark);
 }
