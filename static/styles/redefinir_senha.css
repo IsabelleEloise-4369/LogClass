@@ -9,7 +9,12 @@ body{
     flex-direction: column;
 }
 
-.gerenciador{
+.container-redefinir-senha h2{
+    font-size: 3rem;
+    margin-bottom: 4rem;
+}
+
+.container-redefinir-senha{
     display: flex;
     width: 100%;
     height: 100%;
@@ -18,13 +23,10 @@ body{
     justify-content: center;
 }
 
-.gerenciador h2{
-    font-size: 3.5rem;
-    margin-bottom: 4rem;
-}
 
-.gerenciador table{
-    width: 80%;
+
+.container-redefinir-senha table{
+    width: 60%;
     border: 0.2rem solid var(--cor-bordas);
     background: var(--cor-fundo-formularios);
 }

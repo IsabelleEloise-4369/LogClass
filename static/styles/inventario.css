@@ -3,9 +3,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 120vh;
     margin: 0;
     font-family: Arial, sans-serif;
+    overflow-y:scroll;
+    overflow-x: hidden;
 }
 
 .container-geral-inventario{
@@ -15,7 +17,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: scroll;
 }
 
 .container-inventario{
