@@ -23,6 +23,7 @@
   display: flex;
   align-items: center; /* Centraliza os itens verticalmente */
   flex-direction: row;
+  justify-content: space-around;
   position: fixed;
   left: 0;
   top: 0;
@@ -76,6 +77,7 @@
 
 .dropdown {
   z-index: 1;
+  height: 15vh;
   display: inline-block;
   
 }
