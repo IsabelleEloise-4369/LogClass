@@ -8,11 +8,22 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.container-geral-inventario{
+    top: 10rem;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
 .container-inventario{
     background-color: #d0a8f1;
     border-radius: 10px;
     /* padding: 20px; */
     width: 1000px;
+    height: auto;
 }
 
 .title {
