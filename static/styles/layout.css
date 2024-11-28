@@ -44,8 +44,8 @@
 
 /* Estilização da imagem do logo */
 .header-container img{
-  width: 11rem;
-  height: 13rem;
+  width: 13rem;
+  height: 15rem;
   margin-top: 1.5rem;
 }
 
@@ -61,12 +61,10 @@
   border-radius: 2rem;
   cursor: pointer;
   text-transform: uppercase;
-  margin-left: 2rem;
   margin-bottom: 1.7rem;
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 2rem;
   margin-right:2rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 
 }
 
@@ -173,7 +171,7 @@
 }
 
 .sombreado{
-  height: 50vh;
+  height: 56vh;
   opacity: 0.7;
   width: 100vw;
   background-color: #333; 
@@ -182,13 +180,13 @@
 .inventario{
   margin-left: 2rem;
   text-decoration: none;
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .inventario a{
   color: var(--primary-color-dark);
   font-family:"Bebas Neue", sans-serif ;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 300;
 }
 
