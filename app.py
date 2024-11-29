@@ -467,7 +467,7 @@ def pagina_estoque():
             sucesso = tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, saldo_novo, funcionario, cod_aluno, turma)
             
             mycursor.execute(
-                "UPDATE tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
+                f"UPDATE {turma}.tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
                 (qt_item - qt_saida, cod_prod)
             )
             mydb.commit()
@@ -981,6 +981,11 @@ def excluir_banco(nomeBD):
         return redirect("/professor/listarBD")
     else:
         return "Acesso negado", 403
+    
+@app.route("/logoff")
+def logoff():
+    session.clear()
+    return redirect("/login")
 
 if  __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)  # Iniciando o servidor com debug ativado

@@ -231,6 +231,12 @@
   color: var(----cor-titulos);
 }
 
+.header-container .sair img{
+  height: 3rem;
+  width: 4rem;
+  margin-top: 0;
+}
+
 /* ****************************** Padronização/ estilização RODAPÉ ************************************ */
 
 /* Estilização do rodapé */
