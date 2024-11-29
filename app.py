@@ -467,7 +467,7 @@ def pagina_estoque():
             sucesso = tbEstoque.estoque(cod_prod, num_lote, loc_, descricao, dt_enter, qt_item, dt_end, qt_saida, saldo_novo, funcionario, cod_aluno, turma)
             
             mycursor.execute(
-                "UPDATE tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
+                f"UPDATE {turma}.tb_cadastramento SET quantidade = quantidade + %s WHERE cod_prod = %s",
                 (qt_item - qt_saida, cod_prod)
             )
             mydb.commit()
