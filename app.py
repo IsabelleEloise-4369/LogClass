@@ -981,6 +981,11 @@ def excluir_banco(nomeBD):
         return redirect("/professor/listarBD")
     else:
         return "Acesso negado", 403
+    
+@app.route("/logoff")
+def logoff():
+    session.clear()
+    return redirect("/login")
 
 if  __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)  # Iniciando o servidor com debug ativado
