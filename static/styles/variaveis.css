@@ -42,7 +42,8 @@
     --cor-hover-btn-enviar: #471386;
 
     /* Cor do ícone de Cadastramento */
-    --cor-icone-cadastramento: linear-gradient(to bottom, #6a00c2, #9373ae);
+    --cor-icone-cadastramento: linear-gradient(to top, #86a9cf, #92c5ff79,#86a9cf);
+    
 
     /* Cores do tema claro */
     --primary-color-light: #f0f0f0; /* Cor de fundo clara */

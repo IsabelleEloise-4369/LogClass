@@ -1,7 +1,6 @@
 <!-- EXTENDENDO O CSS DA PAGINA PRINCIPAL (LAYOUT) -->
 {% block css %}
 <link rel="stylesheet" href="/static/styles/cadastramento.css">
-
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 {% endblock %}
 
@@ -20,40 +19,37 @@
 
     <section class="geral-cadastramento">
 
-        <section class="container-cadastramento">
-
             <div class="cadastramento-titulo">
                 <span class="cadastramento1">PROCESSO DE</span><br>
                 <span class="cadastramento2">CADASTRAMENTO</span>
             </div>
 
-            <div class="container-img"></div>
-        </section>
+            <div class="formulario">
+                <div class="form_container">
+                
+                    <form action="/cadastramento" method="POST">
+                        <!-- Campo "Descrição Técnica" -->
+                        <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao"></textarea>
 
-            <div class="form_container">
-               
-                <form action="/cadastramento" method="POST">
-                    <!-- Campo "Descrição Técnica" -->
-                    <textarea placeholder="Descrição Técnica" class="textarea-field" name="descricao"></textarea>
+                        <input list="browsers" name="modelo" placeholder="Modelo do Produto" class="input-field">
 
-                    <input list="browsers" name="modelo" placeholder="Modelo do Produto" class="input-field">
+                        <!-- Campo "Fabricante" -->
+                        <input type="text" placeholder="Fabricante" class="input-field" name="fabricante">
 
-                    <!-- Campo "Fabricante" -->
-                    <input type="text" placeholder="Fabricante" class="input-field" name="fabricante">
+                        <!-- Campo "Código do produto" -->
+                        <input type="number" placeholder="Código do Produto" class="input-field" name="codigo">
 
-                    <!-- Campo "Código do produto" -->
-                    <input type="number" placeholder="Código do Produto" class="input-field" name="codigo">
+                        <!-- Campo "Responsável pelo Recebimento" -->
+                        <input type="number" placeholder="Número de Lote" class="input-field" name="numeroLote">
 
-                    <!-- Campo "Responsável pelo Recebimento" -->
-                    <input type="number" placeholder="Número de Lote" class="input-field" name="numeroLote">
+                        <!-- Campo "Responsável pelo Recebimento" -->
+                        <input type="text" placeholder="Endereçamento" class="input-field" name="enderecamento">
 
-                    <!-- Campo "Responsável pelo Recebimento" -->
-                    <input type="text" placeholder="Endereçamento" class="input-field" name="enderecamento">
+                        <!-- Botão de Enviar -->
+                        <button class="submit-btn" id="confirmButton">Enviar</button>
+                    </form>
 
-                    <!-- Botão de Enviar -->
-                    <button class="submit-btn" id="confirmButton">Enviar</button>
-                </form>
-
+                </div>
             </div>
 
         </section>

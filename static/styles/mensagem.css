@@ -12,7 +12,7 @@ body {
 
 .container-mensagem_professor{
     width: 90%;
-    padding-top: 40rem;
+    padding-top: 8rem;
 }
 
 .titulomensagem{
@@ -21,7 +21,8 @@ body {
 
 .titulomensagem h2{
     margin-bottom: 4rem;
-    font-size: 3rem;  
+    font-size: 3rem;   
+    text-align: center;
 }
 
 .mensagem{
@@ -34,23 +35,25 @@ body {
 
 input {
     padding: 1rem;
-    width: 97%;
+    width: 100%;
     border: none;
     border-radius: 0.5rem;
     outline: none;
     background-color: var(--cor-drop-btn);
     color: var(--cor-padrao-letras);
     text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 input::placeholder{
     color: var(--cor-padrao-letras);
+    font-size: 1.3rem;
 }
 
 .textarea-mensagem{
     width: 100%;
-    margin-bottom: 0.5rem;
-    padding:1rem;
+    margin-bottom: 1rem;
+    padding:1.3rem;
     font-size: 1rem;
     border: 0.2rem solid var(--cor-bordas);
     border-radius: 4px;
@@ -70,7 +73,9 @@ button[type="submit"] {
     color: var(--cor-padrao-letras);
     font-weight: bold;
     cursor: pointer;
-    width: 50%;
+    width: 60%;
+    margin-left: 8.8rem;
+    font-size: 1.3rem;
 }
 
 
@@ -80,6 +85,7 @@ button[type="submit"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 4rem;
 }
 
 .container-mensagens-enviadas table{

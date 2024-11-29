@@ -1,7 +1,6 @@
 <!-- EXTENDENDO O CSS DA PAGINA PRINCIPAL (LAYOUT) -->
 {% block css %}
 <link rel="stylesheet" href="/static/styles/listarBD.css">
-<link rel="stylesheet" href="/static/styles/media/listarBD-media.css">
 <link rel="stylesheet" href="/static/styles/variaveis.css">
 {% endblock %}
 
@@ -9,7 +8,7 @@
 {% block conteudo %}
 
 <section class="gerenciador">
-    <h2>Lista das suas turmas</h2>
+    <h2>Lista das turmas</h2>
     <table>
         <thead>
             <tr>
@@ -23,7 +22,7 @@
                 <td>{{ banco.nome }}</td>
                 <td>
                     <form action="{{ url_for('excluir_banco', nomeBD=banco.nome) }}" method="post">
-                        <button type="submit" class="btn-submit">Excluir</button>
+                        <button type="submit" class="btn-submit">Encerrar turma</button>
                     </form>
                 </td>
             </tr>

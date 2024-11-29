@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 body{
-    background-color: var(--cor-fundo-pg-funcoes);
-    overflow-x: hidden;
+    position: relative;
+    width: 100rem;
+    height: 80rem;
+    background: var( --cor-icone-cadastramento);
+    border-radius: 2.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
 }
 
 .geral-cadastramento{
@@ -12,33 +17,17 @@ body{
     flex-direction: column;
 }
 
-.container-cadastramento{
+.cadastramento1{
+    position: absolute;
+    left: 30.8rem;
+    font-size: 2.75rem;
+    color: #292525;
     margin-top: 10rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    gap: 20rem;
 }
 
-.cadastramento-titulo span{
-    font-size: 3.5rem;
-    margin-left: 0.5rem;
-    opacity: 0.7;
-}
-
-.container-img {
-    width: 15rem;
-    height: 20rem;
-    background: var(--cor-icone-cadastramento);
-    filter: blur(3rem);
-    margin-right: 10rem;
-    border-radius: 2.5rem;
-    opacity: 1;
-}
 
 .formulario{
-    margin-top: 2rem;
+    margin-top: 16rem;
 }
   
 .form_container {
@@ -46,10 +35,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 40rem;
-    margin-left: 5rem;
+    width: 41rem;
     padding: 20px;
     border-radius: 1.5rem;
+    margin-bottom: 2rem;
     
 }
 
@@ -123,6 +112,7 @@ body{
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 1.5rem;
 }
 
 .submit-btn:hover {

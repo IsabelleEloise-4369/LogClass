@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
-
 body{
-    background-color: var(--cor-fundo-pg-funcoes);
+    position: relative;
+    width: 100rem;
+    height: 80rem;
+    background: var( --cor-icone-cadastramento);
+    border-radius: 2.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
 }
 
 .geral-cadastramento{
@@ -21,25 +26,16 @@ body{
     gap: 20rem;
 }
 
-.cadastramento-titulo span{
-    font-size: 3.5rem;
-    color: var(--cor-titulo);
-    margin-left: 0.5rem;
-    opacity: 0.7;
+.expedicao1{
+    position: absolute;
+    left: 30.5rem;
+    font-size: 2.75rem;
+    color: #292525;
 }
-
-.container-img {
-    width: 12rem;
-    height: 20rem;
-    background: var( --cor-icone-cadastramento);
-    filter: blur(3rem);
-    margin-right: 10rem;
-    border-radius: 2.5rem;
-  }
 
 
 .formulario{
-    margin-top: 3rem;
+    margin-top: 2rem;
 
 }
   
@@ -48,9 +44,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 30rem;
-    padding: 20px;
+    width: 40rem;
+    padding: 10px;
     border-radius: 8px;
+    margin-bottom: 2rem;
     
 }
 
@@ -124,6 +121,7 @@ body{
     border: none;
     cursor: pointer;
     transition:  0.3s;
+    font-size: 1.5rem;
 }
 
 .submit-btn:hover {

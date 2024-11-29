@@ -2,49 +2,43 @@
 
 
 body{
-    background-color: var(--cor-fundo-pg-funcoes);
+    position: relative;
+    width: 100rem;
+    height: 80rem;
+    background-image: var( --cor-icone-cadastramento);
+    border-radius: 2.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
     overflow-x: hidden;
 }
 
 
 .geral-cadastramento {
-    margin-top: 4rem; /* Dar um espaço após o header */
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-.container-cadastramento{
+.cadastramento1{
+    position: absolute;
+    left: 30.8rem;
+    font-size: 3rem;
+    color: #292525;
     margin-top: 10rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    gap: 20rem;
+    font-size: 2.75rem;
 }
 
-.cadastramento-titulo span{
-    font-size: 4.5rem;
-    margin-left: 3rem;
-    margin-right: 1rem;
-    opacity: 0.7;
+.cadastramento2{
+    position: absolute;
+    left: 30.8rem;
+    font-size: 1.5rem;
+    color: #292525;
+    margin-top: 13rem;
 }
-
-.container-img {
-    width: 15rem;
-    height: 20rem;
-    margin-right: 1.5rem;
-    background: var(--cor-icone-cadastramento);
-    filter: blur(3rem);
-    border-radius: 2.5rem;
-  }
-
 
 .formulario{
-    margin-top: 2rem;
-    padding: 20px;
-    background-color: var(--form-background-color);
+    margin-top: 16rem;
 }
   
 .form_container {
@@ -52,9 +46,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50rem;
+    width: 41rem;
     padding: 1.5rem;
     border-radius: 8px;
+    margin-bottom: 2rem;
     
 }
 
@@ -130,6 +125,7 @@ body{
     border: none;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 1.5rem;
 }
 
 .submit-btn:hover {

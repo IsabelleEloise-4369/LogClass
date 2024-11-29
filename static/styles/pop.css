@@ -1,5 +1,12 @@
 body{
-    background-color: var(--cor-fundo-pg-funcoes);
+    position: relative;
+    width: 100rem;
+    height: 80rem;
+    background-image: var( --cor-icone-cadastramento);
+    border-radius: 2.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    overflow-x: hidden;
 }
 
 /* Geral cadastramento: section que engloba toda interface dessa página. */
@@ -10,36 +17,28 @@ body{
     flex-direction: column;
 }
 
-/* Container cadastramento: section que estiliza o título (nome da matéria) e cor. */
-.container-cadastramento{
-    margin-top: 10rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    gap: 20rem;
-}
+
 
 /* Título do cadastramento: Controle de Estoque */
-.cadastramento-titulo span{
-    font-size: 3.5rem;
-    color: var(--cor-titulo);
-    margin-left: 2rem;
-    opacity: 0.7;
+.cadastramento1{
+    position: absolute;
+    left: 30.8rem;
+    font-size: 3rem;
+    color: #292525;
+    margin-top: 10rem;
+    font-size: 2.75rem;
 }
 
-/* Imagem da section de "apresentação" da matéria. Cada matéria possui uma cor. */
-.container-img {
-    width: 12rem;
-    height: 20rem;
-    background: var(--cor-icone-cadastramento);
-    filter: blur(3rem);
-    margin-right: 10rem;
-    border-radius: 2.5rem;
-  }
+.cadastramento2{
+    position: absolute;
+    left: 30.8rem;
+    font-size: 1.5rem;
+    color: #292525;
+    margin-top: 12rem;
+}
 
 .formulario{
-    margin-top: 2rem;
+    margin-top: 16rem;
 }
 
 /* Form Container: section que determina o formulário. */
@@ -48,9 +47,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 30rem;
+    width: 41rem;
     padding: 20px;
     border-radius: 8px;
+    margin-bottom: 2rem;
     
 }
 
@@ -78,6 +78,7 @@ body{
     border: none;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 1.5rem;
 }
 
 /* Estiliza o botão de enviar quando passamos o mouse. */
